@@ -1,0 +1,3349 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.eslintrc.json
+.gitignore
+next.config.ts
+package.json
+postcss.config.mjs
+public/brand-images/image 31.png
+public/brand-images/image 32.png
+public/brand-images/image 33.png
+public/brand-images/image 34.png
+public/brand-images/image 35.png
+public/brand-images/Rectangle 26.png
+public/brand-images/Rectangle 27.png
+public/brand-images/Rectangle 28.png
+public/brand-images/Rectangle 32.png
+public/brand-images/Rectangle 33.png
+public/brand-images/Tote Bag-1.png
+public/brand-images/Tote Bag.png
+public/images/black rice mix-1.png
+public/images/black rice mix-2.png
+public/images/botanical-bottom.png
+public/images/botanical-middle.png
+public/images/botanical-top.png
+public/images/card-product.png
+public/images/footer-wave.svg
+public/images/hero-accent-2fe929.png
+public/images/hero-botanical-608f3c.png
+public/images/hero-botanical-nobottle.png
+public/images/hero-product.png
+public/images/icon-bag.png
+public/images/image 16.png
+public/images/image 19.png
+public/images/image 29.png
+public/images/image 30.png
+public/images/karuppukavuni kanji mix black rice porridge mix.png
+public/images/lifestyle-botanical.png
+public/images/lifestyle-product-41aad2.png
+public/images/multigrain health mix.png
+public/images/product-1-2b9d79.png
+public/images/product-2-68e613.png
+public/images/product-3.png
+public/images/product-4-784bf1.png
+public/images/product-rosemary-62e953.png
+public/images/siddha-ritual-54332e.png
+public/ingredients-images/amla.png
+public/ingredients-images/avaram poo.png
+public/ingredients-images/badam (almonds).png
+public/ingredients-images/barley.png
+public/ingredients-images/bhringraj leaves.png
+public/ingredients-images/coconut oil.png
+public/ingredients-images/curry leaves.png
+public/ingredients-images/fenugreek seeds.png
+public/ingredients-images/image 34.png
+public/ingredients-images/karboga arisi (babchi seeds).png
+public/ingredients-images/karuppu kavuni rice.png
+public/ingredients-images/kathazhai podi (aloe vera).png
+public/ingredients-images/kattuyam rice.png
+public/ingredients-images/kodhumai (wheat).png
+public/ingredients-images/kollu (horse gram).png
+public/ingredients-images/kuppaimeni.png
+public/ingredients-images/mapillai samba rice.png
+public/ingredients-images/matta rice.png
+public/ingredients-images/orithal thamarai.png
+public/ingredients-images/pachai payaru (green gram).png
+public/ingredients-images/ragi (finger millet).png
+public/ingredients-images/Rectangle 32.png
+public/ingredients-images/Rectangle 37.png
+public/ingredients-images/Rectangle 38.png
+public/ingredients-images/Rectangle 39.png
+public/ingredients-images/Rectangle 40.png
+public/ingredients-images/Rectangle 41.png
+public/ingredients-images/Rectangle 42.png
+public/ingredients-images/Rectangle 43.png
+public/ingredients-images/Rectangle 44.png
+public/ingredients-images/Rectangle 45.png
+public/ingredients-images/Rectangle 46.png
+public/ingredients-images/Rectangle 47.png
+public/ingredients-images/Rectangle 48.png
+public/ingredients-images/Rectangle 49.png
+public/ingredients-images/Rectangle 50.png
+public/ingredients-images/Rectangle 51.png
+public/ingredients-images/Rectangle 52.png
+public/ingredients-images/Rectangle 53.png
+public/ingredients-images/Rectangle 54.png
+public/ingredients-images/Rectangle 55.png
+public/ingredients-images/Rectangle 58.png
+public/ingredients-images/Rectangle 60-1.png
+public/ingredients-images/Rectangle 60.png
+public/ingredients-images/Rectangle 61.png
+public/ingredients-images/Rectangle 62.png
+public/ingredients-images/Rectangle 64.png
+public/ingredients-images/Rectangle 65.png
+public/ingredients-images/Rectangle 66.png
+public/ingredients-images/Rectangle 67.png
+public/ingredients-images/roja poo (rose petals).png
+public/ingredients-images/rosemary leaves.png
+public/ingredients-images/samai saamai (little millet).png
+public/ingredients-images/thulasi (tulsi).png
+public/ingredients-images/ulundhu (black gram).png
+public/ingredients-images/varagu (kodo millet).png
+public/litbigjournal.png
+public/middlejournal.png
+public/smalljournal.png
+public/smalljournal1.png
+public/smalljournal2.png
+src/app/brand/page.tsx
+src/app/cart/page.tsx
+src/app/collections/[slug]/page.tsx
+src/app/collections/page.tsx
+src/app/favorites/page.tsx
+src/app/globals.css
+src/app/ingredients/page.tsx
+src/app/journal/page.tsx
+src/app/layout.tsx
+src/app/login/page.tsx
+src/app/page.tsx
+src/app/product/[slug]/page.tsx
+src/app/product/page.tsx
+src/app/values/page.tsx
+src/components/collections/CollectionsFooter.tsx
+src/components/collections/ProductCard.tsx
+src/components/FigmaScaler.tsx
+src/components/Header.tsx
+src/components/home/BrandBand.tsx
+src/components/home/FigmaLayer.tsx
+src/components/home/FooterSection.tsx
+src/components/home/HeroSection.tsx
+src/components/home/ProductsSection.tsx
+src/components/home/PromoChip.tsx
+src/components/home/RitualSection.tsx
+src/components/home/SkinSection.tsx
+src/components/product/KeyIngredientsSection.tsx
+src/components/product/OtherProductsSection.tsx
+src/components/product/ProductDetail.tsx
+src/components/SiteFooter.tsx
+src/lib/figma-home.ts
+src/lib/navigation.ts
+src/lib/products.ts
+tailwind.config.js
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".eslintrc.json">
+{
+  "extends": "next/core-web-vitals"
+}
+</file>
+
+<file path=".gitignore">
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="next.config.ts">
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {};
+
+export default nextConfig;
+</file>
+
+<file path="package.json">
+{
+  "name": "website-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9",
+    "eslint-config-next": "^15.1.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="postcss.config.mjs">
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="public/images/footer-wave.svg">
+<svg width="1595" height="512" viewBox="0 0 1595 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M205.952 50.3857C156.462 74.2689 85.6521 40.7224 41.414 13.7367C24.2833 3.28676 0.5 15.3471 0.5 35.4136V487.417C0.5 500.672 11.2452 511.417 24.5 511.417H1489.37C1498.61 511.417 1506.92 506.334 1510.71 497.899C1543.19 425.566 1685.33 87.5214 1504.5 87.5219C1302 87.5224 1238.5 0.499961 1080 0.50021C921.5 0.500459 940.509 63.3076 687.5 23.0005C434.491 -17.3066 282.905 13.2494 205.952 50.3857Z" fill="#144232" stroke="black"/>
+</svg>
+</file>
+
+<file path="src/app/brand/page.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { FooterSection } from "@/components/home/FooterSection";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+export default function BrandPage() {
+  const customHeight = 3551;
+  const footerTop = 3074;
+  return (
+    <FigmaScaler customHeight={customHeight}>
+     <main
+              className="relative bg-anna-background"
+              style={{
+                width: FIGMA_HOME.width,
+                height: customHeight,
+              }}
+            >
+      
+
+
+      <section className="mx-auto w-full max-w-site pt-[119px]">
+        <div className="px-[54px]">
+          <h1 className="font-script text-[64px] font-normal leading-none text-anna-foreground">
+            About us
+          </h1>
+          <p className="mt-2 font-display text-[27px] font-normal leading-[1.24] text-anna-foreground">
+            At Annavalam, we believe true beauty and health begin with nature. Inspired by timeless Siddha
+            <br />
+            wisdom and traditional ingredients, we craft products that nourish the body inside and out from
+            <br />
+            wholesome health mixes and Karuppu Kavuni Kanji Mix to deeply nourishing hair oils and
+            <br />
+            herbal face packs.
+          </p>
+        </div>
+
+        <div className="relative mt-4 h-[653px] w-full overflow-hidden">
+          <Image
+            src="/brand-images/image 33.png"
+            alt="Traditional herbs, grains, and spices for Annavalam products"
+            fill
+            priority
+            className="object-cover"
+            sizes="1440px"
+          />
+        </div>
+
+        <section className="grid min-h-[685px] grid-cols-[640px_731px] items-center gap-[48px] px-[34px]">
+          <div className="flex flex-col items-end pr-[2px] text-right">
+            <p className="font-script text-[40px] font-normal leading-none text-anna-foreground">
+              Sustainability
+            </p>
+            <h2 className="-mt-1 font-display text-[42px] font-normal leading-none text-anna-foreground">
+              Responsibly sourced
+            </h2>
+            <p className="mt-5 w-[560px] font-sans text-[23px] font-normal leading-[1.16] text-anna-foreground">
+              We&apos;re proud to source our ingredients responsibly,
+              <br />
+              placing a high emphasis on ethical and sustainable
+              <br />
+              methods. This ensures that our supplements not
+              <br />
+              only offer you health benefits, but also promote a
+              <br />
+              healthier planet.
+            </p>
+          </div>
+
+          <div className="relative h-[606px] w-[731px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/brand-images/Tote Bag.png"
+              alt="Anna Valam tote bag with botanical ingredients"
+              fill
+              className="object-cover"
+              sizes="731px"
+            />
+          </div>
+        </section>
+
+        <section className="grid min-h-[606px] grid-cols-[731px_1fr] items-center gap-[23px] px-[34px] pb-[74px]">
+          <div className="relative h-[606px] w-[731px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/brand-images/Tote Bag-1.png"
+              alt="Natural oil drop above amber bottle"
+              fill
+              className="object-cover"
+              sizes="731px"
+            />
+          </div>
+
+          <div className="pl-0 pt-[18px] text-left">
+            <p className="font-script text-[40px] font-normal leading-none text-anna-foreground">
+              All natural
+            </p>
+            <h2 className="-mt-1 font-display text-[42px] font-normal leading-none text-anna-foreground">
+              Consciously formulated
+            </h2>
+            <p className="mt-3 w-[560px] font-sans text-[23px] font-normal leading-[1.16] text-anna-foreground">
+              We take a thoughtful and meticulous approach to our
+              <br />
+              development process, ensuring that every step is
+              <br />
+              rigorous and uncompromising in our pursuit of highly
+              <br />
+              effective yet gentle skincare that delivers visible
+              <br />
+              results.
+            </p>
+          </div>
+        </section>
+
+        <section className="grid min-h-[664px] grid-cols-[560px_560px] justify-center gap-[58px] pt-[12px]">
+          <Link href="/values" className="relative h-[540px] w-[560px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity">
+            <Image
+              src="/brand-images/Rectangle 32.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="560px"
+            />
+            <div className="absolute bottom-[20px] left-[20px] flex h-[54px] w-[180px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+              <span className="font-display text-[38px] font-normal leading-none text-white">
+                Values
+              </span>
+            </div>
+          </Link>
+
+          <Link href="/ingredients" className="relative h-[540px] w-[560px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity">
+            <Image
+              src="/brand-images/Rectangle 33.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="560px"
+            />
+            <div className="absolute bottom-[20px] left-[20px] flex h-[54px] w-[266px] items-center justify-center rounded-[6px] border border-black/85 bg-white/5">
+              <span className="font-display text-[38px] font-normal leading-none text-anna-foreground">
+                Ingredients
+              </span>
+            </div>
+          </Link>
+        </section>
+      </section>
+
+      
+        <FooterSection style={{ top: footerTop }} />
+    </main>
+    </FigmaScaler>
+  );
+}
+</file>
+
+<file path="src/app/cart/page.tsx">
+import { SiteFooter } from "@/components/SiteFooter";
+
+export default function CartPage() {
+  return (
+    <main className="min-h-screen bg-anna-background pt-24 text-center font-display text-2xl">
+      <section className="min-h-[420px]">Cart Coming Soon</section>
+      <SiteFooter />
+    </main>
+  );
+}
+</file>
+
+<file path="src/app/collections/[slug]/page.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { CollectionsFooter } from "@/components/collections/CollectionsFooter";
+import { ProductCard } from "@/components/collections/ProductCard";
+import {
+  collections,
+  getCollectionBySlug,
+  getProductsByCategory,
+} from "@/lib/products";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+import { FooterSection } from "@/components/home/FooterSection";
+const filterGroups = [
+  { label: "Collections", options: ["New Arrivals", "Bestsellers", "On Sale", "Kits"] },
+  { label: "Type", options: ["Cream", "Lotion", "Cleanser", "Oil", "Serum"] },
+  { label: "Price", options: [] },
+  { label: "Size", options: [] },
+];
+
+export function generateStaticParams() {
+  return collections.map((collection) => ({ slug: collection.slug }));
+}
+
+type Props = { params: Promise<{ slug: string }> }
+
+export default async function CollectionCategoryPage({
+  params,
+}: Props) {
+  const { slug } = await params;
+  const collection = getCollectionBySlug(slug);
+
+  if (!collection) {
+    notFound();
+  }
+
+  const categoryProducts = getProductsByCategory(collection.category);
+  const otherCollections = collections.filter((item) => item.slug !== collection.slug);
+const customHeight = 3551;
+  const footerTop = 3074;
+  return (
+    
+    <div className="relative bg-anna-background">
+    <FigmaScaler customHeight={customHeight}>
+     <main
+              className="relative bg-anna-background"
+              style={{
+                width: FIGMA_HOME.width,
+                height: customHeight,
+              }}
+            >
+      <section className="mx-auto w-full max-w-site px-[24px] sm:px-[50px] pt-[124px]">
+        <h1 className="flex items-baseline gap-[12px] text-anna-foreground">
+          <span className="font-display text-[72px] font-normal leading-none">
+            {collection.label.replace(" Mix", "")}
+          </span>
+          {collection.label.includes("Mix") ? (
+            <span className="font-script text-[72px] font-normal leading-none">
+              Mix
+            </span>
+          ) : null}
+        </h1>
+
+        <div className="relative mt-[20px] aspect-[1340/490] w-full overflow-hidden rounded-[10px]">
+          <Image
+            src={collection.heroImage}
+            alt={collection.alt}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+
+        <section className="mt-[40px] grid grid-cols-1 gap-[34px] lg:grid-cols-[240px_1fr]">
+          <aside className="rounded-[10px] bg-white px-[28px] py-[28px]">
+            <h2 className="font-display text-[24px] font-bold leading-none">
+              Filter (0)
+            </h2>
+            <div className="mt-[22px] space-y-[22px]">
+              {filterGroups.map((group) => (
+                <div key={group.label} className="border-t border-black/15 pt-[16px]">
+                  <div className="flex items-center justify-between font-display text-[20px] font-bold leading-none">
+                    <span>{group.label}</span>
+                    <span>⌄</span>
+                  </div>
+                  {group.options.length > 0 ? (
+                    <div className="mt-[14px] space-y-[10px]">
+                      {group.options.map((option) => (
+                        <label
+                          key={option}
+                          className="flex items-center gap-[8px] font-sans text-[13px] leading-none"
+                        >
+                          <input type="checkbox" className="h-[12px] w-[12px]" />
+                          {option}
+                        </label>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </aside>
+
+          <div className="grid grid-cols-1 gap-x-[42px] gap-y-[42px] sm:grid-cols-2 xl:grid-cols-3">
+            {categoryProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-[88px]">
+          <h2 className="flex items-baseline gap-[12px]">
+            <span className="font-display text-[52px] font-bold leading-none">
+              Other
+            </span>
+            <span className="font-script text-[52px] leading-none">
+              Collections
+            </span>
+          </h2>
+
+          <div className="mx-auto mt-[42px] grid max-w-[640px] grid-cols-1 gap-[24px] sm:grid-cols-2">
+            {otherCollections.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/collections/${item.slug}`}
+                className="group relative aspect-[405/476] overflow-hidden rounded-[10px] bg-anna-cream"
+              >
+                <Image
+                  src={item.cardImage}
+                  alt={item.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  sizes="320px"
+                />
+                <span className="absolute left-[12px] top-[12px] rounded-[6px] border border-black/85 bg-white/10 px-[16px] py-[9px] font-display text-[20px] leading-none">
+                  {item.label}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </section>
+
+    </main>
+   <FooterSection style={{ top: footerTop }} />
+     </FigmaScaler>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/collections/page.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { FooterSection } from "@/components/home/FooterSection";
+import { collections } from "@/lib/products";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+export default function CollectionsPage() {
+  const customHeight = 1280;
+  const footerTop = 803;
+  return (
+    <div className="bg-anna-background" style={{ overflowX: "hidden" }}>
+      <FigmaScaler customHeight={customHeight}>
+        <main
+          className="relative bg-anna-background pt-[124px] text-anna-foreground"
+          style={{
+            width: FIGMA_HOME.width,
+            height: customHeight,
+          }}
+        >
+      <section className="mx-auto w-full max-w-site px-[24px] sm:px-[50px]">
+        <h1 className="flex items-baseline gap-[12px] text-anna-foreground">
+          <span className="font-display text-[52px] font-normal leading-none">
+            All
+          </span>
+          <span className="font-script text-[52px] font-normal leading-none">
+            Collections
+          </span>
+        </h1>
+
+        <section className="mt-[72px] grid grid-cols-1 gap-[30px] md:grid-cols-3">
+          {collections.map((collection) => (
+            <Link
+              key={collection.slug}
+              href={`/collections/${collection.slug}`}
+              className="group relative block aspect-[405/476] overflow-hidden rounded-[10px] bg-anna-cream"
+            >
+              <Image
+                src={collection.cardImage}
+                alt={collection.alt}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                sizes="(min-width: 768px) 31vw, 100vw"
+              />
+              <span className="absolute left-[18px] top-[18px] rounded-[6px] border border-black/85 bg-white/10 px-[22px] py-[12px] font-display text-[32px] leading-none text-anna-foreground">
+                {collection.label}
+              </span>
+            </Link>
+          ))}
+        </section>
+      </section>
+
+          <FooterSection style={{ top: footerTop }} />
+        </main>
+      </FigmaScaler>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/favorites/page.tsx">
+import { SiteFooter } from "@/components/SiteFooter";
+
+export default function FavoritesPage() {
+  return (
+    <main className="min-h-screen bg-anna-background pt-24 text-center font-display text-2xl">
+      <section className="min-h-[420px]">Favorites Coming Soon</section>
+      <SiteFooter />
+    </main>
+  );
+}
+</file>
+
+<file path="src/app/globals.css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --anna-background: #fff7e8;
+    --anna-brand: #144232;
+    --anna-forest: #00441e;
+    --anna-gold: #b78204;
+    --anna-gold-light: #d5ad55;
+    --anna-cream: #fdebcb;
+    --anna-sand: #d3b485;
+    --anna-sage: #adbb90;
+    --anna-copper: #9c4115;
+    --anna-copper-mid: #c2753c;
+    --anna-foreground: #000000;
+    --anna-foreground-muted: #010101;
+    --anna-hero-overlay: rgba(255, 255, 255, 0.7);
+  }
+
+  html {
+    @apply antialiased scroll-smooth;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body {
+    @apply bg-anna-background text-anna-foreground font-sans;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .text-logo-nav {
+    @apply font-display text-anna-logo-nav font-normal text-anna-brand;
+  }
+
+  .text-logo-hero {
+    @apply font-display text-anna-logo-hero font-bold;
+    color: var(--anna-hero-overlay);
+  }
+
+  .text-nav-active {
+    @apply font-display text-anna-nav font-normal text-anna-foreground-muted;
+  }
+
+  .text-nav {
+    @apply font-display text-anna-nav font-normal text-anna-foreground-muted;
+  }
+
+  .text-script-display {
+    @apply font-script text-anna-display-script font-normal leading-tight;
+  }
+
+  .text-script-display-md {
+    @apply font-script text-anna-display-script-md font-normal leading-tight;
+  }
+
+  .text-script-display-sm {
+    @apply font-script text-anna-display-script-sm font-normal leading-tight;
+  }
+
+  .text-heading-section {
+    @apply font-display text-anna-heading-lg font-bold text-anna-foreground;
+  }
+
+  .text-product-title {
+    @apply font-display text-anna-title font-normal text-anna-foreground;
+  }
+
+  .text-body-long {
+    @apply font-sans text-anna-body-lg font-light text-anna-foreground;
+  }
+
+  .text-footer-link {
+    @apply font-display text-anna-nav font-bold text-white underline decoration-white underline-offset-4;
+  }
+
+  .site-container {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-figma-gutter;
+  }
+}
+</file>
+
+<file path="src/app/ingredients/page.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { SiteFooter } from "@/components/SiteFooter";
+
+const ingredients = [
+  {
+    name: "Karuppu Kavuni Rice",
+    src: "/ingredients-images/karuppu kavuni rice.png",
+    text: ["Ancient black rice rich", "in antioxidants and", "iron."],
+  },
+  {
+    name: "Mapillai Samba Rice",
+    src: "/ingredients-images/mapillai samba rice.png",
+    text: ["Traditional rice known", "for strength and", "energy support."],
+  },
+  {
+    name: "Kattuyanam Rice",
+    src: "/ingredients-images/kattuyam rice.png",
+    text: ["Fiber-rich rice that", "supports digestion", "and wellness."],
+  },
+  {
+    name: "Matta Rice",
+    src: "/ingredients-images/matta rice.png",
+    text: ["Nutritious red rice", "rich in minerals and", "fiber."],
+  },
+  {
+    name: "Samai / Saamai (Little Millet)",
+    src: "/ingredients-images/samai saamai (little millet).png",
+    text: ["Light millet that", "supports weight", "management."],
+  },
+  {
+    name: "Kollu (Horse Gram)",
+    src: "/ingredients-images/kollu (horse gram).png",
+    text: ["Protein-rich legume", "known for fat-burning", "benefits."],
+  },
+  {
+    name: "Ulundhu (Black Gram)",
+    src: "/ingredients-images/ulundhu (black gram).png",
+    text: ["Protein-packed pulse", "that supports bone", "strength."],
+  },
+  {
+    name: "Pachai Payaru (Green Gram)",
+    src: "/ingredients-images/pachai payaru (green gram).png",
+    text: ["Easy-to-digest", "legume rich in", "nutrients"],
+  },
+  {
+    name: "Barley",
+    src: "/ingredients-images/barley.png",
+    text: ["Whole grain that", "supports digestion", "and heart health."],
+  },
+  {
+    name: "Ragi (Finger Millet)",
+    src: "/ingredients-images/ragi (finger millet).png",
+    text: ["Calcium-rich millet", "good for bones and", "energy."],
+  },
+  {
+    name: "Kodhumai (Wheat)",
+    src: "/ingredients-images/kodhumai (wheat).png",
+    text: ["Nutritious grain", "providing fiber and", "carbohydrates."],
+  },
+  {
+    name: "Varagu (Kodo Millet)",
+    src: "/ingredients-images/varagu (kodo millet).png",
+    text: ["Healthy millet that", "helps maintain", "balanced nutrition."],
+  },
+  {
+    name: "Badam (Almonds)",
+    src: "/ingredients-images/badam (almonds).png",
+    text: ["Nutrient-rich nuts", "packed with healthy", "fats and vitamins."],
+  },
+  {
+    name: "Kathazhai Podi (Aloe Vera)",
+    src: "/ingredients-images/kathazhai podi (aloe vera).png",
+    text: ["Natural skin-soothing", "and hydrating herb."],
+  },
+  {
+    name: "Avaram Poo",
+    src: "/ingredients-images/avaram poo.png",
+    text: ["Traditional flower", "used for glowing and", "healthy skin."],
+  },
+  {
+    name: "Orithal Thamarai",
+    src: "/ingredients-images/orithal thamarai.png",
+    text: ["Herbal ingredient", "valued in traditional", "wellness care."],
+  },
+  {
+    name: "Roja Poo (Rose Petals)",
+    src: "/ingredients-images/roja poo (rose petals).png",
+    text: ["Refreshing flower that", "softens and brightens", "skin."],
+  },
+  {
+    name: "Kuppaimeni",
+    src: "/ingredients-images/kuppaimeni.png",
+    text: ["Herbal plant", "commonly used for", "skin cleansing."],
+  },
+  {
+    name: "Thulasi (Tulsi)",
+    src: "/ingredients-images/thulasi (tulsi).png",
+    text: ["Sacred herb known", "for antibacterial and", "healing properties."],
+  },
+  {
+    name: "Karboga Arisi (Babchi Seeds)",
+    src: "/ingredients-images/karboga arisi (babchi seeds).png",
+    text: ["Traditional herb used", "for skin support."],
+  },
+  {
+    name: "Rosemary Leaves",
+    src: "/ingredients-images/rosemary leaves.png",
+    text: ["Herb that supports", "hair growth and scalp", "health."],
+  },
+  {
+    name: "Coconut Oil",
+    src: "/ingredients-images/coconut oil.png",
+    text: ["Natural oil that deeply", "nourishes hair and", "skin."],
+  },
+  {
+    name: "Curry Leaves",
+    src: "/ingredients-images/curry leaves.png",
+    text: ["Rich in nutrients that", "strengthen hair roots."],
+  },
+  {
+    name: "Fenugreek Seeds",
+    src: "/ingredients-images/fenugreek seeds.png",
+    text: ["Seeds known to", "reduce hair fall and", "dandruff."],
+  },
+  {
+    name: "Hibiscus Flowers",
+    src: "/ingredients-images/Rectangle 67.png",
+    text: ["Natural flower that", "promotes soft and", "healthy hair."],
+  },
+  {
+    name: "Amla",
+    src: "/ingredients-images/amla.png",
+    text: ["Vitamin C-rich fruit", "that supports strong", "hair growth."],
+  },
+  {
+    name: "Bhringraj Leaves",
+    src: "/ingredients-images/bhringraj leaves.png",
+    text: ["Ayurvedic herb", "traditionally used for", "hair nourishment."],
+  },
+];
+
+export default function IngredientsPage() {
+  return (
+    <main className="min-h-screen bg-anna-background text-anna-foreground">
+      <section className="relative mx-auto w-full max-w-site overflow-hidden bg-anna-background">
+        <div className="relative h-[665px] w-full overflow-hidden">
+          <Image
+            src="/ingredients-images/image 34.png"
+            alt="Oil bubbles in water"
+            fill
+            priority
+            className="object-cover object-bottom"
+            sizes="1440px"
+          />
+
+
+          <h1 className="absolute left-[52px] top-[432px] z-10 text-anna-foreground">
+            <span className="block font-serif text-[76px] font-normal leading-[0.78]">
+              Our
+            </span>
+            <span className="block font-script text-[82px] font-normal leading-[0.72]">
+              Ingredients
+            </span>
+          </h1>
+
+          <p className="absolute right-[52px] top-[454px] z-10 w-[188px] text-right font-sans text-[22px] font-bold leading-[1.05] text-anna-foreground">
+            Discover the key
+            <br />
+            ingredients that
+            <br />
+            make our products
+            <br />
+            truly transformative.
+          </p>
+        </div>
+
+        <section className="grid grid-cols-[251px_251px_251px] justify-center gap-x-[104px] gap-y-[72px] px-[70px] py-[54px]">
+          {ingredients.map((ingredient) => (
+            <article key={ingredient.name} className="w-[251px]">
+              <div className="relative h-[247px] w-[251px] overflow-hidden rounded-[8px]">
+                <Image
+                  src={ingredient.src}
+                  alt={ingredient.name}
+                  fill
+                  className="object-cover"
+                  sizes="251px"
+                />
+              </div>
+              <h2 className="mt-[18px] font-display text-[22px] font-normal leading-none text-anna-foreground">
+                {ingredient.name}
+              </h2>
+              <p className="mt-[12px] font-sans text-[18px] font-normal leading-[1.04] text-anna-foreground">
+                {ingredient.text.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </p>
+            </article>
+          ))}
+        </section>
+
+        <section className="grid min-h-[670px] grid-cols-[520px_520px] justify-center gap-[68px] pt-[18px]">
+          <div className="relative h-[520px] w-[520px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/brand-images/image 35.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="520px"
+            />
+            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+              <span className="font-display text-[38px] font-normal leading-none text-white">
+                About us
+              </span>
+            </div>
+          </div>
+
+          <div className="relative h-[520px] w-[520px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/brand-images/Rectangle 32.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="520px"
+            />
+            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[180px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+              <span className="font-display text-[38px] font-normal leading-none text-white">
+                Values
+              </span>
+            </div>
+          </div>
+        </section>
+
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}
+</file>
+
+<file path="src/app/journal/page.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { FooterSection } from "@/components/home/FooterSection";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+
+const articles = [
+  {
+    src: "/smalljournal.png",
+    alt: "Can traditional ingredients help achieve healthy glowing skin?",
+    title: "Can traditional ingredients help achieve healthy glowing skin?",
+    href: "/journal/traditional-ingredients-skin",
+  },
+  {
+    src: "/smalljournal1.png",
+    alt: "Why is rosemary oil trending in hair care?",
+    title: "Why is rosemary oil trending in hair care?",
+    href: "/journal/rosemary-oil-hair",
+  },
+  {
+    src: "/smalljournal2.png",
+    alt: "Can a health mix support daily energy levels?",
+    title: "Can a health mix support daily energy levels?",
+    href: "/journal/health-mix-energy",
+  },
+];
+
+export default function JournalPage() {
+  const customHeight = 4200;
+  const footerTop = 3700;
+
+  return (
+    <FigmaScaler customHeight={customHeight}>
+      <main
+        className="relative bg-anna-background"
+        style={{
+          width: FIGMA_HOME.width,
+          height: customHeight,
+        }}
+      >
+        {/* All content centered in a narrow column */}
+        <div className="mx-auto max-w-[680px] pt-[140px] px-[24px]">
+
+          {/* Title — centered */}
+          <h1 className="text-center font-display text-[48px] font-normal leading-[1.2] text-anna-foreground">
+            Why are people returning
+            <br />
+            to traditional wellness?
+          </h1>
+
+          {/* Top small centered image */}
+          <div className="relative mt-[40px] w-full h-[380px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/litbigjournal.png"
+              alt="Journal hero"
+              fill
+              priority
+              className="object-cover"
+              sizes="680px"
+            />
+          </div>
+
+          {/* Text block 1 */}
+          <div className="mt-[48px]">
+            <h2 className="font-display text-[17px] font-bold leading-snug text-anna-foreground mb-[12px]">
+              Growing Demand for Natural and Chemical-Free Living
+            </h2>
+            <p className="font-sans text-[15px] leading-[1.8] text-anna-foreground/80">
+              In today's fast-paced world, more people are returning to
+              traditional wellness practices as they seek natural and sustainable
+              ways to improve their health. Traditional wellness focuses on
+              holistic healing through ancient foods, herbal remedies, mindful
+              living, and balanced nutrition. Unlike modern quick-fix solutions,
+              traditional methods emphasize long-term wellness by supporting
+              the body naturally. From herbal skincare to nutrient-rich traditional
+              grains and Ayurvedic-inspired routines, people are increasingly
+              choosing natural wellness products to maintain a healthier lifestyle
+              without relying heavily on chemicals or processed alternatives.
+            </p>
+          </div>
+
+          {/* Text block 2 */}
+          <div className="mt-[36px]">
+            <h2 className="font-display text-[17px] font-bold leading-snug text-anna-foreground mb-[12px]">
+              Increased Awareness of Preventive Healthcare
+            </h2>
+            <p className="font-sans text-[15px] leading-[1.8] text-anna-foreground/80">
+              One of the biggest reasons for the growing popularity of traditional
+              wellness is the increasing awareness of the benefits of natural
+              ingredients and preventive healthcare. Ancient superfoods like
+              millets, black rice, herbal powders, and cold-pressed oils are rich
+              in fiber, antioxidants, vitamins, and minerals that support immunity,
+              digestion, skin health, and overall well-being. Consumers are
+              becoming more conscious about what they eat and apply to their
+              bodies, leading to a higher demand for organic health mixes,
+              herbal beauty products, and traditional wellness solutions that are
+              safe, effective, and deeply rooted in cultural wisdom.
+            </p>
+          </div>
+
+          {/* Wide full-width image — breaks out of the narrow column */}
+          <div className="relative mt-[48px] w-full h-[460px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/middlejournal.png"
+              alt="People enjoying traditional wellness outdoors"
+              fill
+              className="object-cover object-center"
+              sizes="680px"
+            />
+          </div>
+
+          {/* Text block 3 */}
+          <div className="mt-[48px]">
+            <h2 className="font-display text-[17px] font-bold leading-snug text-anna-foreground mb-[12px]">
+              A Shift Towards Holistic and Balanced Lifestyles
+            </h2>
+            <p className="font-sans text-[15px] leading-[1.8] text-anna-foreground/80">
+              Traditional wellness is also gaining attention because it promotes a
+              balanced lifestyle that connects health, nature, and self-care. In an
+              era dominated by stress, pollution, and unhealthy food habits,
+              people are rediscovering the value of ancient wellness traditions
+              that encourage mindful living and natural healing. Brands that offer
+              authentic herbal products, traditional health foods, and Ayurvedic-
+              inspired wellness solutions are becoming increasingly popular
+              among health-conscious consumers. As people continue searching
+              for natural ways to improve their physical and mental well-being,
+              traditional wellness is no longer just a trend — it is becoming a
+              lifestyle choice for healthier living.
+            </p>
+          </div>
+
+        </div>
+
+        {/* Read More — full width */}
+        <div className="mx-auto w-full max-w-site px-[50px] mt-[100px]">
+          <div className="flex items-baseline justify-between mb-[40px]">
+            <h2 className="font-display text-[40px] font-normal text-anna-foreground">
+              Read{" "}
+              <span className="font-script text-[40px]">More</span>
+            </h2>
+            <Link
+              href="/journal"
+              className="font-sans text-[14px] text-anna-foreground underline underline-offset-4 hover:opacity-60 transition-opacity"
+            >
+              All articles
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-3 gap-[32px]">
+            {articles.map((article) => (
+              <Link
+                key={article.href}
+                href={article.href}
+                className="group flex flex-col"
+              >
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[8px] bg-anna-cream">
+                  <Image
+                    src={article.src}
+                    alt={article.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    sizes="420px"
+                  />
+                </div>
+                <p className="mt-[12px] font-sans text-[14px] leading-[1.5] text-anna-foreground/80 group-hover:underline underline-offset-2 transition-all">
+                  {article.title}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <FooterSection style={{ top: footerTop }} />
+      </main>
+    </FigmaScaler>
+  );
+}
+</file>
+
+<file path="src/app/layout.tsx">
+import type { Metadata } from "next";
+import {
+  Abhaya_Libre,
+  Inter,
+  Italianno,
+  Playfair_Display,
+  REM,
+} from "next/font/google";
+import "./globals.css";
+import { Header } from "@/components/Header";
+
+const abhaya = Abhaya_Libre({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-abhaya",
+  display: "swap",
+});
+
+const italianno = Italianno({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-italianno",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const rem = REM({
+  subsets: ["latin"],
+  weight: ["300"],
+  variable: "--font-rem",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "ANNA VALAM — Glow the Siddha Way",
+  description:
+    "Premium Siddha-inspired wellness. Tradition that nourishes beauty.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      className={`${abhaya.variable} ${italianno.variable} ${inter.variable} ${rem.variable} ${playfair.variable}`}
+    >
+      <body>
+        <Header />
+        {children}
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="src/app/login/page.tsx">
+import { SiteFooter } from "@/components/SiteFooter";
+
+export default function LoginPage() {
+  return (
+    <main className="min-h-screen bg-anna-background pt-24 text-center font-display text-2xl">
+      <section className="min-h-[420px]">Login Coming Soon</section>
+      <SiteFooter />
+    </main>
+  );
+}
+</file>
+
+<file path="src/app/page.tsx">
+import { BrandBand } from "@/components/home/BrandBand";
+import { FooterSection } from "@/components/home/FooterSection";
+import { HeroSection } from "@/components/home/HeroSection";
+import { ProductsSection } from "@/components/home/ProductsSection";
+import { RitualSection } from "@/components/home/RitualSection";
+import { SkinSection } from "@/components/home/SkinSection";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+
+/**
+ * Home page — frame 67:3
+ * Single 1440×4028 canvas scaled to fit the viewport — no horizontal scrollbar.
+ */
+export default function HomePage() {
+  return (
+    <div className="bg-anna-background" style={{ overflowX: "hidden" }}>
+      <FigmaScaler>
+        <main
+          className="relative bg-anna-background"
+          style={{
+            width: FIGMA_HOME.width,
+            height: FIGMA_HOME.height,
+          }}
+        >
+          <HeroSection />
+          <BrandBand />
+          <ProductsSection />
+          <SkinSection />
+          <RitualSection />
+          <FooterSection />
+        </main>
+      </FigmaScaler>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/product/[slug]/page.tsx">
+import { notFound } from "next/navigation";
+import { ProductDetail } from "@/components/product/ProductDetail";
+import { getProductBySlug, products } from "@/lib/products";
+
+export function generateStaticParams() {
+  return products.map((product) => ({ slug: product.slug }));
+}
+
+type Props = { params: Promise<{ slug: string }> }
+
+export default async function ProductSlugPage({
+  params,
+}: Props) {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
+
+  if (!product) {
+    notFound();
+  }
+
+  return <ProductDetail product={product} />;
+}
+</file>
+
+<file path="src/app/product/page.tsx">
+import { ProductDetail } from "@/components/product/ProductDetail";
+import { getProductBySlug, products } from "@/lib/products";
+
+export default function ProductPage() {
+  const product = getProductBySlug("black-rice-porridge-mix") ?? products[0];
+
+  return <ProductDetail product={product} />;
+}
+</file>
+
+<file path="src/app/values/page.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { SiteFooter } from "@/components/SiteFooter";
+
+export default function ValuesPage() {
+  return (
+    <main className="min-h-screen bg-anna-background text-anna-foreground">
+      <section className="relative mx-auto w-full max-w-site overflow-hidden bg-anna-background">
+        <div className="relative h-[624px] w-full overflow-hidden">
+          <Image
+            src="/brand-images/image 34.png"
+            alt="Green hills under a cloudy sky"
+            fill
+            priority
+            className="object-cover"
+            sizes="1440px"
+          />
+
+
+
+          <h1 className="absolute left-[56px] top-[383px] z-10 w-[292px] text-white">
+            <span className="block font-serif text-[76px] font-normal leading-[0.78]">
+              Our
+            </span>
+            <span className="block font-script text-[88px] font-normal leading-[0.72]">
+              Values
+            </span>
+          </h1>
+        </div>
+
+        <section className="grid grid-cols-[270px_270px_270px] gap-[126px] px-[56px] pt-[22px]">
+          <article>
+            <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
+              Purity from Nature
+            </h2>
+            <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
+              We value ingredients in
+              <br />
+              their most natural and
+              <br />
+              beneficial form, free from
+              <br />
+              unnecessary additives
+              <br />
+              and artificial
+              <br />
+              compromises.
+            </p>
+          </article>
+
+          <article>
+            <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
+              Rooted in Tradition
+            </h2>
+            <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
+              Inspired by traditional
+              <br />
+              Siddha wellness practices,
+              <br />
+              we honour ancient
+              <br />
+              knowledge while adapting
+              <br />
+              it for modern lifestyles.
+            </p>
+          </article>
+
+          <article>
+            <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
+              Honest Wellness
+            </h2>
+            <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
+              We believe wellness should
+              <br />
+              be authentic, transparent,
+              <br />
+              and accessible built on
+              <br />
+              trust and integrity.
+            </p>
+          </article>
+        </section>
+
+        <section className="grid min-h-[720px] grid-cols-[520px_520px] justify-center gap-[72px] pt-[142px]">
+          <Link href="/brand" className="relative h-[510px] w-[520px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity">
+            <Image
+              src="/brand-images/image 35.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="520px"
+            />
+            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+              <span className="font-display text-[38px] font-normal leading-none text-white">
+                About us
+              </span>
+            </div>
+          </Link>
+
+          <Link href="/ingredients" className="relative h-[510px] w-[520px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity">
+            <Image
+              src="/brand-images/Rectangle 33.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="520px"
+            />
+            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[266px] items-center justify-center rounded-[6px] border border-black/85 bg-white/5">
+              <span className="font-display text-[38px] font-normal leading-none text-anna-foreground">
+                Ingredients
+              </span>
+            </div>
+          </Link>
+        </section>
+
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}
+</file>
+
+<file path="src/components/collections/CollectionsFooter.tsx">
+import { SiteFooter } from "@/components/SiteFooter";
+
+export function CollectionsFooter() {
+  return <SiteFooter className="mt-[90px]" />;
+}
+</file>
+
+<file path="src/components/collections/ProductCard.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import type { Product } from "@/lib/products";
+
+export function ProductCard({ product }: { product: Product }) {
+  return (
+    <article className="w-full max-w-[260px]">
+      <Link
+        href={`/product/${product.slug}`}
+        className="group block overflow-hidden rounded-[10px] bg-anna-cream"
+      >
+        <div className="relative aspect-[3/4] w-full">
+          <Image
+            src={product.detailSrc}
+            alt={product.detailAlt}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            sizes="260px"
+          />
+        </div>
+      </Link>
+      <h3 className="mt-[10px] min-h-[38px] font-display text-[20px] leading-[1.05]">
+        {product.name}
+      </h3>
+      <div className="mt-[8px] flex items-center justify-between">
+        <span className="rounded-[3px] bg-anna-gold-light px-[10px] py-[5px] font-display text-[14px] leading-none">
+          {product.price}
+        </span>
+        <Link
+          href="/cart"
+          className="flex h-[24px] w-[24px] items-center justify-center rounded-[3px] bg-anna-copper-mid"
+          aria-label={`Add ${product.name} to cart`}
+        >
+          <Image
+            src="/images/icon-bag.png"
+            alt=""
+            width={18}
+            height={18}
+            className="invert"
+          />
+        </Link>
+      </div>
+    </article>
+  );
+}
+</file>
+
+<file path="src/components/FigmaScaler.tsx">
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { FIGMA_HOME } from "@/lib/figma-home";
+
+/**
+ * Wraps the Figma canvas and scales it proportionally to fit the viewport width.
+ * No horizontal or vertical overflow — the canvas scales like a zoomed page.
+ */
+export function FigmaScaler({ children, customHeight }: { children: React.ReactNode, customHeight?: number }) {
+  const [scale, setScale] = useState(1);
+  const outerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function updateScale() {
+      const vw = window.innerWidth;
+      setScale(vw / FIGMA_HOME.width);
+    }
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
+
+  const canonicalHeight = customHeight ?? FIGMA_HOME.height;
+  const scaledHeight = canonicalHeight * scale;
+
+  return (
+    <div
+      ref={outerRef}
+      style={{ width: "100vw", height: scaledHeight, overflow: "hidden" }}
+    >
+      <div
+        style={{
+          width: FIGMA_HOME.width,
+          height: canonicalHeight,
+          transformOrigin: "top left",
+          transform: `scale(${scale})`,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Header.tsx">
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { navLinks, accountLinks } from "@/lib/navigation";
+
+export function Header() {
+  const pathname = usePathname();
+
+  return (
+    <header className="absolute left-0 top-0 z-50 h-[82px] w-full">
+      <div className="relative mx-auto h-full w-full max-w-site px-[18px] sm:px-[51px]">
+        <nav
+          className="absolute left-[18px] top-1/2 flex -translate-y-1/2 items-center gap-[28px] sm:left-[51px]"
+          aria-label="Primary"
+        >
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={
+                  isActive
+                    ? "font-display text-[32px] leading-none text-anna-foreground underline underline-offset-4"
+                    : "font-display text-[32px] leading-none text-anna-foreground hover:opacity-80"
+                }
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <Link
+          href="/"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-display text-[48px] leading-none text-anna-brand"
+        >
+          ANNA VALAM
+        </Link>
+
+        <div className="absolute right-[18px] top-1/2 flex -translate-y-1/2 items-center gap-[18px] sm:right-[51px]">
+          <nav
+            className="flex items-center gap-[18px]"
+            aria-label="Account"
+          >
+            {accountLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="font-display text-[32px] leading-none text-anna-foreground hover:opacity-80"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          <Link
+            href="/cart"
+            className="relative h-[55px] w-[55px] shrink-0"
+            aria-label="Shopping bag"
+          >
+            <Image
+              src="/images/icon-bag.png"
+              alt=""
+              width={55}
+              height={55}
+              className="object-contain"
+            />
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
+</file>
+
+<file path="src/components/home/BrandBand.tsx">
+import Image from "next/image";
+
+/** Rectangle 10 brand band - 0,823 1440x236 #144232 + leaf imagery */
+export function BrandBand() {
+  return (
+    <div
+      className="absolute left-0 top-[823px] z-[8] h-[236px] w-full overflow-hidden bg-anna-brand"
+      aria-hidden
+    >
+      <div className="absolute left-[82px] top-[36px] h-[196px] w-[558px] opacity-90">
+        <Image
+          src="/brand-images/image 31.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes="558px"
+        />
+      </div>
+      <div className="absolute left-[474px] top-[44px] h-[196px] w-[558px] opacity-90">
+        <Image
+          src="/brand-images/image 32.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes="558px"
+        />
+      </div>
+      <div className="absolute left-[1042px] top-[38px] h-[196px] w-[558px] opacity-90">
+        <Image
+          src="/brand-images/image 31.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes="558px"
+        />
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/home/FigmaLayer.tsx">
+import Image from "next/image";
+import type { CSSProperties, ReactNode } from "react";
+
+type FigmaLayerProps = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  className?: string;
+  style?: CSSProperties;
+  children?: ReactNode;
+  zIndex?: number;
+};
+
+/** Positions a child exactly as on the 1440px Figma home frame (absolute within section). */
+export function FigmaLayer({
+  x,
+  y,
+  width,
+  height,
+  className = "",
+  style,
+  children,
+  zIndex,
+}: FigmaLayerProps) {
+  return (
+    <div
+      className={`absolute ${className}`}
+      style={{
+        left: x,
+        top: y,
+        width,
+        height,
+        zIndex,
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+type FigmaImageProps = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  src: string;
+  alt: string;
+  className?: string;
+  objectFit?: "cover" | "contain" | "fill";
+  priority?: boolean;
+  zIndex?: number;
+  borderRadius?: number;
+  style?: CSSProperties;
+};
+
+export function FigmaImage({
+  x,
+  y,
+  width,
+  height,
+  src,
+  alt,
+  className = "",
+  objectFit = "cover",
+  priority = false,
+  zIndex,
+  borderRadius,
+  style,
+}: FigmaImageProps) {
+  return (
+    <FigmaLayer
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      className={`overflow-hidden ${className}`}
+      zIndex={zIndex}
+      style={{
+        ...(borderRadius ? { borderRadius } : {}),
+        ...style,
+      }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className={
+          objectFit === "contain"
+            ? "object-contain"
+            : objectFit === "fill"
+              ? "object-fill"
+              : "object-cover"
+        }
+        priority={priority}
+        sizes={`${Math.round(width)}px`}
+      />
+    </FigmaLayer>
+  );
+}
+</file>
+
+<file path="src/components/home/FooterSection.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { FigmaImage } from "./FigmaLayer";
+import { footerNavPrimary, footerNavSecondary } from "@/lib/navigation";
+
+
+/**
+ * Footer block — Figma from y=3551 (Vector 3 wave through y=4028)
+ * Wave: 84:117 at -36,3551.31 — 1594×525.61 #144232
+ */
+export function FooterSection({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    <footer
+      className={`absolute left-0 top-[3551px] z-30 w-full overflow-hidden ${className || ""}`}
+      style={{ height: 477, ...style }}
+      aria-labelledby="footer-heading"
+    >
+      <h2 id="footer-heading" className="sr-only">
+        Footer
+      </h2>
+
+      {/* Vector 3 — curved brand-green wave */}
+      <div
+        className="pointer-events-none absolute -left-[36px] top-0 z-0"
+        style={{ width: 1594, height: 525.61 }}
+        aria-hidden
+      >
+        <Image
+          src="/images/footer-wave.svg"
+          alt=""
+          fill
+          className="object-fill object-top"
+          sizes="1594px"
+        />
+      </div>
+
+      {/* image 30 soft glow — 338,3309 (758px above footer top; rendered from page root in ritual — duplicated here for footer stack) */}
+      <div
+        className="hidden"
+        style={{ top: -242, width: 736, height: 326 }}
+        aria-hidden
+      >
+        <div className="relative h-full w-full blur-[71px]">
+          <Image
+            src="/images/hero-product.png"
+            alt=""
+            fill
+            className="object-cover opacity-40"
+            sizes="736px"
+          />
+        </div>
+      </div>
+
+
+
+      <div className="pointer-events-none absolute -left-[70px] top-[78px] z-[2] h-[190px] w-[540px] opacity-75">
+        <Image
+          src="/brand-images/image 31.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes="540px"
+        />
+      </div>
+
+      <div className="pointer-events-none absolute left-[972px] top-[102px] z-[2] h-[190px] w-[540px] opacity-75">
+        <Image
+          src="/brand-images/image 32.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes="540px"
+        />
+      </div>
+
+      {/* ANNA VALAM watermark — -17,3818 1466×342 Abhaya 700 250px rgba white 0.7 */}
+      <p
+        className="text-logo-hero pointer-events-none absolute -bottom-[60px] -left-[17px] z-[3] select-none"
+        style={{ width: 1466, height: 342 }}
+        aria-hidden
+      >
+        ANNA VALAM
+      </p>
+
+      {/* Frame 6 — 378,3649 col width 150 */}
+      <nav
+        className="absolute left-[378px] top-[98px] z-20 flex w-[150px] flex-col"
+        aria-label="Footer navigation"
+      >
+        {footerNavPrimary.map((item) => (
+          <Link key={item.label} href={item.href} className="text-footer-link">
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      {/* Frame 7 — 566,3649 */}
+      <nav
+        className="absolute left-[566px] top-[98px] z-20 flex w-[150px] flex-col"
+        aria-label="Footer secondary navigation"
+      >
+        {footerNavSecondary.map((item) => (
+          <Link key={item.label} href={item.href} className="text-footer-link">
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      {/* +91 — 904,3738 */}
+      <a
+        href="tel:+919000000095"
+        className="text-footer-link absolute left-[904px] top-[187px] z-20"
+        style={{ width: 220, height: 38 }}
+      >
+        +91 9xxxxxx95
+      </a>
+
+      {/* support@ — 909,3776 */}
+      <a
+        href="mailto:support@annavalam.com"
+        className="text-footer-link absolute left-[909px] top-[225px] z-20"
+        style={{ width: 365, height: 38 }}
+      >
+        support@annavalam.com
+      </a>
+
+    </footer>
+  );
+}
+</file>
+
+<file path="src/components/home/HeroSection.tsx">
+import { FigmaImage } from "./FigmaLayer";
+import { FigmaLayer } from "./FigmaLayer";
+import { PromoChip } from "./PromoChip";
+
+/** Hero + header — Figma layers from y=0 through y=823 (brand band follows) */
+export function HeroSection() {
+  return (
+    <>
+      <FigmaImage
+        x={-42}
+        y={52}
+        width={360}
+        height={480}
+        src="/images/image 19.png"
+        alt=""
+        objectFit="fill"
+        zIndex={4}
+      />
+      <FigmaLayer
+        x={1122}
+        y={52}
+        width={360}
+        height={480}
+        zIndex={4}
+        className="overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/image 19.png')",
+          backgroundSize: "100% 100%",
+          transform: "scaleX(-1)",
+        }}
+      />
+      <FigmaImage
+        x={-42}
+        y={370}
+        width={360}
+        height={480}
+        src="/images/image 19.png"
+        alt=""
+        objectFit="fill"
+        zIndex={4}
+      />
+      <FigmaLayer
+        x={1122}
+        y={370}
+        width={360}
+        height={480}
+        zIndex={4}
+        className="overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/image 19.png')",
+          backgroundSize: "100% 100%",
+          transform: "scaleX(-1)",
+        }}
+      />
+
+      {/* Tradition That Nourishes Beauty. — 187,145 408×359 Italianno 86 */}
+      <p
+        className="text-script-display-md absolute left-[187px] top-[145px] z-10 w-[408px] text-anna-foreground"
+        style={{ height: 359 }}
+      >
+        Tradition That Nourishes Beauty.
+      </p>
+
+      {/* Glow the Siddha Way. — 820,325 410×283 Italianno 96 right */}
+      <p
+        className="text-script-display absolute left-[820px] top-[325px] z-10 w-[410px] text-right text-anna-foreground"
+        style={{ height: 283 }}
+      >
+        Glow the Siddha Way.
+      </p>
+
+      {/* black rice mix hero — 467,53 492.75×683.69 (resized, shifted and rotated to sit in hand) */}
+      <FigmaImage
+        x={525}
+        y={130}
+        width={380}
+        height={527}
+        src="/images/hero-product.png"
+        alt="Anna Valam black rice mix"
+        objectFit="cover"
+        priority
+        zIndex={5}
+        style={{ transform: "rotate(9deg)" }}
+      />
+
+      {/* image 16 — 467,547 506×289.95 (shifted to the right under the pouch) */}
+      <FigmaImage
+        x={480}
+        y={578}
+        width={506}
+        height={290}
+        src="/images/image 16.png"
+        alt=""
+        objectFit="fill"
+        zIndex={4}
+      />
+
+      <FigmaImage
+        x={530}
+        y={547}
+        width={0}
+        height={0}
+        src="/images/image 16.png"
+        alt=""
+        objectFit="fill"
+        zIndex={4}
+      />
+
+      {/* Group 9 promo chip — adjusted for new pouch placement */}
+      <PromoChip x={300} y={580} imagePosition="right" />
+    </>
+  );
+}
+</file>
+
+<file path="src/components/home/ProductsSection.tsx">
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { FigmaImage } from "./FigmaLayer";
+import { FigmaLayer } from "./FigmaLayer";
+import { categoryOrder, getFirstProductByCategory, products } from "@/lib/products";
+
+const productSlots = [
+  {
+    bg: { x: 98, y: 850, w: 205, h: 182 },
+    image: { x: 114, y: 872, w: 174, h: 148 },
+    src: "/images/product-1-2b9d79.png",
+    alt: "Health mix product",
+    href: "/product/multigrain-health-mix",
+  },
+  {
+    bg: { x: 428, y: 850, w: 205, h: 182 },
+    image: { x: 438, y: 872, w: 186, h: 152 },
+    src: "/images/product-2-68e613.png",
+    alt: "Oil product",
+    href: "/product/rosemary-oil",
+  },
+  {
+    bg: { x: 758, y: 850, w: 205, h: 182 },
+    image: { x: 795, y: 872, w: 132, h: 137 },
+    src: "/images/product-3.png",
+    alt: "Face pack product",
+    href: "/product/glowing-face-pack",
+  },
+  {
+    bg: { x: 1088, y: 850, w: 205, h: 182 },
+    image: { x: 1081, y: 872, w: 219, h: 159 },
+    src: "/images/product-4-784bf1.png",
+    alt: "Wellness product",
+    href: "/product/black-rice-porridge-mix",
+  },
+];
+
+export function ProductsSection() {
+  const [activeCategory, setActiveCategory] = useState("Oils");
+  const featuredProduct = getFirstProductByCategory(activeCategory) ?? products[0];
+
+  return (
+    <>
+      {/* Our products — 51,1092 357×76 */}
+      <h2
+        id="products-heading"
+        className="text-heading-section absolute left-[51px] top-[1092px] z-10 w-[357px]"
+        style={{ height: 76 }}
+      >
+        Our products
+      </h2>
+
+      {/* All products — 1162,1237 */}
+      <Link
+        href="/collections"
+        className="text-nav-active absolute left-[1162px] top-[1237px] z-10"
+        style={{ width: 160, height: 38 }}
+      >
+        All products
+      </Link>
+
+      <FigmaLayer x={390} y={1217} width={660} height={58} zIndex={20}>
+        <div className="flex h-full w-full items-center gap-[15px]">
+          {categoryOrder.map((category) => {
+            const isActive = category === activeCategory;
+
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                className={`flex h-[58px] w-[210px] items-center justify-center rounded-card font-display text-anna-title-sm leading-none transition-colors ${
+                  isActive
+                    ? "bg-anna-copper-mid text-white"
+                    : "bg-anna-cream text-anna-foreground"
+                }`}
+                aria-pressed={isActive}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
+      </FigmaLayer>
+
+      {/* Product grid — cream plates + images */}
+      {productSlots.map((slot) => (
+        <Link key={slot.src} href={slot.href} aria-label={`View ${slot.alt}`}>
+          <FigmaLayer
+            x={slot.bg.x}
+            y={slot.bg.y}
+            width={slot.bg.w}
+            height={slot.bg.h}
+            zIndex={10}
+          >
+            <div className="h-full w-full rounded-product bg-anna-cream" />
+          </FigmaLayer>
+          <FigmaImage
+            x={slot.image.x}
+            y={slot.image.y}
+            width={slot.image.w}
+            height={slot.image.h}
+            src={slot.src}
+            alt={slot.alt}
+            zIndex={11}
+          />
+        </Link>
+      ))}
+
+      {/* Group 5 Rosemary — 574,1327 291.26×511 */}
+      <FigmaLayer x={574} y={1327} width={291.26} height={511} zIndex={12}>
+        <Link
+          href={`/product/${featuredProduct.slug}`}
+          className="relative block h-full w-full overflow-hidden rounded-pill bg-anna-cream"
+          aria-label={`View ${featuredProduct.name}`}
+        >
+          <div
+            className="absolute left-0 top-0 overflow-hidden rounded-pill"
+            style={{ width: 291.26, height: 415.23 }}
+          >
+            <Image
+              src={featuredProduct.featuredSrc}
+              alt={featuredProduct.detailAlt}
+              fill
+              className={
+                featuredProduct.category === "Oils"
+                  ? "object-cover"
+                  : "object-contain p-[24px]"
+              }
+              sizes="291px"
+            />
+          </div>
+          <p
+            className="text-product-title absolute left-[22px] top-[427px] w-[247px] text-center"
+            style={{ height: 42 }}
+          >
+            {featuredProduct.shortName}
+          </p>
+          <p
+            className="text-product-title absolute left-[22px] top-[469px] w-[247px] text-center"
+            style={{ height: 42 }}
+          >
+            {featuredProduct.price}
+          </p>
+        </Link>
+      </FigmaLayer>
+    </>
+  );
+}
+</file>
+
+<file path="src/components/home/PromoChip.tsx">
+import Image from "next/image";
+import { FigmaLayer } from "./FigmaLayer";
+
+type PromoChipProps = {
+  x: number;
+  y: number;
+  imagePosition?: "left" | "right";
+};
+
+/** Group 8/9/10 product chip — 179×87px per Figma */
+export function PromoChip({ x, y, imagePosition = "right" }: PromoChipProps) {
+  const imageBox =
+    imagePosition === "right"
+      ? { left: 87, top: 8, width: 82, height: 72 }
+      : { left: 10, top: 8, width: 82, height: 72 };
+
+  const dotLarge =
+    imagePosition === "right"
+      ? { left: 17, top: 28, size: 28 }
+      : { left: 134, top: 28, size: 28 };
+
+  const dotSmall =
+    imagePosition === "right"
+      ? { left: 25, top: 36, size: 12 }
+      : { left: 142, top: 36, size: 12 };
+
+  return (
+    <FigmaLayer x={x} y={y} width={179} height={87} zIndex={20}>
+      <div className="relative h-full w-full overflow-hidden rounded-badge border border-black/35 bg-white">
+        <div
+          className="absolute overflow-hidden rounded-[18px]"
+          style={{
+            left: imageBox.left,
+            top: imageBox.top,
+            width: imageBox.width,
+            height: imageBox.height,
+          }}
+        >
+          <Image
+            src="/images/card-product.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="82px"
+          />
+        </div>
+        <span
+          className="absolute rounded-full bg-[rgba(36,225,52,0.76)]"
+          style={{
+            left: dotLarge.left,
+            top: dotLarge.top,
+            width: dotLarge.size,
+            height: dotLarge.size,
+          }}
+          aria-hidden
+        />
+        <span
+          className="absolute rounded-full bg-[#1B9E52]"
+          style={{
+            left: dotSmall.left,
+            top: dotSmall.top,
+            width: dotSmall.size,
+            height: dotSmall.size,
+          }}
+          aria-hidden
+        />
+      </div>
+    </FigmaLayer>
+  );
+}
+</file>
+
+<file path="src/components/home/RitualSection.tsx">
+import Image from "next/image";
+import { FigmaImage } from "./FigmaLayer";
+import { FigmaLayer } from "./FigmaLayer";
+import { PromoChip } from "./PromoChip";
+
+export function RitualSection() {
+  return (
+    <>
+      {/* Eco-friendly / Packaging — 843,2115 */}
+      <p
+        className="absolute left-[843px] top-[2115px] z-10 font-script text-anna-heading-md text-right text-anna-foreground"
+        style={{ width: 174, height: 39 }}
+      >
+        Eco-friendly
+      </p>
+      <p
+        className="absolute left-[1030px] top-[2115px] z-10 font-display text-anna-heading-md text-right text-anna-foreground"
+        style={{ width: 201, height: 57 }}
+      >
+        Packaging
+      </p>
+      <p
+        className="absolute left-[858px] top-[2219px] z-10 font-rem text-anna-body font-light text-anna-foreground"
+        style={{ width: 343, height: 75 }}
+      >
+        Eco-friendly packaging materials designed to care for the planet as much
+        as your skin
+      </p>
+
+      {/* image 29 — 711,2103 562×308 */}
+      <FigmaImage
+        x={711}
+        y={2103}
+        width={562}
+        height={308}
+        src="/images/image 29.png"
+        alt="Eco-friendly packaging"
+        borderRadius={15}
+        zIndex={10}
+      />
+
+      {/* Group 6 — 667,2436 606×240 (image 28: 416×240) */}
+      <FigmaLayer x={711} y={2436} width={562} height={240} zIndex={10}>
+        <div className="relative h-full w-full overflow-hidden rounded-card bg-anna-brand">
+          <div
+            className="absolute left-0 top-0 overflow-hidden"
+            style={{ width: 416, height: 240 }}
+          >
+            <Image
+              src="/images/siddha-ritual-54332e.png"
+              alt="Siddha ritual"
+              fill
+              className="object-cover object-left"
+              sizes="416px"
+            />
+          </div>
+        </div>
+      </FigmaLayer>
+
+      {/* Nature's Wisdom — 109,2760 497×240 */}
+      <p
+        className="text-script-display absolute left-[109px] top-[2760px] z-10 text-anna-foreground"
+        style={{ width: 497, height: 240 }}
+      >
+        Nature&apos;s Wisdom, Beautifully Yours.
+      </p>
+
+      {/* 100% Natural / 100% You — 1023,2507 */}
+      <p
+        className="absolute left-[1023px] top-[2507px] z-10 font-display text-anna-heading-sm font-bold text-anna-cream"
+        style={{ width: 229, height: 47 }}
+      >
+        100% Natural
+      </p>
+      <p
+        className="absolute left-[1023px] top-[2554px] z-10 font-script text-[40px] leading-none text-anna-cream"
+        style={{ width: 116, height: 50 }}
+      >
+        100% You
+      </p>
+
+      {/* Your Daily Siddha Ritual. — 873,3317 423×240 */}
+      <p
+        className="text-script-display absolute left-[873px] top-[3317px] z-10 text-right text-anna-foreground"
+        style={{ width: 423, height: 240 }}
+      >
+        Your Daily Siddha Ritual.
+      </p>
+
+      <div
+        className="pointer-events-none absolute left-[390px] top-[3318px] z-[4] h-[190px] w-[640px]"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.22) 34%, rgba(0, 0, 0, 0.08) 62%, rgba(0, 0, 0, 0) 78%)",
+          filter: "blur(24px)",
+          transform: "rotate(-4deg)",
+        }}
+        aria-hidden
+      />
+
+      {/* image 12 botanical — rosemary oil bottle from supplied asset */}
+      <FigmaImage
+        x={635}
+        y={2812}
+        width={375}
+        height={645}
+        src="/images/hero-botanical-608f3c.png"
+        alt=""
+        objectFit="contain"
+        zIndex={7}
+        style={{ transform: "rotate(6deg)" }}
+      />
+
+      {/* image 30 glow — 338,3309 736×326 */}
+      <div
+        className="hidden"
+        style={{ width: 736, height: 326 }}
+        aria-hidden
+      >
+        <div className="relative h-full w-full blur-[71px]">
+          <Image
+            src="/images/hero-botanical-608f3c.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="736px"
+          />
+        </div>
+      </div>
+
+      {/* Promo chips — 453,3000 and 706,3344 */}
+      <PromoChip x={565} y={2968} imagePosition="right" />
+      <PromoChip x={825} y={3188} imagePosition="left" />
+    </>
+  );
+}
+</file>
+
+<file path="src/components/home/SkinSection.tsx">
+import { FigmaImage } from "./FigmaLayer";
+
+export function SkinSection() {
+  return (
+    <>
+      {/* Why your Skin — 51,1911 389×76 */}
+      <h2
+        id="skin-heading"
+        className="text-heading-section absolute left-[51px] top-[1911px] z-10"
+        style={{ width: 389, height: 76 }}
+      >
+        Why your Skin
+      </h2>
+
+      {/* Deserves the best — 51,1979 284×80 Italianno 64 */}
+      <p
+        className="text-script-display-sm absolute left-[51px] top-[1979px] z-10 text-anna-foreground"
+        style={{ width: 284, height: 80 }}
+      >
+        Deserves the best
+      </p>
+
+      {/* proven — 160,2542 */}
+      <p
+        className="absolute left-[160px] top-[2542px] z-20 font-display text-anna-title-sm font-bold leading-none text-anna-foreground"
+        style={{ width: 100, height: 37 }}
+      >
+        proven
+      </p>
+      {/* Effectiveness — 160,2571 */}
+      <p
+        className="absolute left-[160px] top-[2570px] z-20 font-script text-[32px] leading-none text-anna-foreground"
+        style={{ width: 106, height: 40 }}
+      >
+        Effectiveness
+      </p>
+      {/* body copy — 160,2606 */}
+      <p
+        className="absolute left-[160px] top-[2605px] z-20 font-sans text-[14px] leading-[1.12] text-anna-charcoal"
+        style={{ width: 296, height: 36 }}
+      >
+        every product is carefully crafted to meet
+        <br />
+        the highest quality standards
+      </p>
+
+      {/* image 11 — 124,2101 560.65×578.49 */}
+      <FigmaImage
+        x={124}
+        y={2101}
+        width={560.65}
+        height={578.49}
+        src="/images/lifestyle-botanical.png"
+        alt="Botanical ingredients"
+        borderRadius={15}
+        zIndex={10}
+      />
+
+      {/* Rectangle 24 — 148,2542 346×109 */}
+      <div
+        className="absolute left-[148px] top-[2542px] z-[19] rounded-chip bg-white"
+        style={{ width: 346, height: 109 }}
+        aria-hidden
+      />
+    </>
+  );
+}
+</file>
+
+<file path="src/components/product/KeyIngredientsSection.tsx">
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+
+const ingredients = [
+  {
+    name: "Karuppu Kavuni Rice",
+    src: "/ingredients-images/karuppu kavuni rice.png",
+  },
+  {
+    name: "Mapillai Samba Rice",
+    src: "/ingredients-images/mapillai samba rice.png",
+  },
+  {
+    name: "Kattuyanam Rice",
+    src: "/ingredients-images/kattuyam rice.png",
+  },
+  {
+    name: "Matta Rice, Samai (Little Millet)",
+    src: "/ingredients-images/matta rice.png",
+  },
+  {
+    name: "Kollu (Horse Gram)",
+    src: "/ingredients-images/kollu (horse gram).png",
+  },
+];
+
+export function KeyIngredientsSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimer.current) clearTimeout(hoverTimer.current);
+      if (fadeTimer.current) clearTimeout(fadeTimer.current);
+    };
+  }, []);
+
+  function showIngredient(index: number) {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    if (fadeTimer.current) clearTimeout(fadeTimer.current);
+
+    hoverTimer.current = setTimeout(() => {
+      setVisible(false);
+      fadeTimer.current = setTimeout(() => {
+        setActiveIndex(index);
+        setVisible(true);
+      }, 180);
+    }, 500);
+  }
+
+  const activeIngredient = ingredients[activeIndex];
+
+  return (
+    <section className="grid h-[665px] grid-cols-[585px_1fr] gap-[56px] px-[62px] pb-[58px] pt-[96px]">
+      <div className="pt-[97px]">
+        <h2 className="flex items-baseline text-anna-foreground">
+          <span className="font-display text-[36px] font-normal leading-none">
+            Key
+          </span>
+          <span className="font-script text-[42px] font-normal leading-none">
+            Ingredients
+          </span>
+        </h2>
+
+        <div className="mt-[52px] w-[565px]">
+          {ingredients.map((ingredient, index) => (
+            <button
+              key={ingredient.name}
+              type="button"
+              onPointerEnter={() => showIngredient(index)}
+              onMouseEnter={() => showIngredient(index)}
+              onMouseOver={() => showIngredient(index)}
+              onFocus={() => showIngredient(index)}
+              onClick={() => showIngredient(index)}
+              className="block h-[57px] w-full border-b border-black/40 text-left font-sans text-[16px] font-normal leading-none text-anna-foreground transition-colors duration-300 hover:text-anna-copper-mid focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-anna-copper-mid"
+            >
+              {ingredient.name}
+            </button>
+          ))}
+        </div>
+
+        <Link
+          href="/ingredients"
+          className="mt-[14px] block font-sans text-[13px] font-normal leading-none text-black/35 underline decoration-black/25 underline-offset-2"
+        >
+          See all ingredients -&gt;
+        </Link>
+      </div>
+
+      <div className="relative h-[650px] w-[672px] overflow-hidden rounded-[10px]">
+        <Image
+          key={activeIngredient.src}
+          src={activeIngredient.src}
+          alt={activeIngredient.name}
+          fill
+          className={`object-cover transition-all duration-700 ease-out ${
+            visible ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
+          }`}
+          sizes="672px"
+        />
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="src/components/product/OtherProductsSection.tsx">
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+
+const products = [
+  {
+    name: "Multigrain health\nmix",
+    price: "200 $",
+    src: "/images/multigrain health mix.png",
+    alt: "Multigrain health mix",
+  },
+  {
+    name: "Karuppukavuni Kanji mix\n/ Black rice porridge mix",
+    price: "200 $",
+    src: "/images/karuppukavuni kanji mix black rice porridge mix.png",
+    alt: "Karuppukavuni Kanji mix Black rice porridge mix",
+  },
+];
+
+function OtherProductCard({ product }: { product: typeof products[0] }) {
+  const [quantity, setQuantity] = useState(product.name.includes("Kanji") ? 0 : 1);
+
+  return (
+    <article className="w-[230px]">
+      <div className="relative h-[310px] w-[230px] overflow-hidden rounded-[12px]">
+        <Image
+          src={product.src}
+          alt={product.alt}
+          fill
+          className="object-cover"
+          sizes="230px"
+        />
+      </div>
+
+      <h3 className="mt-[12px] font-display text-[16px] font-normal leading-[1.2] text-anna-foreground min-h-[38px]">
+        {product.name.split("\n").map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
+        ))}
+      </h3>
+
+      <div className="mt-[12px] flex h-[28px] items-center justify-between">
+        <span className="flex h-[28px] w-[64px] items-center justify-center rounded-[3px] bg-[#E2C39B] font-display text-[14px] font-normal leading-none text-black">
+          {product.price}
+        </span>
+        <div className="flex items-center bg-[#9C4115] rounded-[4px] px-[8px] h-[28px] gap-[10px] text-white">
+          <button
+            type="button"
+            className="font-sans text-[15px] font-bold hover:opacity-80 transition-opacity"
+            onClick={() => setQuantity((prev) => Math.max(0, prev - 1))}
+            aria-label={`Decrease ${product.alt} quantity`}
+          >
+            -
+          </button>
+          <span className="w-[12px] text-center font-sans text-[14px] font-medium">
+            {quantity}
+          </span>
+          <button
+            type="button"
+            className="font-sans text-[15px] font-bold hover:opacity-80 transition-opacity"
+            onClick={() => setQuantity((prev) => prev + 1)}
+            aria-label={`Increase ${product.alt} quantity`}
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function OtherProductsSection() {
+  return (
+    <section className="px-[76px] pb-[80px] pt-[160px]">
+      <h2 className="flex items-baseline text-anna-foreground">
+        <span className="font-display text-[32px] font-normal leading-none">
+          Other
+        </span>
+        <span className="ml-[8px] font-script text-[42px] font-normal leading-none">
+          Products
+        </span>
+      </h2>
+
+      <div className="mt-[32px] grid grid-cols-[230px_230px] gap-[40px]">
+        {products.map((product) => (
+          <OtherProductCard key={product.src} product={product} />
+        ))}
+      </div>
+    </section>
+  );
+}
+</file>
+
+<file path="src/components/product/ProductDetail.tsx">
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import type { Product } from "@/lib/products";
+import { KeyIngredientsSection } from "@/components/product/KeyIngredientsSection";
+import { OtherProductsSection } from "@/components/product/OtherProductsSection";
+import { SiteFooter } from "@/components/SiteFooter";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+import { FooterSection } from "../home/FooterSection";
+
+const accordionRows = ["How to use", "Benefits", "Ingredients"];
+
+export function ProductDetail({ product }: { product: Product }) {
+  const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const footerTop = 3500;
+  const customHeight = 4080;
+
+  return (
+    <FigmaScaler customHeight={customHeight}>
+<main
+  className="bg-anna-background"
+  style={{
+    width: FIGMA_HOME.width,
+    height: customHeight,   // ← uses the variable
+  }}
+>
+      <section className="relative mx-auto min-h-screen w-full max-w-site bg-anna-background">
+        <section className="grid grid-cols-[90px_459px_1fr] gap-[25px] px-[50px] pt-[140px]">
+          <div className="flex flex-col gap-[24px]">
+            {["/images/black rice mix-1.png", "/images/black rice mix-2.png"].map((src) => (
+              <div
+                key={src}
+                className="relative h-[135px] w-[90px] overflow-hidden rounded-[4px] bg-anna-cream"
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="90px"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="relative h-[620px] w-[459px] overflow-hidden rounded-[6px] bg-anna-cream">
+            <Image
+              src={product.detailSrc}
+              alt={product.detailAlt}
+              fill
+              priority
+              className="object-cover"
+              sizes="459px"
+            />
+          </div>
+
+          <div className="pl-[27px] pt-[2px]">
+            <div className="flex items-start justify-between gap-8">
+              <h1 className="w-[500px] font-display text-[42px] font-normal leading-[1.16] text-anna-foreground">
+                {product.name}
+              </h1>
+              <button
+                type="button"
+                onClick={() => setIsFavorite(!isFavorite)}
+                className="mt-[5px] flex h-[42px] w-[42px] items-center justify-center transition-transform hover:scale-105"
+                aria-label="Add to favorites"
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill={isFavorite ? "#8C4E2D" : "none"}
+                  stroke={isFavorite ? "#8C4E2D" : "currentColor"}
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-colors duration-300"
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div className="mt-[20px] h-px w-[518px] bg-black/15" />
+
+            <p className="mt-[24px] w-[509px] font-sans text-[18px] font-normal leading-[1.18] text-anna-foreground">
+              {product.description}
+            </p>
+
+            <h2 className="mt-[28px] font-display text-[24px] font-bold leading-none text-anna-foreground">
+              Size
+            </h2>
+
+            <div className="mt-[16px] flex items-center gap-[20px]">
+              {product.sizes.map((size) => {
+                const isSelected = size === selectedSize;
+                const isDisabled = size === "1kg";
+
+                let btnStyles = "";
+                if (isDisabled) {
+                  btnStyles = "bg-[#EAEAEA] text-black/25 cursor-not-allowed";
+                } else if (isSelected) {
+                  btnStyles = "bg-[#8C4E2D] text-white";
+                } else {
+                  btnStyles = "border border-black/35 bg-white text-black hover:border-black transition-colors";
+                }
+
+                return (
+                  <button
+                    key={size}
+                    type="button"
+                    disabled={isDisabled}
+                    onClick={() => setSelectedSize(size)}
+                    className={`h-[36px] min-w-[55px] rounded-[4px] px-[10px] font-sans text-[14px] leading-none ${btnStyles}`}
+                  >
+                    {size}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-[24px] flex items-center gap-[16px]">
+              <div className="grid h-[36px] w-[110px] grid-cols-3 items-center rounded-[3px] border border-black/15 bg-white font-sans text-[18px] font-bold">
+                <button
+                  type="button"
+                  className="h-full text-black/45"
+                  onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+                  aria-label="Decrease quantity"
+                >
+                  -
+                </button>
+                <span className="text-center text-[16px]">{quantity}</span>
+                <button
+                  type="button"
+                  className="h-full text-black"
+                  onClick={() => setQuantity((value) => value + 1)}
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+              <Link
+                href="/cart"
+                className="flex h-[36px] w-[293px] items-center justify-center gap-[10px] rounded-[3px] bg-black font-sans text-[16px] font-bold text-white hover:opacity-90 transition-opacity"
+              >
+                <Image
+                  src="/images/icon-bag.png"
+                  alt=""
+                  width={22}
+                  height={22}
+                  className="invert"
+                />
+                Add to cart
+              </Link>
+            </div>
+
+            <p className="mt-[14px] font-sans text-[14px] font-normal leading-none text-black/45 underline cursor-pointer hover:text-black transition-colors">
+              Shipping, Exchange , Returns
+            </p>
+
+            <div className="mt-[34px] w-[518px]">
+              {accordionRows.map((row) => (
+                <div
+                  key={row}
+                  className="flex h-[53px] items-center justify-between border-b border-black/20 font-sans text-[14px] font-normal text-anna-foreground cursor-pointer hover:text-anna-copper transition-colors"
+                >
+                  <span>{row}</span>
+                  <span className="text-[24px] leading-none">+</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-[50px] pb-[104px] pt-[118px]">
+          <h2 className="font-script text-[48px] font-normal leading-none text-anna-foreground">
+            FAQ
+          </h2>
+
+          <div className="ml-[93px] mt-[58px] w-[912px]">
+            {product.faqs.map((row) => (
+              <div
+                key={row}
+                className="flex h-[81px] items-center justify-between border-b border-black/45 font-sans text-[20px] font-bold text-anna-foreground"
+              >
+                <span>{row}</span>
+                <span className="pr-[19px] text-[27px] font-normal leading-none">
+                  +
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid min-h-[700px] grid-cols-[740px_1fr] items-center gap-[96px] px-[20px] pb-[42px]">
+          <div className="relative h-[620px] w-[740px] overflow-hidden rounded-[4px] bg-white">
+            <Image
+              src="/images/lifestyle-product-41aad2.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="740px"
+            />
+          </div>
+
+          <div className="pt-[14px]">
+            <h2 className="font-script text-[40px] font-normal leading-none text-anna-foreground">
+              Steps:
+            </h2>
+            <ul className="mt-[13px] list-disc pl-[20px] font-sans text-[18px] font-normal leading-[1.18] text-anna-foreground">
+              {product.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <KeyIngredientsSection />
+        <OtherProductsSection />
+      </section>
+      <FooterSection style={{ top: footerTop }} />
+    </main>
+    </FigmaScaler>
+  );
+}
+</file>
+
+<file path="src/components/SiteFooter.tsx">
+import Image from "next/image";
+import Link from "next/link";
+import { footerNavPrimary, footerNavSecondary } from "@/lib/navigation";
+
+export function SiteFooter({ className = "" }: { className?: string }) {
+  return (
+    <footer
+      className={`relative h-[477px] w-screen overflow-hidden ${className}`}
+      style={{ left: "50%", transform: "translateX(-50%)" }}
+      aria-labelledby="site-footer-heading"
+    >
+      <h2 id="site-footer-heading" className="sr-only">
+        Footer
+      </h2>
+
+      <div
+        className="pointer-events-none absolute top-0 z-0"
+        style={{
+          left: "50%",
+          width: "max(1594px, 110vw)",
+          height: 525.61,
+          transform: "translateX(-50%)",
+        }}
+        aria-hidden
+      >
+        <Image
+          src="/images/footer-wave.svg"
+          alt=""
+          fill
+          className="object-fill object-top"
+          sizes="100vw"
+        />
+      </div>
+
+      <div
+        className="pointer-events-none absolute top-[78px] z-[2] h-[190px] w-[540px] opacity-75"
+        style={{ left: "calc(50% - 790px)" }}
+      >
+        <Image
+          src="/brand-images/image 31.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes="540px"
+        />
+      </div>
+
+      <div
+        className="pointer-events-none absolute top-[102px] z-[2] h-[190px] w-[540px] opacity-75"
+        style={{ left: "calc(50% + 252px)" }}
+      >
+        <Image
+          src="/brand-images/image 32.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes="540px"
+        />
+      </div>
+
+      <p
+        className="text-logo-hero pointer-events-none absolute -bottom-[60px] z-[3] select-none"
+        style={{ left: "calc(50% - 737px)", width: 1466, height: 342 }}
+        aria-hidden
+      >
+        ANNA VALAM
+      </p>
+
+      <nav
+        className="absolute top-[98px] z-20 flex w-[150px] flex-col"
+        style={{ left: "calc(50% - 342px)" }}
+        aria-label="Footer navigation"
+      >
+        {footerNavPrimary.map((item) => (
+          <Link key={item.label} href={item.href} className="text-footer-link">
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      <nav
+        className="absolute top-[98px] z-20 flex w-[150px] flex-col"
+        style={{ left: "calc(50% - 154px)" }}
+        aria-label="Footer secondary navigation"
+      >
+        {footerNavSecondary.map((item) => (
+          <Link key={item.label} href={item.href} className="text-footer-link">
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      <a
+        href="tel:+919000000095"
+        className="text-footer-link absolute top-[187px] z-20"
+        style={{ left: "calc(50% + 184px)", width: 220, height: 38 }}
+      >
+        +91 9xxxxxx95
+      </a>
+
+      <a
+        href="mailto:support@annavalam.com"
+        className="text-footer-link absolute top-[225px] z-20"
+        style={{ left: "calc(50% + 189px)", width: 365, height: 38 }}
+      >
+        support@annavalam.com
+      </a>
+    </footer>
+  );
+}
+</file>
+
+<file path="src/lib/figma-home.ts">
+/** Home page frame 67:3 — canonical dimensions from Figma MCP */
+export const FIGMA_HOME = {
+  width: 1440,
+  height: 4028,
+} as const;
+</file>
+
+<file path="src/lib/navigation.ts">
+export const navLinks = [
+  { label: "Collections", href: "/collections" },
+  { label: "Brand", href: "/brand" },
+  { label: "Journal", href: "/journal" }
+];
+
+export const accountLinks = [
+  { label: "sign-in/ log in", href: "/login" },
+  { label: "Favorites", href: "/favorites" }
+];
+
+export const footerNavPrimary = [
+  { label: "Home", href: "/" },
+  { label: "About us", href: "/brand" },
+  { label: "Collections", href: "/collections" },
+  { label: "Brand", href: "/brand" }
+];
+
+export const footerNavSecondary = [
+  { label: "Contact us", href: "/brand" },
+  { label: "Values", href: "/values" }
+];
+</file>
+
+<file path="src/lib/products.ts">
+export type Product = {
+  slug: string;
+  name: string;
+  shortName: string;
+  price: string;
+  category: string;
+  thumbnailSrc: string;
+  featuredSrc: string;
+  detailSrc: string;
+  detailAlt: string;
+  description: string;
+  sizes: string[];
+  steps: string[];
+  faqs: string[];
+};
+
+export type Collection = {
+  slug: string;
+  label: string;
+  category: string;
+  cardImage: string;
+  heroImage: string;
+  alt: string;
+};
+
+const defaultFaqs = [
+  "Is this product suitable for daily use?",
+  "Can it be used by all age groups?",
+  "Is this made with traditional ingredients?",
+  "How should I store this product?",
+  "How often should I use it?",
+];
+
+export const products: Product[] = [
+  {
+    slug: "rosemary-oil",
+    name: "Rosemary Oil",
+    shortName: "Rosemary oil",
+    price: "$ 100",
+    category: "Oils",
+    thumbnailSrc: "/images/product-2-68e613.png",
+    featuredSrc: "/images/product-rosemary-62e953.png",
+    detailSrc: "/images/product-rosemary-62e953.png",
+    detailAlt: "Anna Valam Rosemary Oil bottle",
+    description:
+      "A botanical hair oil crafted with rosemary care to nourish the scalp, support stronger-looking hair, and bring a fresh herbal ritual into everyday wellness.",
+    sizes: ["100ml", "200ml", "500ml"],
+    steps: [
+      "Apply a small amount to the scalp and hair lengths.",
+      "Massage gently for a few minutes.",
+      "Leave for 30 minutes or overnight before washing.",
+      "Use two to three times a week.",
+    ],
+    faqs: defaultFaqs,
+  },
+  {
+    slug: "multigrain-health-mix",
+    name: "Multigrain Health Mix",
+    shortName: "Health mix",
+    price: "$ 120",
+    category: "Health mixes",
+    thumbnailSrc: "/images/product-1-2b9d79.png",
+    featuredSrc: "/images/multigrain health mix.png",
+    detailSrc: "/images/multigrain health mix.png",
+    detailAlt: "Anna Valam Multigrain Health Mix pouch",
+    description:
+      "A traditional wellness blend made with grains and millets for a nourishing breakfast ritual with natural energy, fiber, and everyday comfort.",
+    sizes: ["250g", "500g", "1kg"],
+    steps: [
+      "Mix two spoons of powder in water or milk.",
+      "Stir well and cook on low heat.",
+      "Add palm sugar or salt as preferred.",
+      "Serve warm as a breakfast meal.",
+    ],
+    faqs: defaultFaqs,
+  },
+  {
+    slug: "glowing-face-pack",
+    name: "Herbal Wellness Glowing Face Pack",
+    shortName: "Face pack",
+    price: "$ 90",
+    category: "Face packs",
+    thumbnailSrc: "/images/product-3.png",
+    featuredSrc: "/images/card-product.png",
+    detailSrc: "/images/card-product.png",
+    detailAlt: "Anna Valam Glowing Face Pack pouch",
+    description:
+      "A herbal face pack made with skin-friendly botanicals to support a natural glow, purifying care, and a gentle traditional skincare ritual.",
+    sizes: ["100g", "250g", "500g"],
+    steps: [
+      "Mix one spoon of powder with rose water or curd.",
+      "Apply an even layer on clean skin.",
+      "Leave for 10 to 15 minutes.",
+      "Rinse gently and pat dry.",
+    ],
+    faqs: defaultFaqs,
+  },
+  {
+    slug: "black-rice-porridge-mix",
+    name: "Karuppukavuni Kanji Mix / Black Rice Porridge Mix",
+    shortName: "Wellness mix",
+    price: "$ 110",
+    category: "Health mixes",
+    thumbnailSrc: "/images/product-4-784bf1.png",
+    featuredSrc: "/images/karuppukavuni kanji mix black rice porridge mix.png",
+    detailSrc: "/images/karuppukavuni kanji mix black rice porridge mix.png",
+    detailAlt: "Anna Valam Karuppukavuni Kanji Mix pouch",
+    description:
+      "Traditional health blend made with ancient rice varieties, millets, and horse gram to support natural wellness, healthy digestion, energy, and weight management. Rich in fiber, iron, and essential nutrients, it is a wholesome and nourishing breakfast choice for all age groups.",
+    sizes: ["250g", "500g", "1kg"],
+    steps: [
+      "Mix two spoons of powder in water.",
+      "Add a pinch of salt and pepper.",
+      "Stir well and cook for five minutes on low heat.",
+      "Consume warm as a breakfast meal.",
+    ],
+    faqs: defaultFaqs,
+  },
+];
+
+export const categoryOrder = ["Oils", "Health mixes", "Face packs"];
+
+export const collections: Collection[] = [
+  {
+    slug: "health-mix",
+    label: "Health Mix",
+    category: "Health mixes",
+    cardImage: "/brand-images/Rectangle 26.png",
+    heroImage: "/brand-images/Rectangle 26.png",
+    alt: "Health mix preparation",
+  },
+  {
+    slug: "face-packs",
+    label: "Face packs",
+    category: "Face packs",
+    cardImage: "/brand-images/Rectangle 28.png",
+    heroImage: "/brand-images/Rectangle 28.png",
+    alt: "Face pack being applied",
+  },
+  {
+    slug: "oils",
+    label: "Oils",
+    category: "Oils",
+    cardImage: "/brand-images/Rectangle 27.png",
+    heroImage: "/brand-images/Rectangle 27.png",
+    alt: "Hair oil care",
+  },
+];
+
+export function getProductBySlug(slug: string) {
+  return products.find((product) => product.slug === slug);
+}
+
+export function getFirstProductByCategory(category: string) {
+  return products.find((product) => product.category === category);
+}
+
+export function getCollectionBySlug(slug: string) {
+  return collections.find((collection) => collection.slug === slug);
+}
+
+export function getProductsByCategory(category: string) {
+  return products.filter((product) => product.category === category);
+}
+</file>
+
+<file path="tailwind.config.js">
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        anna: {
+          background: "#FFF7E8",
+          brand: "#144232",
+          forest: "#00441E",
+          gold: "#B78204",
+          "gold-light": "#D5AD55",
+          cream: "#FDEBCB",
+          sand: "#D3B485",
+          sage: "#ADBB90",
+          copper: "#9C4115",
+          "copper-mid": "#C2753C",
+          foreground: "#000000",
+          "foreground-muted": "#010101",
+          border: "#A3A3A3",
+          muted: "#A6A6A6",
+          "ui-gray": "#565454",
+          "ui-gray-light": "#BCBCBC",
+          charcoal: "#444444",
+        },
+      },
+      fontFamily: {
+        display: ["var(--font-abhaya)", "serif"],
+        script: ["var(--font-italianno)", "cursive"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        rem: ["var(--font-rem)", "system-ui", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
+      },
+      fontSize: {
+        "anna-logo-nav": ["48px", { lineHeight: "1", letterSpacing: "0" }],
+        "anna-logo-hero": ["250px", { lineHeight: "1.37", letterSpacing: "0" }],
+        "anna-nav": ["32px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-display-script-xl": ["128px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-display-script": ["96px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-display-script-md": ["86px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-display-script-sm": ["64px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-heading-xl": ["96px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-heading-lg": ["64px", { lineHeight: "1.19", letterSpacing: "0" }],
+        "anna-heading-md": ["48px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-heading-sm": ["40px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-title": ["36px", { lineHeight: "1.17", letterSpacing: "0" }],
+        "anna-title-sm": ["32px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-body-lg": ["24px", { lineHeight: "1.5", letterSpacing: "0" }],
+        "anna-body": ["20px", { lineHeight: "1.5", letterSpacing: "0" }],
+        "anna-body-sm": ["16px", { lineHeight: "1.5", letterSpacing: "0" }],
+        "anna-caption": ["15px", { lineHeight: "1.4", letterSpacing: "0" }],
+        "anna-label": ["14px", { lineHeight: "1.4", letterSpacing: "0" }],
+      },
+      maxWidth: {
+        site: "1440px",
+      },
+      borderRadius: {
+        card: "15px",
+        pill: "25px",
+        chip: "10px",
+        footer: "24px",
+        product: "18px",
+        badge: "22px",
+      },
+      backgroundImage: {
+        "anna-cta": "linear-gradient(180deg, #C2753C 0%, #9C4115 100%)",
+      },
+      spacing: {
+        "figma-gutter": "51px",
+      },
+    },
+  },
+  plugins: [],
+};
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+</file>
+
+</files>
