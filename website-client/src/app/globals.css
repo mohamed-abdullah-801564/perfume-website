@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --anna-background: #fff7e8;
+    --anna-brand: #144232;
+    --anna-forest: #00441e;
+    --anna-gold: #b78204;
+    --anna-gold-light: #d5ad55;
+    --anna-cream: #fdebcb;
+    --anna-sand: #d3b485;
+    --anna-sage: #adbb90;
+    --anna-copper: #9c4115;
+    --anna-copper-mid: #c2753c;
+    --anna-foreground: #000000;
+    --anna-foreground-muted: #010101;
+    --anna-hero-overlay: rgba(255, 255, 255, 0.7);
+  }
+
+  html {
+    @apply antialiased scroll-smooth;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body {
+    @apply bg-anna-background text-anna-foreground font-sans;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .text-logo-nav {
+    @apply font-display text-anna-logo-nav font-normal text-anna-brand;
+  }
+
+  .text-logo-hero {
+    @apply font-display text-anna-logo-hero font-bold;
+    color: var(--anna-hero-overlay);
+  }
+
+  .text-nav-active {
+    @apply font-display text-anna-nav font-normal text-anna-foreground-muted;
+  }
+
+  .text-nav {
+    @apply font-display text-anna-nav font-normal text-anna-foreground-muted;
+  }
+
+  .text-script-display {
+    @apply font-script text-anna-display-script font-normal leading-tight;
+  }
+
+  .text-script-display-md {
+    @apply font-script text-anna-display-script-md font-normal leading-tight;
+  }
+
+  .text-script-display-sm {
+    @apply font-script text-anna-display-script-sm font-normal leading-tight;
+  }
+
+  .text-heading-section {
+    @apply font-display text-anna-heading-lg font-bold text-anna-foreground;
+  }
+
+  .text-product-title {
+    @apply font-display text-anna-title font-normal text-anna-foreground;
+  }
+
+  .text-body-long {
+    @apply font-sans text-anna-body-lg font-light text-anna-foreground;
+  }
+
+  .text-footer-link {
+    @apply font-display text-anna-nav font-bold text-white underline decoration-white underline-offset-4;
+  }
+
+  .site-container {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-figma-gutter;
+  }
+}

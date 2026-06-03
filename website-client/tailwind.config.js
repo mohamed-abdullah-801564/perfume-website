@@ -1,0 +1,78 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        anna: {
+          background: "#FFF7E8",
+          brand: "#144232",
+          forest: "#00441E",
+          gold: "#B78204",
+          "gold-light": "#D5AD55",
+          cream: "#FDEBCB",
+          sand: "#D3B485",
+          sage: "#ADBB90",
+          copper: "#9C4115",
+          "copper-mid": "#C2753C",
+          foreground: "#000000",
+          "foreground-muted": "#010101",
+          border: "#A3A3A3",
+          muted: "#A6A6A6",
+          "ui-gray": "#565454",
+          "ui-gray-light": "#BCBCBC",
+          charcoal: "#444444",
+        },
+      },
+      fontFamily: {
+        display: ["var(--font-abhaya)", "serif"],
+        script: ["var(--font-italianno)", "cursive"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        rem: ["var(--font-rem)", "system-ui", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
+      },
+      fontSize: {
+        "anna-logo-nav": ["48px", { lineHeight: "1", letterSpacing: "0" }],
+        "anna-logo-hero": ["250px", { lineHeight: "1.37", letterSpacing: "0" }],
+        "anna-nav": ["32px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-display-script-xl": ["128px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-display-script": ["96px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-display-script-md": ["86px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-display-script-sm": ["64px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-heading-xl": ["96px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-heading-lg": ["64px", { lineHeight: "1.19", letterSpacing: "0" }],
+        "anna-heading-md": ["48px", { lineHeight: "1.25", letterSpacing: "0" }],
+        "anna-heading-sm": ["40px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-title": ["36px", { lineHeight: "1.17", letterSpacing: "0" }],
+        "anna-title-sm": ["32px", { lineHeight: "1.2", letterSpacing: "0" }],
+        "anna-body-lg": ["24px", { lineHeight: "1.5", letterSpacing: "0" }],
+        "anna-body": ["20px", { lineHeight: "1.5", letterSpacing: "0" }],
+        "anna-body-sm": ["16px", { lineHeight: "1.5", letterSpacing: "0" }],
+        "anna-caption": ["15px", { lineHeight: "1.4", letterSpacing: "0" }],
+        "anna-label": ["14px", { lineHeight: "1.4", letterSpacing: "0" }],
+      },
+      maxWidth: {
+        site: "1440px",
+      },
+      borderRadius: {
+        card: "15px",
+        pill: "25px",
+        chip: "10px",
+        footer: "24px",
+        product: "18px",
+        badge: "22px",
+      },
+      backgroundImage: {
+        "anna-cta": "linear-gradient(180deg, #C2753C 0%, #9C4115 100%)",
+      },
+      spacing: {
+        "figma-gutter": "51px",
+      },
+    },
+  },
+  plugins: [],
+};
