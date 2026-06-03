@@ -36,8 +36,8 @@ export default async function CollectionCategoryPage({
 
   const categoryProducts = getProductsByCategory(collection.category);
   const otherCollections = collections.filter((item) => item.slug !== collection.slug);
-const customHeight = 3551;
-  const footerTop = 3074;
+  const customHeight = 2450;
+  const footerTop = 1970;
   return (
     
     <div className="relative bg-anna-background">

@@ -139,6 +139,11 @@ public/ingredients-images/samai saamai (little millet).png
 public/ingredients-images/thulasi (tulsi).png
 public/ingredients-images/ulundhu (black gram).png
 public/ingredients-images/varagu (kodo millet).png
+public/litbigjournal.png
+public/middlejournal.png
+public/smalljournal.png
+public/smalljournal1.png
+public/smalljournal2.png
 src/app/brand/page.tsx
 src/app/cart/page.tsx
 src/app/collections/[slug]/page.tsx
@@ -146,6 +151,7 @@ src/app/collections/page.tsx
 src/app/favorites/page.tsx
 src/app/globals.css
 src/app/ingredients/page.tsx
+src/app/journal/page.tsx
 src/app/layout.tsx
 src/app/login/page.tsx
 src/app/page.tsx
@@ -285,13 +291,15 @@ import { FooterSection } from "@/components/home/FooterSection";
 import { FigmaScaler } from "@/components/FigmaScaler";
 import { FIGMA_HOME } from "@/lib/figma-home";
 export default function BrandPage() {
+  const customHeight = 3551;
+  const footerTop = 3074;
   return (
-    <FigmaScaler>
+    <FigmaScaler customHeight={customHeight}>
      <main
               className="relative bg-anna-background"
               style={{
                 width: FIGMA_HOME.width,
-                height: FIGMA_HOME.height,
+                height: customHeight,
               }}
             >
       
@@ -422,7 +430,7 @@ export default function BrandPage() {
       </section>
 
       
-        <FooterSection />
+        <FooterSection style={{ top: footerTop }} />
     </main>
     </FigmaScaler>
   );
@@ -453,7 +461,9 @@ import {
   getCollectionBySlug,
   getProductsByCategory,
 } from "@/lib/products";
-
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+import { FooterSection } from "@/components/home/FooterSection";
 const filterGroups = [
   { label: "Collections", options: ["New Arrivals", "Bestsellers", "On Sale", "Kits"] },
   { label: "Type", options: ["Cream", "Lotion", "Cleanser", "Oil", "Serum"] },
@@ -465,11 +475,11 @@ export function generateStaticParams() {
   return collections.map((collection) => ({ slug: collection.slug }));
 }
 
+type Props = { params: Promise<{ slug: string }> }
+
 export default async function CollectionCategoryPage({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+}: Props) {
   const { slug } = await params;
   const collection = getCollectionBySlug(slug);
 
@@ -479,10 +489,20 @@ export default async function CollectionCategoryPage({
 
   const categoryProducts = getProductsByCategory(collection.category);
   const otherCollections = collections.filter((item) => item.slug !== collection.slug);
-
+const customHeight = 3551;
+  const footerTop = 3074;
   return (
-    <main className="min-h-screen bg-anna-background pt-[124px] text-anna-foreground">
-      <section className="mx-auto w-full max-w-site px-[24px] sm:px-[50px]">
+    
+    <div className="relative bg-anna-background">
+    <FigmaScaler customHeight={customHeight}>
+     <main
+              className="relative bg-anna-background"
+              style={{
+                width: FIGMA_HOME.width,
+                height: customHeight,
+              }}
+            >
+      <section className="mx-auto w-full max-w-site px-[24px] sm:px-[50px] pt-[124px]">
         <h1 className="flex items-baseline gap-[12px] text-anna-foreground">
           <span className="font-display text-[72px] font-normal leading-none">
             {collection.label.replace(" Mix", "")}
@@ -575,8 +595,10 @@ export default async function CollectionCategoryPage({
         </section>
       </section>
 
-      <CollectionsFooter />
     </main>
+   <FooterSection style={{ top: footerTop }} />
+     </FigmaScaler>
+    </div>
   );
 }
 </file>
@@ -589,13 +611,16 @@ import { collections } from "@/lib/products";
 import { FigmaScaler } from "@/components/FigmaScaler";
 import { FIGMA_HOME } from "@/lib/figma-home";
 export default function CollectionsPage() {
+  const customHeight = 1280;
+  const footerTop = 803;
   return (
     <div className="bg-anna-background" style={{ overflowX: "hidden" }}>
-      <FigmaScaler>
+      <FigmaScaler customHeight={customHeight}>
         <main
-          className="bg-anna-background pt-[124px] text-anna-foreground"
+          className="relative bg-anna-background pt-[124px] text-anna-foreground"
           style={{
             width: FIGMA_HOME.width,
+            height: customHeight,
           }}
         >
       <section className="mx-auto w-full max-w-site px-[24px] sm:px-[50px]">
@@ -630,9 +655,7 @@ export default function CollectionsPage() {
         </section>
       </section>
 
-          <div className="mt-[40px]">
-  <FooterSection />
-</div>
+          <FooterSection style={{ top: footerTop }} />
         </main>
       </FigmaScaler>
     </div>
@@ -750,7 +773,9 @@ export default function FavoritesPage() {
 <file path="src/app/ingredients/page.tsx">
 import Image from "next/image";
 import Link from "next/link";
-import { SiteFooter } from "@/components/SiteFooter";
+import { FooterSection } from "@/components/home/FooterSection";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
 
 const ingredients = [
   {
@@ -890,102 +915,322 @@ const ingredients = [
   },
 ];
 
+// Accurate height breakdown (all px at 1440px canvas):
+// Hero section:          665
+// Grid top padding:       54
+// 9 rows × (247 img + 18 mt-title + 24 title + 12 mt-text + 60 text) = 9 × 361 = 3249
+// 8 row gaps × 72:       576
+// Grid bottom padding:    54
+// Grid total:           3933
+// Cards section pt-18:    18
+// Cards height:          520
+// Cards pb-80:            80
+// Cards total:           618
+// Footer height:         477
+const heroHeight   = 665;
+const gridHeight   = 54 + (9 * 361) + (8 * 72) + 54; // 3933
+const cardsHeight  = 18 + 520 + 80;                   // 618
+const footerHeight = 477;
+
+const footerTop   = heroHeight + gridHeight + cardsHeight; // 5216
+const customHeight = footerTop + footerHeight;             // 5693
+
 export default function IngredientsPage() {
   return (
-    <main className="min-h-screen bg-anna-background text-anna-foreground">
-      <section className="relative mx-auto w-full max-w-site overflow-hidden bg-anna-background">
-        <div className="relative h-[665px] w-full overflow-hidden">
-          <Image
-            src="/ingredients-images/image 34.png"
-            alt="Oil bubbles in water"
-            fill
-            priority
-            className="object-cover object-bottom"
-            sizes="1440px"
-          />
+    <FigmaScaler customHeight={customHeight}>
+      <main
+        className="relative bg-anna-background"
+        style={{
+          width: FIGMA_HOME.width,
+          height: customHeight,
+        }}
+      >
+        <section className="mx-auto w-full max-w-site">
 
+          {/* Hero — full width */}
+          <div className="relative h-[665px] w-full overflow-hidden">
+            <Image
+              src="/ingredients-images/image 34.png"
+              alt="Oil bubbles in water"
+              fill
+              priority
+              className="object-cover object-bottom"
+              sizes="1440px"
+            />
 
-          <h1 className="absolute left-[52px] top-[432px] z-10 text-anna-foreground">
-            <span className="block font-serif text-[76px] font-normal leading-[0.78]">
-              Our
-            </span>
-            <span className="block font-script text-[82px] font-normal leading-[0.72]">
-              Ingredients
-            </span>
+            <h1 className="absolute left-[52px] top-[432px] z-10 text-anna-foreground">
+              <span className="block font-serif text-[76px] font-normal leading-[0.78]">
+                Our
+              </span>
+              <span className="block font-script text-[82px] font-normal leading-[0.72]">
+                Ingredients
+              </span>
+            </h1>
+
+            <p className="absolute right-[52px] top-[454px] z-10 w-[188px] text-right font-sans text-[22px] font-bold leading-[1.05] text-anna-foreground">
+              Discover the key
+              <br />
+              ingredients that
+              <br />
+              make our products
+              <br />
+              truly transformative.
+            </p>
+          </div>
+
+          {/* Ingredients grid — 3 equal columns, full width */}
+          <section className="grid grid-cols-3 justify-items-center gap-x-[104px] gap-y-[72px] px-[70px] py-[54px]">
+            {ingredients.map((ingredient) => (
+              <article key={ingredient.name} className="w-full max-w-[251px]">
+                <div className="relative h-[247px] w-full overflow-hidden rounded-[8px]">
+                  <Image
+                    src={ingredient.src}
+                    alt={ingredient.name}
+                    fill
+                    className="object-cover"
+                    sizes="251px"
+                  />
+                </div>
+                <h2 className="mt-[18px] font-display text-[22px] font-normal leading-none text-anna-foreground">
+                  {ingredient.name}
+                </h2>
+                <p className="mt-[12px] font-sans text-[18px] font-normal leading-[1.04] text-anna-foreground">
+                  {ingredient.text.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </p>
+              </article>
+            ))}
+          </section>
+
+          {/* Nav cards — full width two-column */}
+          <section className="grid grid-cols-2 gap-[68px] px-[56px] pt-[18px] pb-[80px]">
+            <Link
+              href="/brand"
+              className="relative h-[520px] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+            >
+              <Image
+                src="/brand-images/image 35.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+                <span className="font-display text-[38px] font-normal leading-none text-white">
+                  About us
+                </span>
+              </div>
+            </Link>
+
+            <Link
+              href="/values"
+              className="relative h-[520px] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+            >
+              <Image
+                src="/brand-images/Rectangle 32.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[180px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+                <span className="font-display text-[38px] font-normal leading-none text-white">
+                  Values
+                </span>
+              </div>
+            </Link>
+          </section>
+
+        </section>
+
+        {/* Footer — absolutely positioned after all content */}
+        <FooterSection style={{ top: footerTop }} />
+      </main>
+    </FigmaScaler>
+  );
+}
+</file>
+
+<file path="src/app/journal/page.tsx">
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { FooterSection } from "@/components/home/FooterSection";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+
+const articles = [
+  {
+    src: "/smalljournal.png",
+    alt: "Can traditional ingredients help achieve healthy glowing skin?",
+    title: "Can traditional ingredients help achieve healthy glowing skin?",
+    href: "/journal/traditional-ingredients-skin",
+  },
+  {
+    src: "/smalljournal1.png",
+    alt: "Why is rosemary oil trending in hair care?",
+    title: "Why is rosemary oil trending in hair care?",
+    href: "/journal/rosemary-oil-hair",
+  },
+  {
+    src: "/smalljournal2.png",
+    alt: "Can a health mix support daily energy levels?",
+    title: "Can a health mix support daily energy levels?",
+    href: "/journal/health-mix-energy",
+  },
+];
+
+export default function JournalPage() {
+  const customHeight = 4028;
+  const footerTop = 3700;
+
+  return (
+    <FigmaScaler customHeight={4028}>
+      <main
+        className="relative bg-anna-background"
+        style={{
+          width: FIGMA_HOME.width,
+          height: customHeight,
+        }}
+      >
+        {/* All content centered in a narrow column */}
+        <div className="mx-auto max-w-[680px] pt-[140px] px-[24px]">
+
+          {/* Title — centered */}
+          <h1 className="text-center font-display text-[48px] font-normal leading-[1.2] text-anna-foreground">
+            Why are people returning
+            <br />
+            to traditional wellness?
           </h1>
 
-          <p className="absolute right-[52px] top-[454px] z-10 w-[188px] text-right font-sans text-[22px] font-bold leading-[1.05] text-anna-foreground">
-            Discover the key
-            <br />
-            ingredients that
-            <br />
-            make our products
-            <br />
-            truly transformative.
-          </p>
+          {/* Top small centered image */}
+          <div className="relative mt-[40px] w-full h-[380px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/litbigjournal.png"
+              alt="Journal hero"
+              fill
+              priority
+              className="object-cover"
+              sizes="680px"
+            />
+          </div>
+
+          {/* Text block 1 */}
+          <div className="mt-[48px]">
+            <h2 className="font-display text-[17px] font-bold leading-snug text-anna-foreground mb-[12px]">
+              Growing Demand for Natural and Chemical-Free Living
+            </h2>
+            <p className="font-sans text-[15px] leading-[1.8] text-anna-foreground/80">
+              In today&apos;s fast-paced world, more people are returning to
+              traditional wellness practices as they seek natural and sustainable
+              ways to improve their health. Traditional wellness focuses on
+              holistic healing through ancient foods, herbal remedies, mindful
+              living, and balanced nutrition. Unlike modern quick-fix solutions,
+              traditional methods emphasize long-term wellness by supporting
+              the body naturally. From herbal skincare to nutrient-rich traditional
+              grains and Ayurvedic-inspired routines, people are increasingly
+              choosing natural wellness products to maintain a healthier lifestyle
+              without relying heavily on chemicals or processed alternatives.
+            </p>
+          </div>
+
+          {/* Text block 2 */}
+          <div className="mt-[36px]">
+            <h2 className="font-display text-[17px] font-bold leading-snug text-anna-foreground mb-[12px]">
+              Increased Awareness of Preventive Healthcare
+            </h2>
+            <p className="font-sans text-[15px] leading-[1.8] text-anna-foreground/80">
+              One of the biggest reasons for the growing popularity of traditional
+              wellness is the increasing awareness of the benefits of natural
+              ingredients and preventive healthcare. Ancient superfoods like
+              millets, black rice, herbal powders, and cold-pressed oils are rich
+              in fiber, antioxidants, vitamins, and minerals that support immunity,
+              digestion, skin health, and overall well-being. Consumers are
+              becoming more conscious about what they eat and apply to their
+              bodies, leading to a higher demand for organic health mixes,
+              herbal beauty products, and traditional wellness solutions that are
+              safe, effective, and deeply rooted in cultural wisdom.
+            </p>
+          </div>
+
+          {/* Wide full-width image — breaks out of the narrow column */}
+          <div className="relative mt-[48px] w-full h-[460px] overflow-hidden rounded-[10px]">
+            <Image
+              src="/middlejournal.png"
+              alt="People enjoying traditional wellness outdoors"
+              fill
+              className="object-cover object-center"
+              sizes="680px"
+            />
+          </div>
+
+          {/* Text block 3 */}
+          <div className="mt-[48px]">
+            <h2 className="font-display text-[17px] font-bold leading-snug text-anna-foreground mb-[12px]">
+              A Shift Towards Holistic and Balanced Lifestyles
+            </h2>
+            <p className="font-sans text-[15px] leading-[1.8] text-anna-foreground/80">
+              Traditional wellness is also gaining attention because it promotes a
+              balanced lifestyle that connects health, nature, and self-care. In an
+              era dominated by stress, pollution, and unhealthy food habits,
+              people are rediscovering the value of ancient wellness traditions
+              that encourage mindful living and natural healing. Brands that offer
+              authentic herbal products, traditional health foods, and Ayurvedic-
+              inspired wellness solutions are becoming increasingly popular
+              among health-conscious consumers. As people continue searching
+              for natural ways to improve their physical and mental well-being,
+              traditional wellness is no longer just a trend — it is becoming a
+              lifestyle choice for healthier living.
+            </p>
+          </div>
+
         </div>
 
-        <section className="grid grid-cols-[251px_251px_251px] justify-center gap-x-[104px] gap-y-[72px] px-[70px] py-[54px]">
-          {ingredients.map((ingredient) => (
-            <article key={ingredient.name} className="w-[251px]">
-              <div className="relative h-[247px] w-[251px] overflow-hidden rounded-[8px]">
-                <Image
-                  src={ingredient.src}
-                  alt={ingredient.name}
-                  fill
-                  className="object-cover"
-                  sizes="251px"
-                />
-              </div>
-              <h2 className="mt-[18px] font-display text-[22px] font-normal leading-none text-anna-foreground">
-                {ingredient.name}
-              </h2>
-              <p className="mt-[12px] font-sans text-[18px] font-normal leading-[1.04] text-anna-foreground">
-                {ingredient.text.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </p>
-            </article>
-          ))}
-        </section>
-
-        <section className="grid min-h-[670px] grid-cols-[520px_520px] justify-center gap-[68px] pt-[18px]">
-          <div className="relative h-[520px] w-[520px] overflow-hidden rounded-[10px]">
-            <Image
-              src="/brand-images/image 35.png"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="520px"
-            />
-            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
-              <span className="font-display text-[38px] font-normal leading-none text-white">
-                About us
-              </span>
-            </div>
+        {/* Read More — full width */}
+        <div className="mx-auto w-full max-w-site px-[50px] mt-[100px]">
+          <div className="flex items-baseline justify-between mb-[40px]">
+            <h2 className="font-display text-[40px] font-normal text-anna-foreground">
+              Read{" "}
+              <span className="font-script text-[40px]">More</span>
+            </h2>
+            <Link
+              href="/journal"
+              className="font-sans text-[14px] text-anna-foreground underline underline-offset-4 hover:opacity-60 transition-opacity"
+            >
+              All articles
+            </Link>
           </div>
 
-          <div className="relative h-[520px] w-[520px] overflow-hidden rounded-[10px]">
-            <Image
-              src="/brand-images/Rectangle 32.png"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="520px"
-            />
-            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[180px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
-              <span className="font-display text-[38px] font-normal leading-none text-white">
-                Values
-              </span>
-            </div>
+          <div className="grid grid-cols-3 gap-[32px]">
+            {articles.map((article) => (
+              <Link
+                key={article.href}
+                href={article.href}
+                className="group flex flex-col"
+              >
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[8px] bg-anna-cream">
+                  <Image
+                    src={article.src}
+                    alt={article.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    sizes="420px"
+                  />
+                </div>
+                <p className="mt-[12px] font-sans text-[14px] leading-[1.5] text-anna-foreground/80 group-hover:underline underline-offset-2 transition-all">
+                  {article.title}
+                </p>
+              </Link>
+            ))}
           </div>
-        </section>
+        </div>
 
-      </section>
-      <SiteFooter />
-    </main>
+        <FooterSection style={{ top: footerTop }} />
+      </main>
+    </FigmaScaler>
   );
 }
 </file>
@@ -1122,11 +1367,11 @@ export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
 
+type Props = { params: Promise<{ slug: string }> }
+
 export default async function ProductSlugPage({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+}: Props) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
@@ -1152,122 +1397,130 @@ export default function ProductPage() {
 <file path="src/app/values/page.tsx">
 import Image from "next/image";
 import Link from "next/link";
-import { SiteFooter } from "@/components/SiteFooter";
+import { FooterSection } from "@/components/home/FooterSection";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
 
 export default function ValuesPage() {
+  // Hero: 624px
+  // Values section: ~320px
+  // Gap before cards: 142px
+  // Cards section: ~720px
+  // Footer height: ~477px (same as brand page: 3551 - 3074)
+  const footerHeight = 477;
+  const contentHeight = 624 + 320 + 142 + 720; // 1806
+  const footerTop = contentHeight;
+  const customHeight = contentHeight + footerHeight; // 2283
+
   return (
-    <main className="min-h-screen bg-anna-background text-anna-foreground">
-      <section className="relative mx-auto w-full max-w-site overflow-hidden bg-anna-background">
-        <div className="relative h-[624px] w-full overflow-hidden">
-          <Image
-            src="/brand-images/image 34.png"
-            alt="Green hills under a cloudy sky"
-            fill
-            priority
-            className="object-cover"
-            sizes="1440px"
-          />
+    <FigmaScaler customHeight={customHeight}>
+      <main
+        className="relative bg-anna-background"
+        style={{
+          width: FIGMA_HOME.width,
+          height: customHeight,
+        }}
+      >
+        <section className="mx-auto w-full max-w-site">
 
+          {/* Hero Image — full width */}
+          <div className="relative h-[624px] w-full overflow-hidden">
+            <Image
+              src="/brand-images/image 34.png"
+              alt="Green hills under a cloudy sky"
+              fill
+              priority
+              className="object-cover"
+              sizes="1440px"
+            />
+            <h1 className="absolute left-[56px] top-[383px] z-10 w-[292px] text-white">
+              <span className="block font-serif text-[76px] font-normal leading-[0.78]">
+                Our
+              </span>
+              <span className="block font-script text-[88px] font-normal leading-[0.72]">
+                Values
+              </span>
+            </h1>
+          </div>
 
+          {/* Three values columns */}
+          <section className="grid grid-cols-3 gap-[80px] px-[56px] pt-[22px] pb-[60px]">
+            <article>
+              <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
+                Purity from Nature
+              </h2>
+              <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
+                We value ingredients in their most natural and beneficial form,
+                free from unnecessary additives and artificial compromises.
+              </p>
+            </article>
 
-          <h1 className="absolute left-[56px] top-[383px] z-10 w-[292px] text-white">
-            <span className="block font-serif text-[76px] font-normal leading-[0.78]">
-              Our
-            </span>
-            <span className="block font-script text-[88px] font-normal leading-[0.72]">
-              Values
-            </span>
-          </h1>
-        </div>
+            <article>
+              <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
+                Rooted in Tradition
+              </h2>
+              <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
+                Inspired by traditional Siddha wellness practices, we honour
+                ancient knowledge while adapting it for modern lifestyles.
+              </p>
+            </article>
 
-        <section className="grid grid-cols-[270px_270px_270px] gap-[126px] px-[56px] pt-[22px]">
-          <article>
-            <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
-              Purity from Nature
-            </h2>
-            <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
-              We value ingredients in
-              <br />
-              their most natural and
-              <br />
-              beneficial form, free from
-              <br />
-              unnecessary additives
-              <br />
-              and artificial
-              <br />
-              compromises.
-            </p>
-          </article>
+            <article>
+              <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
+                Honest Wellness
+              </h2>
+              <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
+                We believe wellness should be authentic, transparent, and
+                accessible built on trust and integrity.
+              </p>
+            </article>
+          </section>
 
-          <article>
-            <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
-              Rooted in Tradition
-            </h2>
-            <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
-              Inspired by traditional
-              <br />
-              Siddha wellness practices,
-              <br />
-              we honour ancient
-              <br />
-              knowledge while adapting
-              <br />
-              it for modern lifestyles.
-            </p>
-          </article>
+          {/* Image cards — two column, full width */}
+          <section className="grid grid-cols-[520px_520px] justify-center gap-[72px] pt-[142px]">
+            <Link
+              href="/brand"
+              className="relative h-[510px] w-[520px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+            >
+              <Image
+                src="/brand-images/image 35.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="520px"
+              />
+              <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+                <span className="font-display text-[38px] font-normal leading-none text-white">
+                  About us
+                </span>
+              </div>
+            </Link>
 
-          <article>
-            <h2 className="border-b border-anna-foreground/70 pb-[2px] font-display text-[30px] font-normal leading-none text-anna-foreground">
-              Honest Wellness
-            </h2>
-            <p className="mt-[14px] font-sans text-[24px] font-normal leading-[1.07] text-anna-foreground">
-              We believe wellness should
-              <br />
-              be authentic, transparent,
-              <br />
-              and accessible built on
-              <br />
-              trust and integrity.
-            </p>
-          </article>
+            <Link
+              href="/ingredients"
+              className="relative h-[510px] w-[520px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+            >
+              <Image
+                src="/brand-images/Rectangle 33.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="520px"
+              />
+              <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[266px] items-center justify-center rounded-[6px] border border-black/85 bg-white/5">
+                <span className="font-display text-[38px] font-normal leading-none text-anna-foreground">
+                  Ingredients
+                </span>
+              </div>
+            </Link>
+          </section>
+
         </section>
 
-        <section className="grid min-h-[720px] grid-cols-[520px_520px] justify-center gap-[72px] pt-[142px]">
-          <Link href="/brand" className="relative h-[510px] w-[520px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity">
-            <Image
-              src="/brand-images/image 35.png"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="520px"
-            />
-            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
-              <span className="font-display text-[38px] font-normal leading-none text-white">
-                About us
-              </span>
-            </div>
-          </Link>
-
-          <Link href="/ingredients" className="relative h-[510px] w-[520px] overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity">
-            <Image
-              src="/brand-images/Rectangle 33.png"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="520px"
-            />
-            <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[266px] items-center justify-center rounded-[6px] border border-black/85 bg-white/5">
-              <span className="font-display text-[38px] font-normal leading-none text-anna-foreground">
-                Ingredients
-              </span>
-            </div>
-          </Link>
-        </section>
-
-      </section>
-      <SiteFooter />
-    </main>
+        {/* Footer — absolutely positioned just like BrandPage */}
+        <FooterSection style={{ top: footerTop }} />
+      </main>
+    </FigmaScaler>
   );
 }
 </file>
@@ -1338,7 +1591,7 @@ import { FIGMA_HOME } from "@/lib/figma-home";
  * Wraps the Figma canvas and scales it proportionally to fit the viewport width.
  * No horizontal or vertical overflow — the canvas scales like a zoomed page.
  */
-export function FigmaScaler({ children }: { children: React.ReactNode }) {
+export function FigmaScaler({ children, customHeight }: { children: React.ReactNode, customHeight?: number }) {
   const [scale, setScale] = useState(1);
   const outerRef = useRef<HTMLDivElement>(null);
 
@@ -1352,7 +1605,8 @@ export function FigmaScaler({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-  const scaledHeight = FIGMA_HOME.height * scale;
+  const canonicalHeight = customHeight ?? FIGMA_HOME.height;
+  const scaledHeight = canonicalHeight * scale;
 
   return (
     <div
@@ -1362,7 +1616,7 @@ export function FigmaScaler({ children }: { children: React.ReactNode }) {
       <div
         style={{
           width: FIGMA_HOME.width,
-          height: FIGMA_HOME.height,
+          height: canonicalHeight,
           transformOrigin: "top left",
           transform: `scale(${scale})`,
         }}
@@ -1609,11 +1863,11 @@ import { footerNavPrimary, footerNavSecondary } from "@/lib/navigation";
  * Footer block — Figma from y=3551 (Vector 3 wave through y=4028)
  * Wave: 84:117 at -36,3551.31 — 1594×525.61 #144232
  */
-export function FooterSection() {
+export function FooterSection({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <footer
-      className="absolute left-0 top-[3551px] z-30 w-full overflow-hidden"
-      style={{ height: 477 }}
+      className={`absolute left-0 top-[3551px] z-30 w-full overflow-hidden ${className || ""}`}
+      style={{ height: 477, ...style }}
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" className="sr-only">
@@ -1921,12 +2175,11 @@ export function ProductsSection() {
                 key={category}
                 type="button"
                 onClick={() => setActiveCategory(category)}
-                className={[
-                  "flex h-[58px] w-[210px] items-center justify-center rounded-card font-display text-anna-title-sm leading-none transition-colors",
+                className={`flex h-[58px] w-[210px] items-center justify-center rounded-card font-display text-anna-title-sm leading-none transition-colors ${
                   isActive
                     ? "bg-anna-copper-mid text-white"
-                    : "bg-anna-cream text-anna-foreground",
-                ].join(" ")}
+                    : "bg-anna-cream text-anna-foreground"
+                }`}
                 aria-pressed={isActive}
               >
                 {category}
@@ -2397,6 +2650,9 @@ export function KeyIngredientsSection() {
 </file>
 
 <file path="src/components/product/OtherProductsSection.tsx">
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
 const products = [
@@ -2414,64 +2670,74 @@ const products = [
   },
 ];
 
+function OtherProductCard({ product }: { product: typeof products[0] }) {
+  const [quantity, setQuantity] = useState(product.name.includes("Kanji") ? 0 : 1);
+
+  return (
+    <article className="w-[230px]">
+      <div className="relative h-[310px] w-[230px] overflow-hidden rounded-[12px]">
+        <Image
+          src={product.src}
+          alt={product.alt}
+          fill
+          className="object-cover"
+          sizes="230px"
+        />
+      </div>
+
+      <h3 className="mt-[12px] font-display text-[16px] font-normal leading-[1.2] text-anna-foreground min-h-[38px]">
+        {product.name.split("\n").map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
+        ))}
+      </h3>
+
+      <div className="mt-[12px] flex h-[28px] items-center justify-between">
+        <span className="flex h-[28px] w-[64px] items-center justify-center rounded-[3px] bg-[#E2C39B] font-display text-[14px] font-normal leading-none text-black">
+          {product.price}
+        </span>
+        <div className="flex items-center bg-[#9C4115] rounded-[4px] px-[8px] h-[28px] gap-[10px] text-white">
+          <button
+            type="button"
+            className="font-sans text-[15px] font-bold hover:opacity-80 transition-opacity"
+            onClick={() => setQuantity((prev) => Math.max(0, prev - 1))}
+            aria-label={`Decrease ${product.alt} quantity`}
+          >
+            -
+          </button>
+          <span className="w-[12px] text-center font-sans text-[14px] font-medium">
+            {quantity}
+          </span>
+          <button
+            type="button"
+            className="font-sans text-[15px] font-bold hover:opacity-80 transition-opacity"
+            onClick={() => setQuantity((prev) => prev + 1)}
+            aria-label={`Increase ${product.alt} quantity`}
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export function OtherProductsSection() {
   return (
-    <section className="h-[390px] px-[76px] pb-[31px] pt-[20px]">
+    <section className="px-[76px] pb-[80px] pt-[160px]">
       <h2 className="flex items-baseline text-anna-foreground">
-        <span className="font-display text-[18px] font-normal leading-none">
+        <span className="font-display text-[32px] font-normal leading-none">
           Other
         </span>
-        <span className="ml-[5px] font-script text-[25px] font-normal leading-none">
+        <span className="ml-[8px] font-script text-[42px] font-normal leading-none">
           Products
         </span>
       </h2>
 
-      <div className="mt-[38px] grid grid-cols-[129px_129px] gap-[24px]">
+      <div className="mt-[32px] grid grid-cols-[230px_230px] gap-[40px]">
         {products.map((product) => (
-          <article key={product.src} className="w-[129px]">
-            <div className="relative h-[194px] w-[129px] overflow-hidden rounded-[6px]">
-              <Image
-                src={product.src}
-                alt={product.alt}
-                fill
-                className="object-cover"
-                sizes="129px"
-              />
-            </div>
-
-            <h3 className="mt-[6px] font-display text-[10px] font-normal leading-[1.08] text-anna-foreground">
-              {product.name.split("\n").map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h3>
-
-            <div className="mt-[6px] flex h-[15px] items-center justify-between">
-              <span className="flex h-[15px] w-[30px] items-center justify-center rounded-[1px] bg-anna-gold-light font-display text-[8px] font-normal leading-none text-anna-foreground">
-                {product.price}
-              </span>
-              <div className="flex items-center gap-[4px]">
-                <button
-                  type="button"
-                  className="flex h-[15px] w-[15px] items-center justify-center rounded-[2px] bg-anna-copper font-sans text-[10px] font-bold leading-none text-white"
-                  aria-label={`Decrease ${product.alt} quantity`}
-                >
-                  -
-                </button>
-                <span className="font-sans text-[10px] font-normal leading-none text-anna-foreground">
-                  1
-                </span>
-                <button
-                  type="button"
-                  className="flex h-[15px] w-[15px] items-center justify-center rounded-[2px] bg-anna-copper font-sans text-[10px] font-bold leading-none text-white"
-                  aria-label={`Increase ${product.alt} quantity`}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </article>
+          <OtherProductCard key={product.src} product={product} />
         ))}
       </div>
     </section>
@@ -2489,186 +2755,225 @@ import type { Product } from "@/lib/products";
 import { KeyIngredientsSection } from "@/components/product/KeyIngredientsSection";
 import { OtherProductsSection } from "@/components/product/OtherProductsSection";
 import { SiteFooter } from "@/components/SiteFooter";
+import { FigmaScaler } from "@/components/FigmaScaler";
+import { FIGMA_HOME } from "@/lib/figma-home";
+import { FooterSection } from "../home/FooterSection";
 
 const accordionRows = ["How to use", "Benefits", "Ingredients"];
 
 export function ProductDetail({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const footerTop = 3500;
+  const customHeight = 4080;
 
   return (
-    <main className="min-h-screen bg-anna-background text-anna-foreground">
-      <section className="relative mx-auto min-h-screen w-full max-w-site overflow-hidden bg-anna-background">
-        <section className="grid grid-cols-[80px_459px_1fr] gap-[25px] px-[50px] pt-[77px]">
-          <div className="flex flex-col gap-[24px]">
-            {[product.thumbnailSrc, product.featuredSrc].map((src) => (
-              <div
-                key={src}
-                className="relative h-[135px] w-[90px] overflow-hidden rounded-[4px] bg-anna-cream"
-              >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="90px"
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="relative h-[620px] w-[459px] overflow-hidden rounded-[6px] bg-anna-cream">
-            <Image
-              src={product.detailSrc}
-              alt={product.detailAlt}
-              fill
-              priority
-              className="object-cover"
-              sizes="459px"
-            />
-          </div>
-
-          <div className="pl-[27px] pt-[2px]">
-            <div className="flex items-start justify-between gap-8">
-              <h1 className="w-[500px] font-display text-[42px] font-normal leading-[1.16] text-anna-foreground">
-                {product.name}
-              </h1>
-              <button
-                type="button"
-                className="mt-[5px] flex h-[42px] w-[42px] items-center justify-center font-sans text-[36px] leading-none"
-                aria-label="Add to favorites"
-              >
-                ♡
-              </button>
-            </div>
-
-            <div className="mt-[28px] h-px w-[518px] bg-black/45" />
-
-            <p className="mt-[24px] w-[509px] font-sans text-[18px] font-normal leading-[1.18] text-anna-foreground">
-              {product.description}
-            </p>
-
-            <h2 className="mt-[18px] font-display text-[24px] font-bold leading-none text-anna-foreground">
-              Size
-            </h2>
-
-            <div className="mt-[16px] flex items-center gap-[20px]">
-              {product.sizes.map((size, index) => (
-                <button
-                  key={size}
-                  type="button"
-                  className={[
-                    "h-[36px] min-w-[55px] rounded-[4px] px-[10px] font-sans text-[14px]",
-                    index === 0
-                      ? "bg-anna-copper-mid text-white"
-                      : "border border-black/25 bg-white text-anna-foreground",
-                  ].join(" ")}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-[17px] flex items-center">
-              <div className="grid h-[36px] w-[110px] grid-cols-3 items-center rounded-[3px] border border-black/20 bg-white font-sans text-[18px] font-bold">
-                <button
-                  type="button"
-                  className="h-full text-black/45"
-                  onClick={() => setQuantity((value) => Math.max(1, value - 1))}
-                  aria-label="Decrease quantity"
-                >
-                  -
-                </button>
-                <span className="text-center text-[16px]">{quantity}</span>
-                <button
-                  type="button"
-                  className="h-full text-black"
-                  onClick={() => setQuantity((value) => value + 1)}
-                  aria-label="Increase quantity"
-                >
-                  +
-                </button>
-              </div>
-              <Link
-                href="/cart"
-                className="flex h-[36px] w-[293px] items-center justify-center gap-[10px] rounded-[3px] bg-black font-sans text-[16px] font-bold text-white"
-              >
-                <Image
-                  src="/images/icon-bag.png"
-                  alt=""
-                  width={22}
-                  height={22}
-                  className="invert"
-                />
-                Add to cart
-              </Link>
-            </div>
-
-            <p className="mt-[12px] font-sans text-[14px] font-normal leading-none text-black/30 underline">
-              Shipping, Exchange , Returns
-            </p>
-
-            <div className="mt-[34px] w-[518px]">
-              {accordionRows.map((row) => (
+    <FigmaScaler customHeight={customHeight}>
+      <main
+        className="bg-anna-background"
+        style={{
+          width: FIGMA_HOME.width,
+          height: customHeight,   // ← uses the variable
+        }}
+      >
+        <section className="relative mx-auto min-h-screen w-full max-w-site bg-anna-background">
+          <section className="grid grid-cols-[90px_459px_1fr] gap-[25px] px-[50px] pt-[140px]">
+            <div className="flex flex-col gap-[24px]">
+              {["/images/black rice mix-1.png", "/images/black rice mix-2.png"].map((src) => (
                 <div
-                  key={row}
-                  className="flex h-[53px] items-center justify-between border-b border-black/45 font-sans text-[14px] font-normal text-anna-foreground"
+                  key={src}
+                  className="relative h-[135px] w-[90px] overflow-hidden rounded-[4px] bg-anna-cream"
                 >
-                  <span>{row}</span>
-                  <span className="text-[24px] leading-none">+</span>
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="90px"
+                  />
                 </div>
               ))}
             </div>
-          </div>
-        </section>
 
-        <section className="px-[50px] pb-[104px] pt-[118px]">
-          <h2 className="font-script text-[48px] font-normal leading-none text-anna-foreground">
-            FAQ
-          </h2>
+            <div className="relative h-[620px] w-[459px] overflow-hidden rounded-[6px] bg-anna-cream">
+              <Image
+                src={product.detailSrc}
+                alt={product.detailAlt}
+                fill
+                priority
+                className="object-cover"
+                sizes="459px"
+              />
+            </div>
 
-          <div className="ml-[93px] mt-[58px] w-[912px]">
-            {product.faqs.map((row) => (
-              <div
-                key={row}
-                className="flex h-[81px] items-center justify-between border-b border-black/45 font-sans text-[20px] font-bold text-anna-foreground"
-              >
-                <span>{row}</span>
-                <span className="pr-[19px] text-[27px] font-normal leading-none">
-                  +
-                </span>
+            <div className="pl-[27px] pt-[2px]">
+              <div className="flex items-start justify-between gap-8">
+                <h1 className="w-[500px] font-display text-[42px] font-normal leading-[1.16] text-anna-foreground">
+                  {product.name}
+                </h1>
+                <button
+                  type="button"
+                  onClick={() => setIsFavorite(!isFavorite)}
+                  className="mt-[5px] flex h-[42px] w-[42px] items-center justify-center transition-transform hover:scale-105"
+                  aria-label="Add to favorites"
+                >
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill={isFavorite ? "#8C4E2D" : "none"}
+                    stroke={isFavorite ? "#8C4E2D" : "currentColor"}
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="transition-colors duration-300"
+                  >
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
               </div>
-            ))}
-          </div>
-        </section>
 
-        <section className="grid min-h-[700px] grid-cols-[740px_1fr] items-center gap-[96px] px-[20px] pb-[42px]">
-          <div className="relative h-[620px] w-[740px] overflow-hidden rounded-[4px] bg-white">
-            <Image
-              src="/images/lifestyle-product-41aad2.png"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="740px"
-            />
-          </div>
+              <div className="mt-[20px] h-px w-[518px] bg-black/15" />
 
-          <div className="pt-[14px]">
-            <h2 className="font-script text-[40px] font-normal leading-none text-anna-foreground">
-              Steps:
+              <p className="mt-[24px] w-[509px] font-sans text-[18px] font-normal leading-[1.18] text-anna-foreground">
+                {product.description}
+              </p>
+
+              <h2 className="mt-[28px] font-display text-[24px] font-bold leading-none text-anna-foreground">
+                Size
+              </h2>
+
+              <div className="mt-[16px] flex items-center gap-[20px]">
+                {product.sizes.map((size) => {
+                  const isSelected = size === selectedSize;
+                  const isDisabled = size === "1kg";
+
+                  let btnStyles = "";
+                  if (isDisabled) {
+                    btnStyles = "bg-[#EAEAEA] text-black/25 cursor-not-allowed";
+                  } else if (isSelected) {
+                    btnStyles = "bg-[#8C4E2D] text-white";
+                  } else {
+                    btnStyles = "border border-black/35 bg-white text-black hover:border-black transition-colors";
+                  }
+
+                  return (
+                    <button
+                      key={size}
+                      type="button"
+                      disabled={isDisabled}
+                      onClick={() => setSelectedSize(size)}
+                      className={`h-[36px] min-w-[55px] rounded-[4px] px-[10px] font-sans text-[14px] leading-none ${btnStyles}`}
+                    >
+                      {size}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-[24px] flex items-center gap-[16px]">
+                <div className="grid h-[36px] w-[110px] grid-cols-3 items-center rounded-[3px] border border-black/15 bg-white font-sans text-[18px] font-bold">
+                  <button
+                    type="button"
+                    className="h-full text-black/45"
+                    onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+                    aria-label="Decrease quantity"
+                  >
+                    -
+                  </button>
+                  <span className="text-center text-[16px]">{quantity}</span>
+                  <button
+                    type="button"
+                    className="h-full text-black"
+                    onClick={() => setQuantity((value) => value + 1)}
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+                <Link
+                  href="/cart"
+                  className="flex h-[36px] w-[293px] items-center justify-center gap-[10px] rounded-[3px] bg-black font-sans text-[16px] font-bold text-white hover:opacity-90 transition-opacity"
+                >
+                  <Image
+                    src="/images/icon-bag.png"
+                    alt=""
+                    width={22}
+                    height={22}
+                    className="invert"
+                  />
+                  Add to cart
+                </Link>
+              </div>
+
+              <p className="mt-[14px] font-sans text-[14px] font-normal leading-none text-black/45 underline cursor-pointer hover:text-black transition-colors">
+                Shipping, Exchange , Returns
+              </p>
+
+              <div className="mt-[34px] w-[518px]">
+                {accordionRows.map((row) => (
+                  <div
+                    key={row}
+                    className="flex h-[53px] items-center justify-between border-b border-black/20 font-sans text-[14px] font-normal text-anna-foreground cursor-pointer hover:text-anna-copper transition-colors"
+                  >
+                    <span>{row}</span>
+                    <span className="text-[24px] leading-none">+</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="px-[50px] pb-[104px] pt-[118px]">
+            <h2 className="font-script text-[48px] font-normal leading-none text-anna-foreground">
+              FAQ
             </h2>
-            <ul className="mt-[13px] list-disc pl-[20px] font-sans text-[18px] font-normal leading-[1.18] text-anna-foreground">
-              {product.steps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
 
-        <KeyIngredientsSection />
-        <OtherProductsSection />
-      </section>
-      <SiteFooter />
-    </main>
+            <div className="ml-[93px] mt-[58px] w-[912px]">
+              {product.faqs.map((row) => (
+                <div
+                  key={row}
+                  className="flex h-[81px] items-center justify-between border-b border-black/45 font-sans text-[20px] font-bold text-anna-foreground"
+                >
+                  <span>{row}</span>
+                  <span className="pr-[19px] text-[27px] font-normal leading-none">
+                    +
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="grid min-h-[700px] grid-cols-[740px_1fr] items-center gap-[96px] px-[20px] pb-[42px]">
+            <div className="relative h-[620px] w-[740px] overflow-hidden rounded-[4px] bg-white">
+              <Image
+                src="/images/lifestyle-product-41aad2.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="740px"
+              />
+            </div>
+
+            <div className="pt-[14px]">
+              <h2 className="font-script text-[40px] font-normal leading-none text-anna-foreground">
+                Steps:
+              </h2>
+              <ul className="mt-[13px] list-disc pl-[20px] font-sans text-[18px] font-normal leading-[1.18] text-anna-foreground">
+                {product.steps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          <KeyIngredientsSection />
+          <OtherProductsSection />
+        </section>
+        <FooterSection style={{ top: footerTop }} />
+      </main>
+    </FigmaScaler>
   );
 }
 </file>
@@ -2798,7 +3103,7 @@ export const FIGMA_HOME = {
 export const navLinks = [
   { label: "Collections", href: "/collections" },
   { label: "Brand", href: "/brand" },
-  { label: "Journal", href: "/ingredients" }
+  { label: "Journal", href: "/journal" }
 ];
 
 export const accountLinks = [
@@ -2928,7 +3233,7 @@ export const products: Product[] = [
     detailSrc: "/images/karuppukavuni kanji mix black rice porridge mix.png",
     detailAlt: "Anna Valam Karuppukavuni Kanji Mix pouch",
     description:
-      "Traditional health blend made with ancient rice varieties, millets, and horse gram to support natural wellness, healthy digestion, energy, and weight management.",
+      "Traditional health blend made with ancient rice varieties, millets, and horse gram to support natural wellness, healthy digestion, energy, and weight management. Rich in fiber, iron, and essential nutrients, it is a wholesome and nourishing breakfast choice for all age groups.",
     sizes: ["250g", "500g", "1kg"],
     steps: [
       "Mix two spoons of powder in water.",
