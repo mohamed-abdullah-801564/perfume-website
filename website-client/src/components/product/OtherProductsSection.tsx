@@ -6,13 +6,13 @@ import Image from "next/image";
 const products = [
   {
     name: "Multigrain health\nmix",
-    price: "200 $",
+    price: "₹ 180",
     src: "/images/multigrain health mix.png",
     alt: "Multigrain health mix",
   },
   {
     name: "Karuppukavuni Kanji mix\n/ Black rice porridge mix",
-    price: "200 $",
+    price: "₹ 260",
     src: "/images/karuppukavuni kanji mix black rice porridge mix.png",
     alt: "Karuppukavuni Kanji mix Black rice porridge mix",
   },

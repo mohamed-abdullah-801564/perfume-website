@@ -13,28 +13,24 @@ const productSlots = [
     image: { x: 114, y: 872, w: 174, h: 148 },
     src: "/images/product-1-2b9d79.png",
     alt: "Health mix product",
-    href: "/product/multigrain-health-mix",
   },
   {
     bg: { x: 428, y: 850, w: 205, h: 182 },
     image: { x: 438, y: 872, w: 186, h: 152 },
     src: "/images/product-2-68e613.png",
     alt: "Oil product",
-    href: "/product/rosemary-oil",
   },
   {
     bg: { x: 758, y: 850, w: 205, h: 182 },
     image: { x: 795, y: 872, w: 132, h: 137 },
     src: "/images/product-3.png",
     alt: "Face pack product",
-    href: "/product/glowing-face-pack",
   },
   {
     bg: { x: 1088, y: 850, w: 205, h: 182 },
     image: { x: 1081, y: 872, w: 219, h: 159 },
     src: "/images/product-4-784bf1.png",
     alt: "Wellness product",
-    href: "/product/black-rice-porridge-mix",
   },
 ];
 
@@ -88,7 +84,7 @@ export function ProductsSection() {
 
       {/* Product grid — cream plates + images */}
       {productSlots.map((slot) => (
-        <Link key={slot.src} href={slot.href} aria-label={`View ${slot.alt}`}>
+        <div key={slot.src} aria-hidden>
           <FigmaLayer
             x={slot.bg.x}
             y={slot.bg.y}
@@ -107,7 +103,7 @@ export function ProductsSection() {
             alt={slot.alt}
             zIndex={11}
           />
-        </Link>
+        </div>
       ))}
 
       {/* Group 5 Rosemary — 574,1327 291.26×511 */}

@@ -3,7 +3,9 @@ export type Product = {
   name: string;
   shortName: string;
   price: string;
+  priceValue: number;
   category: string;
+  collectionTags: string[];
   thumbnailSrc: string;
   featuredSrc: string;
   detailSrc: string;
@@ -36,8 +38,10 @@ export const products: Product[] = [
     slug: "rosemary-oil",
     name: "Rosemary Oil",
     shortName: "Rosemary oil",
-    price: "$ 100",
+    price: "₹ 240",
+    priceValue: 240,
     category: "Oils",
+    collectionTags: ["New Arrivals"],
     thumbnailSrc: "/images/product-2-68e613.png",
     featuredSrc: "/images/product-rosemary-62e953.png",
     detailSrc: "/images/product-rosemary-62e953.png",
@@ -57,8 +61,10 @@ export const products: Product[] = [
     slug: "multigrain-health-mix",
     name: "Multigrain Health Mix",
     shortName: "Health mix",
-    price: "$ 120",
+    price: "₹ 180",
+    priceValue: 180,
     category: "Health mixes",
+    collectionTags: ["New Arrivals"],
     thumbnailSrc: "/images/product-1-2b9d79.png",
     featuredSrc: "/images/multigrain health mix.png",
     detailSrc: "/images/multigrain health mix.png",
@@ -78,8 +84,10 @@ export const products: Product[] = [
     slug: "glowing-face-pack",
     name: "Herbal Wellness Glowing Face Pack",
     shortName: "Face pack",
-    price: "$ 90",
+    price: "₹ 190",
+    priceValue: 190,
     category: "Face packs",
+    collectionTags: ["On Sale"],
     thumbnailSrc: "/images/product-3.png",
     featuredSrc: "/images/card-product.png",
     detailSrc: "/images/card-product.png",
@@ -99,8 +107,10 @@ export const products: Product[] = [
     slug: "black-rice-porridge-mix",
     name: "Karuppukavuni Kanji Mix / Black Rice Porridge Mix",
     shortName: "Wellness mix",
-    price: "$ 110",
+    price: "₹ 260",
+    priceValue: 260,
     category: "Health mixes",
+    collectionTags: ["On Sale"],
     thumbnailSrc: "/images/product-4-784bf1.png",
     featuredSrc: "/images/karuppukavuni kanji mix black rice porridge mix.png",
     detailSrc: "/images/karuppukavuni kanji mix black rice porridge mix.png",

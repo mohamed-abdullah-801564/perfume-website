@@ -1,22 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CollectionsFooter } from "@/components/collections/CollectionsFooter";
-import { ProductCard } from "@/components/collections/ProductCard";
+import { CollectionProductsSection } from "@/components/collections/CollectionProductsSection";
 import {
   collections,
   getCollectionBySlug,
-  getProductsByCategory,
+  products,
 } from "@/lib/products";
 import { FigmaScaler } from "@/components/FigmaScaler";
 import { FIGMA_HOME } from "@/lib/figma-home";
 import { FooterSection } from "@/components/home/FooterSection";
-const filterGroups = [
-  { label: "Collections", options: ["New Arrivals", "Bestsellers", "On Sale", "Kits"] },
-  { label: "Type", options: ["Cream", "Lotion", "Cleanser", "Oil", "Serum"] },
-  { label: "Price", options: [] },
-  { label: "Size", options: [] },
-];
 
 export function generateStaticParams() {
   return collections.map((collection) => ({ slug: collection.slug }));
@@ -34,7 +27,6 @@ export default async function CollectionCategoryPage({
     notFound();
   }
 
-  const categoryProducts = getProductsByCategory(collection.category);
   const otherCollections = collections.filter((item) => item.slug !== collection.slug);
   const customHeight = 2450;
   const footerTop = 1970;
@@ -72,42 +64,10 @@ export default async function CollectionCategoryPage({
           />
         </div>
 
-        <section className="mt-[40px] grid grid-cols-1 gap-[34px] lg:grid-cols-[240px_1fr]">
-          <aside className="rounded-[10px] bg-white px-[28px] py-[28px]">
-            <h2 className="font-display text-[24px] font-bold leading-none">
-              Filter (0)
-            </h2>
-            <div className="mt-[22px] space-y-[22px]">
-              {filterGroups.map((group) => (
-                <div key={group.label} className="border-t border-black/15 pt-[16px]">
-                  <div className="flex items-center justify-between font-display text-[20px] font-bold leading-none">
-                    <span>{group.label}</span>
-                    <span>⌄</span>
-                  </div>
-                  {group.options.length > 0 ? (
-                    <div className="mt-[14px] space-y-[10px]">
-                      {group.options.map((option) => (
-                        <label
-                          key={option}
-                          className="flex items-center gap-[8px] font-sans text-[13px] leading-none"
-                        >
-                          <input type="checkbox" className="h-[12px] w-[12px]" />
-                          {option}
-                        </label>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </aside>
-
-          <div className="grid grid-cols-1 gap-x-[42px] gap-y-[42px] sm:grid-cols-2 xl:grid-cols-3">
-            {categoryProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-          </div>
-        </section>
+        <CollectionProductsSection
+          products={products}
+          initialCategory={collection.category}
+        />
 
         <section className="mt-[88px]">
           <h2 className="flex items-baseline gap-[12px]">

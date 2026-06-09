@@ -106,8 +106,8 @@ export function HeroSection() {
         zIndex={4}
       />
 
-      {/* Group 9 promo chip — adjusted for new pouch placement */}
-      <PromoChip x={300} y={580} imagePosition="right" />
+      {/* Group 9 promo chip — kept above the hero product and linked to health mix */}
+      <PromoChip x={415} y={565} imagePosition="right" href="/product/multigrain-health-mix" />
     </>
   );
 }

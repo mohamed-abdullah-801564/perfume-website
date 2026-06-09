@@ -1,14 +1,21 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FigmaLayer } from "./FigmaLayer";
 
 type PromoChipProps = {
   x: number;
   y: number;
   imagePosition?: "left" | "right";
+  href?: string;
 };
 
 /** Group 8/9/10 product chip — 179×87px per Figma */
-export function PromoChip({ x, y, imagePosition = "right" }: PromoChipProps) {
+export function PromoChip({
+  x,
+  y,
+  imagePosition = "right",
+  href = "/product/multigrain-health-mix",
+}: PromoChipProps) {
   const imageBox =
     imagePosition === "right"
       ? { left: 87, top: 8, width: 82, height: 72 }
@@ -25,8 +32,12 @@ export function PromoChip({ x, y, imagePosition = "right" }: PromoChipProps) {
       : { left: 142, top: 36, size: 12 };
 
   return (
-    <FigmaLayer x={x} y={y} width={179} height={87} zIndex={20}>
-      <div className="relative h-full w-full overflow-hidden rounded-badge border border-black/35 bg-white">
+    <FigmaLayer x={x} y={y} width={179} height={87} zIndex={24}>
+      <Link
+        href={href}
+        aria-label="View Multigrain Health Mix"
+        className="relative block h-full w-full overflow-hidden rounded-badge border border-black/35 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition-transform duration-200 hover:-translate-y-1"
+      >
         <div
           className="absolute overflow-hidden rounded-[18px]"
           style={{
@@ -38,7 +49,7 @@ export function PromoChip({ x, y, imagePosition = "right" }: PromoChipProps) {
         >
           <Image
             src="/images/card-product.png"
-            alt=""
+            alt="Anna Valam product"
             fill
             className="object-cover"
             sizes="82px"
@@ -64,7 +75,7 @@ export function PromoChip({ x, y, imagePosition = "right" }: PromoChipProps) {
           }}
           aria-hidden
         />
-      </div>
+      </Link>
     </FigmaLayer>
   );
 }
