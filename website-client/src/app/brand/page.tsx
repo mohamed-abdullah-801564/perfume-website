@@ -18,7 +18,7 @@ export default function BrandPage() {
       
 
 
-      <section className="mx-auto w-full max-w-site pt-[119px]">
+      <section className="mx-auto w-full max-w-site pt-[170px] pt-[119px]">
         <div className="px-[54px]">
           <h1 className="font-script text-[64px] font-normal leading-none text-anna-foreground">
             About us

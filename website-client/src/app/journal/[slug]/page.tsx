@@ -119,7 +119,7 @@ export default async function JournalSinglePage({ params }: Props) {
         }}
       >
         {/* All content centered in a narrow column */}
-        <div className="mx-auto max-w-[680px] pt-[140px] px-[24px]">
+        <div className="mx-auto max-w-[680px] pt-[210px] md:pt-[140px] px-[24px]">
 
           {/* Title — centered */}
           <h1 className="font-sans text-[40px] font-normal leading-[1.0] text-center text-anna-foreground">
