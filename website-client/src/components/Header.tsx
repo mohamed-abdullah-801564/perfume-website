@@ -6,12 +6,22 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { navLinks, accountLinks } from "@/lib/navigation";
 import { collections } from "@/lib/products";
+import {
+  SignInButton,
+  SignUpButton,
+  useUser,
+  useClerk,
+   UserButton
+} from "@clerk/nextjs";
 
 export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCollectionsOpen, setIsCollectionsOpen] = useState(false);
   const isCollectionsPage = pathname.startsWith("/collections");
+const { signOut } = useClerk();
+const { user, isSignedIn } = useUser();
+
   const desktopLinkClass =
     "relative font-display text-[32px] leading-none text-anna-foreground after:absolute after:left-0 after:top-full after:mt-[6px] after:h-[3px] after:w-full after:origin-left after:scale-x-0 after:bg-anna-copper-mid after:transition-transform after:duration-200 hover:after:scale-x-100";
 
@@ -21,6 +31,7 @@ export function Header() {
   }, [pathname]);
 
   return (
+    
     <header className="absolute left-0 top-0 z-50 h-16 w-full xl:h-[82px]">
       <div className="relative mx-auto h-full w-full max-w-site px-[18px] sm:px-[51px]">
         <nav
@@ -123,15 +134,40 @@ export function Header() {
             className="hidden items-center gap-[18px] xl:flex"
             aria-label="Account"
           >
-            {accountLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={desktopLinkClass}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {accountLinks.map((link) => {
+  if (link.href === "/login") {
+    return isSignedIn ? (
+      <div
+        key="user-button"
+        className="flex items-center"
+      >
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: "h-10 w-10",
+            },
+          }}
+        />
+      </div>
+    ) : (
+      <SignInButton mode="modal" key={link.label}>
+        <button className={desktopLinkClass}>
+          {link.label}
+        </button>
+      </SignInButton>
+    );
+  }
+
+  return (
+    <Link
+      key={link.label}
+      href={link.href}
+      className={desktopLinkClass}
+    >
+      {link.label}
+    </Link>
+  );
+})}
           </nav>
           <Link
             href="/cart"

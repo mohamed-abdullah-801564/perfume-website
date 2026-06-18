@@ -6,8 +6,12 @@ import {
   Playfair_Display,
   REM,
 } from "next/font/google";
+// @ts-ignore
 import "./globals.css";
 import { Header } from "@/components/Header";
+import { ClerkProvider } from "@clerk/nextjs";
+import UserSync from "@/components/UserSync";
+import { Toaster } from "sonner";
 
 const abhaya = Abhaya_Libre({
   subsets: ["latin"],
@@ -56,6 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
+      <UserSync />
     <html
       lang="en"
       className={`${abhaya.variable} ${italianno.variable} ${inter.variable} ${rem.variable} ${playfair.variable}`}
@@ -63,8 +69,9 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Toaster richColors />
       </body>
     </html>
+    </ClerkProvider>
   );
 }
-

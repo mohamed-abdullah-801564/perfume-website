@@ -10,6 +10,12 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { FigmaScaler } from "@/components/FigmaScaler";
 import { FIGMA_HOME } from "@/lib/figma-home";
 import { FooterSection } from "../home/FooterSection";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
+import { supabase } from "@/lib/supabase";
+import { useClerk } from "@clerk/nextjs";
+import { toast } from "sonner";
+
 
 const accordionRows = ["How to use", "Benefits", "Ingredients"];
 
@@ -19,6 +25,85 @@ export function ProductDetail({ product }: { product: Product }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const footerTop = 3500;
   const customHeight = 4080;
+  const router = useRouter();
+  const { user } = useUser();
+const { openSignIn } = useClerk();
+  const handleAddToCart = async () => {
+  if (!user) {
+  toast("Sign in required", {
+    description: "Please sign in to add products to your cart.",
+  });
+
+  setTimeout(() => {
+    router.push("/");
+  }, 1500);
+
+  return;
+}
+
+  const { data: existingItem } = await supabase
+    .from("cart_items")
+    .select("*")
+    .eq("user_id", user.id)
+    .eq("product_slug", product.slug)
+    .eq("size", selectedSize)
+    .maybeSingle();
+
+  if (existingItem) {
+    await supabase
+      .from("cart_items")
+      .update({
+        quantity: existingItem.quantity + quantity,
+      })
+      .eq("id", existingItem.id);
+  } else {
+    await supabase
+  .from("cart_items")
+  .insert({
+    user_id: user.id,
+    product_slug: product.slug,
+    product_name: product.name,
+    size: selectedSize,
+    quantity,
+    price_value: product.priceValue,
+  });
+  }
+
+  router.push("/cart");
+};
+const handleFavorite = async () => {
+  if (!user) {
+    toast.error("Please sign in to save favorites");
+    return;
+  }
+
+  const { data: existing } = await supabase
+    .from("favorites")
+    .select("*")
+    .eq("user_id", user.id)
+    .eq("product_slug", product.slug)
+    .maybeSingle();
+
+  if (existing) {
+    await supabase
+      .from("favorites")
+      .delete()
+      .eq("id", existing.id);
+
+    setIsFavorite(false);
+    toast.success("Removed from favorites");
+  } else {
+    await supabase
+      .from("favorites")
+      .insert({
+        user_id: user.id,
+        product_slug: product.slug,
+      });
+
+    setIsFavorite(true);
+    toast.success("Added to favorites");
+  }
+};
 
   return (
     <FigmaScaler customHeight={customHeight}>
@@ -66,7 +151,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 </h1>
                 <button
                   type="button"
-                  onClick={() => setIsFavorite(!isFavorite)}
+                  onClick={handleFavorite}
                   className="mt-[5px] flex h-[42px] w-[42px] items-center justify-center transition-transform hover:scale-105"
                   aria-label="Add to favorites"
                 >
@@ -144,10 +229,10 @@ export function ProductDetail({ product }: { product: Product }) {
                     +
                   </button>
                 </div>
-                <Link
-                  href="/cart"
-                  className="flex h-[36px] w-[293px] items-center justify-center gap-[10px] rounded-[3px] bg-black font-sans text-[16px] font-bold text-white hover:opacity-90 transition-opacity"
-                >
+               <button
+  onClick={handleAddToCart}
+  className="flex h-[36px] w-[293px] items-center justify-center gap-[10px] rounded-[3px] bg-black font-sans text-[16px] font-bold text-white hover:opacity-90 transition-opacity"
+>
                   <Image
                     src="/images/icon-bag.png"
                     alt=""
@@ -156,7 +241,7 @@ export function ProductDetail({ product }: { product: Product }) {
                     className="invert"
                   />
                   Add to cart
-                </Link>
+               </button>
               </div>
 
               <p className="mt-[14px] font-sans text-[14px] font-normal leading-none text-black/45 underline cursor-pointer hover:text-black transition-colors">
