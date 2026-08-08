@@ -4,7 +4,7 @@ import type { Product } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="w-full max-w-[260px]">
+    <article className="w-full mx-auto sm:max-w-[260px]">
       <Link
         href={`/product/${product.slug}`}
         className="group block overflow-hidden rounded-[10px] bg-anna-cream"

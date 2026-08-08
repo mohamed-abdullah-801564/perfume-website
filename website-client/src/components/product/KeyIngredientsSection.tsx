@@ -98,9 +98,8 @@ export function KeyIngredientsSection() {
           src={activeIngredient.src}
           alt={activeIngredient.name}
           fill
-          className={`object-cover transition-all duration-700 ease-out ${
-            visible ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
-          }`}
+          className={`object-cover transition-all duration-700 ease-out ${visible ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
+            }`}
           sizes="672px"
         />
       </div>

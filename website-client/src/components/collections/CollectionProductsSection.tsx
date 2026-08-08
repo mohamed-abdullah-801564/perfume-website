@@ -208,7 +208,7 @@ const [isFilterOpen, setIsFilterOpen] = useState(false);
         </button>
       </div>
 
-      <div className="grid grid-cols-1 gap-x-[42px] gap-y-[42px] sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-y-6 gap-x-4 min-[400px]:grid-cols-2 sm:gap-x-[42px] sm:gap-y-[42px] lg:grid-cols-2 xl:grid-cols-3">
         {filteredProducts.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

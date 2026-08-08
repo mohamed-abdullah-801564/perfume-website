@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FooterSection } from "@/components/home/FooterSection";
 import { FigmaScaler } from "@/components/FigmaScaler";
 import { FIGMA_HOME } from "@/lib/figma-home";
+import { MobileFooter } from "@/components/MobileFooter";
 
 const ingredients = [
   {
@@ -164,64 +165,53 @@ const customHeight = footerTop + footerHeight;             // 5693
 
 export default function IngredientsPage() {
   return (
-    <FigmaScaler customHeight={customHeight}>
-      <main
-        className="relative bg-anna-background"
-        style={{
-          width: FIGMA_HOME.width,
-          height: customHeight,
-        }}
-      >
-        <section className="mx-auto w-full max-w-site">
-
-          {/* Hero — full width */}
-          <div className="relative h-[665px] w-full overflow-hidden">
+    <>
+      {/* Mobile view */}
+      <div className="xl:hidden bg-anna-background text-anna-foreground pt-20">
+        <main className="flex flex-col w-full">
+          {/* Hero — fluid width */}
+          <div className="relative h-[280px] w-full overflow-hidden">
             <Image
               src="/ingredients-images/image 34.png"
               alt="Oil bubbles in water"
               fill
               priority
               className="object-cover object-bottom"
-              sizes="1440px"
+              sizes="100vw"
             />
 
-            <h1 className="absolute left-[52px] top-[432px] z-10 text-anna-foreground">
-              <span className="block font-serif text-[76px] font-normal leading-[0.78]">
-                Our
-              </span>
-              <span className="block font-script text-[82px] font-normal leading-[0.72]">
-                Ingredients
-              </span>
-            </h1>
-
-            <p className="absolute right-[52px] top-[454px] z-10 w-[188px] text-right font-sans text-[22px] font-bold leading-[1.05] text-anna-foreground">
-              Discover the key
-              <br />
-              ingredients that
-              <br />
-              make our products
-              <br />
-              truly transformative.
-            </p>
+            <div className="absolute left-5 bottom-6 z-10 flex flex-col items-start text-anna-foreground">
+              <h1>
+                <span className="block font-serif text-[42px] font-normal leading-[0.78]">
+                  Our
+                </span>
+                <span className="block font-script text-[48px] font-normal leading-[0.72] mt-1">
+                  Ingredients
+                </span>
+              </h1>
+              <p className="mt-3 font-sans text-xs font-bold leading-tight text-anna-foreground max-w-[240px]">
+                Discover the key ingredients that make our products truly transformative.
+              </p>
+            </div>
           </div>
 
-          {/* Ingredients grid — 3 equal columns, full width */}
-          <section className="grid grid-cols-3 justify-items-center gap-x-[104px] gap-y-[72px] px-[70px] py-[54px]">
+          {/* Ingredients grid — 2 responsive columns */}
+          <section className="grid grid-cols-2 gap-x-4 gap-y-8 px-5 py-8 justify-items-center">
             {ingredients.map((ingredient) => (
-              <article key={ingredient.name} className="w-full max-w-[251px]">
-                <div className="relative h-[247px] w-full overflow-hidden rounded-[8px]">
+              <article key={ingredient.name} className="w-full">
+                <div className="relative aspect-square w-full overflow-hidden rounded-[8px]">
                   <Image
                     src={ingredient.src}
                     alt={ingredient.name}
                     fill
                     className="object-cover"
-                    sizes="251px"
+                    sizes="(max-width: 768px) 50vw, 251px"
                   />
                 </div>
-                <h2 className="mt-[18px] font-display text-[22px] font-normal leading-none text-anna-foreground">
+                <h2 className="mt-3 font-display text-base font-normal leading-tight text-anna-foreground min-h-[3rem]">
                   {ingredient.name}
                 </h2>
-                <p className="mt-[12px] font-sans text-[18px] font-normal leading-[1.04] text-anna-foreground">
+                <p className="mt-1 font-sans text-xs font-normal leading-snug text-anna-foreground/80">
                   {ingredient.text.map((line) => (
                     <span key={line} className="block">
                       {line}
@@ -232,21 +222,21 @@ export default function IngredientsPage() {
             ))}
           </section>
 
-          {/* Nav cards — full width two-column */}
-          <section className="grid grid-cols-2 gap-[68px] px-[56px] pt-[18px] pb-[80px]">
+          {/* Nav cards — full width, stacked */}
+          <section className="flex flex-col gap-6 px-5 pb-12">
             <Link
               href="/brand"
-              className="relative h-[520px] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+              className="relative aspect-[520/380] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity bg-anna-cream"
             >
               <Image
                 src="/brand-images/image 35.png"
                 alt=""
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="100vw"
               />
-              <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
-                <span className="font-display text-[38px] font-normal leading-none text-white">
+              <div className="absolute bottom-4 left-4 flex h-9 px-4 items-center justify-center rounded-md border border-white/85 bg-white/5">
+                <span className="font-display text-2xl font-normal leading-none text-white">
                   About us
                 </span>
               </div>
@@ -254,28 +244,144 @@ export default function IngredientsPage() {
 
             <Link
               href="/values"
-              className="relative h-[520px] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+              className="relative aspect-[520/380] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity bg-anna-cream"
             >
               <Image
                 src="/brand-images/Rectangle 32.png"
                 alt=""
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="100vw"
               />
-              <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[180px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
-                <span className="font-display text-[38px] font-normal leading-none text-white">
+              <div className="absolute bottom-4 left-4 flex h-9 px-4 items-center justify-center rounded-md border border-white/85 bg-white/5">
+                <span className="font-display text-2xl font-normal leading-none text-white">
                   Values
                 </span>
               </div>
             </Link>
           </section>
+        </main>
+        
+        {/* standard mobile footer */}
+        <MobileFooter />
+      </div>
 
-        </section>
+      {/* Desktop view */}
+      <div className="hidden xl:block bg-anna-background">
+        <FigmaScaler customHeight={customHeight}>
+          <main
+            className="relative bg-anna-background"
+            style={{
+              width: FIGMA_HOME.width,
+              height: customHeight,
+            }}
+          >
+            <section className="mx-auto w-full max-w-site">
 
-        {/* Footer — absolutely positioned after all content */}
-        <FooterSection style={{ top: footerTop }} />
-      </main>
-    </FigmaScaler>
+              {/* Hero — full width */}
+              <div className="relative h-[665px] w-full overflow-hidden">
+                <Image
+                  src="/ingredients-images/image 34.png"
+                  alt="Oil bubbles in water"
+                  fill
+                  priority
+                  className="object-cover object-bottom"
+                  sizes="1440px"
+                />
+
+                <h1 className="absolute left-[52px] top-[432px] z-10 text-anna-foreground">
+                  <span className="block font-serif text-[76px] font-normal leading-[0.78]">
+                    Our
+                  </span>
+                  <span className="block font-script text-[82px] font-normal leading-[0.72]">
+                    Ingredients
+                  </span>
+                </h1>
+
+                <p className="absolute right-[52px] top-[454px] z-10 w-[188px] text-right font-sans text-[22px] font-bold leading-[1.05] text-anna-foreground">
+                  Discover the key
+                  <br />
+                  ingredients that
+                  <br />
+                  make our products
+                  <br />
+                  truly transformative.
+                </p>
+              </div>
+
+              {/* Ingredients grid — 3 equal columns, full width */}
+              <section className="grid grid-cols-3 justify-items-center gap-x-[104px] gap-y-[72px] px-[70px] py-[54px]">
+                {ingredients.map((ingredient) => (
+                  <article key={ingredient.name} className="w-full max-w-[251px]">
+                    <div className="relative h-[247px] w-full overflow-hidden rounded-[8px]">
+                      <Image
+                        src={ingredient.src}
+                        alt={ingredient.name}
+                        fill
+                        className="object-cover"
+                        sizes="251px"
+                      />
+                    </div>
+                    <h2 className="mt-[18px] font-display text-[22px] font-normal leading-none text-anna-foreground">
+                      {ingredient.name}
+                    </h2>
+                    <p className="mt-[12px] font-sans text-[18px] font-normal leading-[1.04] text-anna-foreground">
+                      {ingredient.text.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </p>
+                  </article>
+                ))}
+              </section>
+
+              {/* Nav cards — full width two-column */}
+              <section className="grid grid-cols-2 gap-[68px] px-[56px] pt-[18px] pb-[80px]">
+                <Link
+                  href="/brand"
+                  className="relative h-[520px] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+                >
+                  <Image
+                    src="/brand-images/image 35.png"
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[187px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+                    <span className="font-display text-[38px] font-normal leading-none text-white">
+                      About us
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/values"
+                  className="relative h-[520px] w-full overflow-hidden rounded-[10px] block hover:opacity-95 transition-opacity"
+                >
+                  <Image
+                    src="/brand-images/Rectangle 32.png"
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute bottom-[22px] left-[22px] flex h-[54px] w-[180px] items-center justify-center rounded-[6px] border border-white/85 bg-white/5">
+                    <span className="font-display text-[38px] font-normal leading-none text-white">
+                      Values
+                    </span>
+                  </div>
+                </Link>
+              </section>
+
+            </section>
+
+            {/* Footer — absolutely positioned after all content */}
+            <FooterSection style={{ top: footerTop }} />
+          </main>
+        </FigmaScaler>
+      </div>
+    </>
   );
 }

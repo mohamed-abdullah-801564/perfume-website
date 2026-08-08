@@ -95,17 +95,6 @@ export function HeroSection() {
         zIndex={4}
       />
 
-      <FigmaImage
-        x={530}
-        y={547}
-        width={0}
-        height={0}
-        src="/images/image 16.png"
-        alt=""
-        objectFit="fill"
-        zIndex={4}
-      />
-
       {/* Group 9 promo chip — kept above the hero product and linked to health mix */}
       <PromoChip x={415} y={565} imagePosition="right" href="/product/multigrain-health-mix" />
     </>

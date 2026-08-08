@@ -68,11 +68,10 @@ export function ProductsSection() {
                 key={category}
                 type="button"
                 onClick={() => setActiveCategory(category)}
-                className={`flex h-[58px] w-[210px] items-center justify-center rounded-card font-display text-anna-title-sm leading-none transition-colors ${
-                  isActive
+                className={`flex h-[58px] w-[210px] items-center justify-center rounded-card font-display text-anna-title-sm leading-none transition-colors ${isActive
                     ? "bg-anna-copper-mid text-white"
                     : "bg-anna-cream text-anna-foreground"
-                }`}
+                  }`}
                 aria-pressed={isActive}
               >
                 {category}
@@ -83,28 +82,42 @@ export function ProductsSection() {
       </FigmaLayer>
 
       {/* Product grid — cream plates + images */}
-      {productSlots.map((slot) => (
-        <div key={slot.src} aria-hidden>
-          <FigmaLayer
-            x={slot.bg.x}
-            y={slot.bg.y}
-            width={slot.bg.w}
-            height={slot.bg.h}
-            zIndex={10}
-          >
-            <div className="h-full w-full rounded-product bg-anna-cream" />
-          </FigmaLayer>
-          <FigmaImage
-            x={slot.image.x}
-            y={slot.image.y}
-            width={slot.image.w}
-            height={slot.image.h}
-            src={slot.src}
-            alt={slot.alt}
-            zIndex={11}
-          />
-        </div>
-      ))}
+      {productSlots.map((slot, index) => {
+        const labels = ["Ayurveda", "Siddha", "100% Natural", "No Chemicals"];
+        return (
+          <div key={slot.src} aria-hidden>
+            <FigmaLayer
+              x={slot.bg.x}
+              y={slot.bg.y}
+              width={slot.bg.w}
+              height={slot.bg.h}
+              zIndex={10}
+            >
+              <div className="h-full w-full rounded-product bg-anna-cream" />
+            </FigmaLayer>
+            <FigmaImage
+              x={slot.image.x}
+              y={slot.image.y}
+              width={slot.image.w}
+              height={slot.image.h}
+              src={slot.src}
+              alt={slot.alt}
+              zIndex={11}
+            />
+            <FigmaLayer
+              x={slot.bg.x - 20}
+              y={slot.bg.y + slot.bg.h + 10}
+              width={slot.bg.w + 40}
+              height={30}
+              zIndex={12}
+            >
+              <p className="w-full text-center font-display text-[22px] font-bold text-anna-cream leading-none">
+                {labels[index]}
+              </p>
+            </FigmaLayer>
+          </div>
+        );
+      })}
 
       {/* Group 5 Rosemary — 574,1327 291.26×511 */}
       <FigmaLayer x={574} y={1327} width={291.26} height={511} zIndex={12}>
@@ -123,7 +136,7 @@ export function ProductsSection() {
               fill
               className={
                 featuredProduct.category === "Oils"
-                  ? "object-cover"
+                  ? "object-contain p-[16px]"
                   : "object-contain p-[24px]"
               }
               sizes="291px"

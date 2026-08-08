@@ -22,12 +22,12 @@ export function FigmaScaler({ children, customHeight }: { children: React.ReactN
   }, []);
 
   const canonicalHeight = customHeight ?? FIGMA_HOME.height;
-  const scaledHeight = canonicalHeight * scale;
+  const scaledHeight = Math.ceil(canonicalHeight * scale);
 
   return (
     <div
       ref={outerRef}
-      style={{ width: "100vw", height: scaledHeight, overflow: "hidden" }}
+      style={{ width: "100%", height: scaledHeight, overflow: "hidden" }}
     >
       <div
         style={{

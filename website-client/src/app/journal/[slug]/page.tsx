@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { FooterSection } from "@/components/home/FooterSection";
 import { FigmaScaler } from "@/components/FigmaScaler";
 import { FIGMA_HOME } from "@/lib/figma-home";
+import { MobileFooter } from "@/components/MobileFooter";
 
 const BLOG_DATA = {
   "traditional-wellness": {
@@ -95,8 +96,8 @@ export default async function JournalSinglePage({ params }: Props) {
 
   if (!post) notFound();
 
-  const customHeight = 3280;
   const footerTop = 2800;
+  const customHeight = footerTop + 477;
 
   // Filter out the current active slug to show 3 other articles for the "Read More" section
   const otherPosts = Object.entries(BLOG_DATA)
@@ -110,118 +111,149 @@ export default async function JournalSinglePage({ params }: Props) {
     }));
 
   return (
-    <FigmaScaler customHeight={customHeight}>
-      <main
-        className="relative bg-anna-background"
-        style={{
-          width: FIGMA_HOME.width,
-          height: customHeight,
-        }}
-      >
-        {/* All content centered in a narrow column */}
-        <div className="mx-auto max-w-[680px] pt-[210px] md:pt-[140px] px-[24px]">
+    <div className="relative bg-anna-background">
+      {/* Desktop view */}
+      <div className="hidden xl:block">
+        <FigmaScaler customHeight={customHeight}>
+          <main
+            className="relative bg-anna-background"
+            style={{
+              width: FIGMA_HOME.width,
+              height: customHeight,
+            }}
+          >
+            {/* All content centered in a narrow column */}
+            <div className="mx-auto max-w-[680px] pt-[210px] md:pt-[140px] px-[24px]">
 
-          {/* Title — centered */}
-          <h1 className="font-sans text-[40px] font-normal leading-[1.0] text-center text-anna-foreground">
+              {/* Title — centered */}
+              <h1 className="text-center font-display text-[42px] font-normal leading-[1.24] text-anna-foreground">
+                {post.title}
+              </h1>
+
+              {/* Hero Image */}
+              <div className="relative mt-[42px] h-[348px] w-full overflow-hidden rounded-[8px] bg-anna-cream">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="680px"
+                />
+              </div>
+
+              {/* Content sections */}
+              <div className="mt-[54px] space-y-[48px]">
+                {post.sections.map((section, idx) => (
+                  <div key={idx}>
+                    <h2 className="font-display text-[27px] font-bold leading-tight text-anna-foreground">
+                      {section.h}
+                    </h2>
+                    <p className="mt-[16px] font-sans text-[18px] font-light leading-[1.62] text-anna-foreground/80">
+                      {section.b}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Spacer */}
+              <div className="h-[96px]" />
+
+              {/* Read More Section */}
+              <h3 className="font-display text-[27px] font-bold leading-none text-anna-foreground mb-[32px]">
+                Read More
+              </h3>
+
+              <div className="grid grid-cols-3 gap-[32px]">
+                {otherPosts.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={item.href}
+                    className="group flex flex-col"
+                  >
+                    <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[8px] bg-anna-cream">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        sizes="420px"
+                      />
+                    </div>
+                    <p className="mt-[12px] font-sans text-[14px] leading-[1.5] text-anna-foreground/80 group-hover:underline underline-offset-2 transition-all">
+                      {item.title}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <FooterSection style={{ top: footerTop }} />
+          </main>
+        </FigmaScaler>
+      </div>
+
+      {/* Mobile view */}
+      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-16">
+        <main className="flex-grow px-4 py-6 sm:px-8 max-w-[680px] mx-auto">
+          <h1 className="font-display text-[28px] font-normal leading-tight text-anna-foreground mb-4 text-center">
             {post.title}
           </h1>
 
-          {/* Top small centered image */}
-          <div className="relative mt-[40px] w-full h-[380px] overflow-hidden rounded-[10px]">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg mb-6">
             <Image
               src={post.image}
               alt={post.title}
               fill
               priority
               className="object-cover"
-              sizes="680px"
+              sizes="100vw"
             />
           </div>
 
-          {/* Text block 1 */}
-          <div className="mt-[48px]">
-            <h2 className="font-sans text-[20px] font-semibold tracking-wide text-anna-foreground mb-[14px] mt-[40px]">
-              {post.sections[0].h}
-            </h2>
-            <p className="font-sans text-[17px] font-normal leading-[1.65] text-[#222222] text-justify tracking-normal mb-[24px]">
-              {post.sections[0].b}
-            </p>
-          </div>
-
-          {/* Text block 2 */}
-          <div className="mt-[36px]">
-            <h2 className="font-sans text-[20px] font-semibold tracking-wide text-anna-foreground mb-[14px] mt-[40px]">
-              {post.sections[1].h}
-            </h2>
-            <p className="font-sans text-[17px] font-normal leading-[1.65] text-[#222222] text-justify tracking-normal mb-[24px]">
-              {post.sections[1].b}
-            </p>
-          </div>
-
-          {/* Wide full-width image — breaks out of the narrow column */}
-          <div className="relative mt-[48px] w-full h-[460px] overflow-hidden rounded-[10px]">
-            <Image
-              src="/middlejournal.png"
-              alt="Middle visual"
-              fill
-              className="object-cover object-center"
-              sizes="680px"
-            />
-          </div>
-
-          {/* Text block 3 */}
-          <div className="mt-[48px]">
-            <h2 className="font-sans text-[20px] font-semibold tracking-wide text-anna-foreground mb-[14px] mt-[40px]">
-              {post.sections[2].h}
-            </h2>
-            <p className="font-sans text-[17px] font-normal leading-[1.65] text-[#222222] text-justify tracking-normal mb-[24px]">
-              {post.sections[2].b}
-            </p>
-          </div>
-
-        </div>
-
-        {/* Read More — full width */}
-        <div className="mx-auto w-full max-w-site px-[50px] mt-[100px]">
-          <div className="flex items-baseline justify-between mb-[40px]">
-            <h2 className="font-display text-[40px] font-normal text-anna-foreground">
-              Read{" "}
-              <span className="font-script text-[40px]">More</span>
-            </h2>
-            <Link
-              href="/articles"
-              className="font-sans text-[14px] text-anna-foreground underline underline-offset-4 hover:opacity-60 transition-opacity"
-            >
-              All articles
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-3 gap-[32px]">
-            {otherPosts.map((item) => (
-              <Link
-                key={item.slug}
-                href={item.href}
-                className="group flex flex-col"
-              >
-                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[8px] bg-anna-cream">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                    sizes="420px"
-                  />
-                </div>
-                <p className="mt-[12px] font-sans text-[14px] leading-[1.5] text-anna-foreground/80 group-hover:underline underline-offset-2 transition-all">
-                  {item.title}
+          <div className="space-y-6">
+            {post.sections.map((section, idx) => (
+              <div key={idx}>
+                <h2 className="font-display text-lg font-bold text-anna-foreground mb-2">
+                  {section.h}
+                </h2>
+                <p className="font-sans text-sm leading-relaxed text-anna-charcoal">
+                  {section.b}
                 </p>
-              </Link>
+              </div>
             ))}
           </div>
-        </div>
 
-        <FooterSection style={{ top: footerTop }} />
-      </main>
-    </FigmaScaler>
+          <section className="mt-12 border-t border-black/10 pt-8">
+            <h3 className="font-display text-xl font-bold mb-6">
+              Read More
+            </h3>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              {otherPosts.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={item.href}
+                  className="group flex flex-col gap-2"
+                >
+                  <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg bg-anna-cream">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      sizes="(min-width: 640px) 33vw, 100vw"
+                    />
+                  </div>
+                  <p className="font-sans text-sm leading-snug text-anna-foreground group-hover:underline">
+                    {item.title}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </main>
+        <MobileFooter />
+      </div>
+    </div>
   );
 }

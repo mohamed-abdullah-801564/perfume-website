@@ -85,15 +85,20 @@ export function MobileHome() {
         </div>
       </section>
 
-      <section className="grid grid-cols-4 gap-3 bg-anna-brand px-4 py-3">
-        {productLinks.map((product) => (
-          <div
-            key={product.src}
-            className="relative aspect-square overflow-hidden rounded-lg bg-anna-cream p-1"
-          >
-            <Image src={product.src} alt={product.alt} fill className="object-contain p-1.5" sizes="22vw" />
-          </div>
-        ))}
+      <section className="grid grid-cols-4 gap-2 bg-anna-brand px-2 py-3.5">
+        {productLinks.map((product, index) => {
+          const labels = ["Ayurveda", "Siddha", "100% Natural", "No Chemicals"];
+          return (
+            <div key={product.src} className="flex flex-col items-center gap-1.5 w-full">
+              <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-anna-cream p-1">
+                <Image src={product.src} alt={product.alt} fill className="object-contain p-1.5" sizes="22vw" />
+              </div>
+              <span className="text-center font-display text-[10px] font-bold text-anna-cream leading-tight">
+                {labels[index]}
+              </span>
+            </div>
+          );
+        })}
       </section>
 
       <section className="px-4 py-8" aria-labelledby="mobile-products-heading">
@@ -112,11 +117,10 @@ export function MobileHome() {
               key={category}
               type="button"
               onClick={() => setActiveCategory(category)}
-              className={`min-h-9 rounded-md px-2 font-display text-sm transition-colors ${
-                category === activeCategory
+              className={`min-h-9 rounded-md px-2 font-display text-sm transition-colors ${category === activeCategory
                   ? "bg-anna-copper-mid text-white"
                   : "bg-anna-cream text-black"
-              }`}
+                }`}
               aria-pressed={category === activeCategory}
             >
               {category}
@@ -133,7 +137,7 @@ export function MobileHome() {
               src={featuredProduct.featuredSrc}
               alt={featuredProduct.detailAlt}
               fill
-              className={featuredProduct.category === "Oils" ? "object-cover" : "object-contain p-3"}
+              className={featuredProduct.category === "Oils" ? "object-contain p-2" : "object-contain p-3"}
               sizes="52vw"
             />
           </div>

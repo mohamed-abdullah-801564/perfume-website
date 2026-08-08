@@ -11,7 +11,7 @@ import {
   SignUpButton,
   useUser,
   useClerk,
-   UserButton
+  UserButton
 } from "@clerk/nextjs";
 
 export function Header() {
@@ -19,8 +19,8 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCollectionsOpen, setIsCollectionsOpen] = useState(false);
   const isCollectionsPage = pathname.startsWith("/collections");
-const { signOut } = useClerk();
-const { user, isSignedIn } = useUser();
+  const { signOut } = useClerk();
+  const { user, isSignedIn } = useUser();
 
   const desktopLinkClass =
     "relative font-display text-[32px] leading-none text-anna-foreground after:absolute after:left-0 after:top-full after:mt-[6px] after:h-[3px] after:w-full after:origin-left after:scale-x-0 after:bg-anna-copper-mid after:transition-transform after:duration-200 hover:after:scale-x-100";
@@ -31,7 +31,7 @@ const { user, isSignedIn } = useUser();
   }, [pathname]);
 
   return (
-    
+
     <header className="absolute left-0 top-0 z-50 h-16 w-full xl:h-[82px]">
       <div className="relative mx-auto h-full w-full max-w-site px-[18px] sm:px-[51px]">
         <nav
@@ -65,11 +65,10 @@ const { user, isSignedIn } = useUser();
                   </Link>
 
                   <div
-                    className={`absolute left-0 top-full pt-6 transition-all duration-200 ${
-                      isCollectionsOpen && !isCollectionsPage
+                    className={`absolute left-0 top-full pt-6 transition-all duration-200 ${isCollectionsOpen && !isCollectionsPage
                         ? "visible translate-y-0 opacity-100"
                         : "invisible -translate-y-2 opacity-0"
-                    }`}
+                      }`}
                   >
                     <div className="w-[980px] rounded-[18px] border border-black/10 bg-white/95 p-5 shadow-[0_18px_45px_rgba(0,0,0,0.14)] backdrop-blur-sm">
                       <div className="grid grid-cols-3 gap-5">
@@ -122,11 +121,49 @@ const { user, isSignedIn } = useUser();
           })}
         </nav>
 
+        {/* Mobile Hamburger button on far left */}
+        <button
+          type="button"
+          className="absolute left-[18px] top-1/2 -translate-y-1/2 flex h-9 w-9 flex-col items-center justify-center gap-1.5 text-anna-brand xl:hidden sm:left-[51px]"
+          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          <span
+            className={`h-0.5 w-6 bg-anna-brand transition-transform ${isMenuOpen ? "translate-y-2 rotate-45" : ""
+              }`}
+          />
+          <span
+            className={`h-0.5 w-6 bg-anna-brand transition-opacity ${isMenuOpen ? "opacity-0" : ""
+              }`}
+          />
+          <span
+            className={`h-0.5 w-6 bg-anna-brand transition-transform ${isMenuOpen ? "-translate-y-2 -rotate-45" : ""
+              }`}
+          />
+        </button>
+
         <Link
           href="/"
-          className="absolute left-[18px] top-1/2 -translate-y-1/2 whitespace-nowrap font-display text-[27px] leading-none text-anna-brand xl:left-1/2 xl:-translate-x-1/2 xl:text-[48px]"
+          className="absolute left-[18px] top-1/2 -translate-y-1/2 whitespace-nowrap font-display text-[27px] leading-none text-anna-brand xl:left-1/2 xl:-translate-x-1/2 xl:text-[48px] hidden xl:block"
         >
           ANNA VALAM
+        </Link>
+
+        <Link
+          href="/"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 xl:hidden flex items-center justify-center"
+        >
+          <div className="relative h-14 w-14 sm:h-16 sm:w-16">
+            <Image
+              src="/client-logo.jpeg"
+              alt="Anna Valam Logo"
+              fill
+              className="object-contain rounded-full"
+              priority
+            />
+          </div>
         </Link>
 
         <div className="absolute right-[18px] top-1/2 flex -translate-y-1/2 items-center gap-2 sm:right-[51px] xl:gap-[18px]">
@@ -135,40 +172,61 @@ const { user, isSignedIn } = useUser();
             aria-label="Account"
           >
             {accountLinks.map((link) => {
-  if (link.href === "/login") {
-    return isSignedIn ? (
-      <div
-        key="user-button"
-        className="flex items-center"
-      >
-        <UserButton
-          appearance={{
-            elements: {
-              avatarBox: "h-10 w-10",
-            },
-          }}
-        />
-      </div>
-    ) : (
-      <SignInButton mode="modal" key={link.label}>
-        <button className={desktopLinkClass}>
-          {link.label}
-        </button>
-      </SignInButton>
-    );
-  }
+              if (link.href === "/login") {
+                return isSignedIn ? (
+                  <div
+                    key="user-button"
+                    className="flex items-center"
+                  >
+                    <UserButton
+                      appearance={{
+                        elements: {
+                          avatarBox: "h-10 w-10",
+                        },
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <SignInButton mode="modal" key={link.label}>
+                    <button className={desktopLinkClass}>
+                      {link.label}
+                    </button>
+                  </SignInButton>
+                );
+              }
 
-  return (
-    <Link
-      key={link.label}
-      href={link.href}
-      className={desktopLinkClass}
-    >
-      {link.label}
-    </Link>
-  );
-})}
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={desktopLinkClass}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
+          {/* Search Icon button on mobile, placed directly next to the cart */}
+          <button
+            type="button"
+            className="flex h-9 w-9 items-center justify-center text-anna-brand xl:hidden"
+            aria-label="Search"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+          </button>
           <Link
             href="/cart"
             className="relative h-9 w-9 shrink-0 xl:h-[55px] xl:w-[55px]"
@@ -182,51 +240,25 @@ const { user, isSignedIn } = useUser();
               className="object-contain brightness-0"
             />
           </Link>
-          <button
-            type="button"
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md border border-anna-brand/30 bg-anna-background/90 xl:hidden"
-            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setIsMenuOpen((current) => !current)}
-          >
-            <span
-              className={`h-0.5 w-5 bg-anna-brand transition-transform ${
-                isMenuOpen ? "translate-y-2 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`h-0.5 w-5 bg-anna-brand transition-opacity ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`h-0.5 w-5 bg-anna-brand transition-transform ${
-                isMenuOpen ? "-translate-y-2 -rotate-45" : ""
-              }`}
-            />
-          </button>
         </div>
       </div>
 
       <div
         id="mobile-navigation"
-        className={`absolute left-0 top-16 w-full border-y border-anna-brand/20 bg-anna-background/95 px-[18px] py-5 shadow-lg backdrop-blur-sm transition-all duration-200 sm:px-[51px] xl:hidden ${
-          isMenuOpen
+        className={`absolute left-0 top-16 w-full border-y border-anna-brand/20 bg-anna-background/95 px-[18px] py-5 shadow-lg backdrop-blur-sm transition-all duration-200 sm:px-[51px] xl:hidden ${isMenuOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-2 opacity-0"
-        }`}
+          }`}
       >
         <nav className="flex flex-col" aria-label="Mobile primary navigation">
           {[{ label: "Home", href: "/" }, ...navLinks].map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className={`border-b border-anna-brand/15 py-3 font-display text-2xl leading-none ${
-                pathname === link.href
+              className={`border-b border-anna-brand/15 py-3 font-display text-2xl leading-none ${pathname === link.href
                   ? "text-anna-copper underline underline-offset-4"
                   : "text-anna-foreground"
-              }`}
+                }`}
             >
               {link.label}
             </Link>

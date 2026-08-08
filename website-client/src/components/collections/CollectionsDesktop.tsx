@@ -5,8 +5,8 @@ import { collections } from "@/lib/products";
 import { FigmaScaler } from "@/components/FigmaScaler";
 import { FIGMA_HOME } from "@/lib/figma-home";
 export default function CollectionsDesktop() {
-  const customHeight = 1380;
   const footerTop = 900;
+  const customHeight = footerTop + 477; // 1377 (footerTop + footer height)
   return (
     <div className="bg-anna-background" style={{ overflowX: "hidden" }}>
       <FigmaScaler customHeight={customHeight}>
