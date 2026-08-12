@@ -27,7 +27,7 @@ export function FigmaScaler({ children, customHeight }: { children: React.ReactN
   return (
     <div
       ref={outerRef}
-      style={{ width: "100%", height: scaledHeight, overflow: "hidden" }}
+      style={{ width: "100%", height: scaledHeight, overflow: "hidden", backgroundColor: "#144232" }}
     >
       <div
         style={{

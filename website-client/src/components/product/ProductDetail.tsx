@@ -12,7 +12,7 @@ import { FIGMA_HOME } from "@/lib/figma-home";
 import { FooterSection } from "../home/FooterSection";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabase";
+import { useSupabase } from "@/lib/supabase";
 import { useClerk } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { MobileFooter } from "@/components/MobileFooter";
@@ -22,85 +22,115 @@ export function ProductDetail({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const { getClient } = useSupabase();
   const footerTop = 3500;
-  const customHeight = 4080;
+  const customHeight = footerTop + 477; // 3977
   const router = useRouter();
   const { user } = useUser();
 const { openSignIn } = useClerk();
   const handleAddToCart = async () => {
-  if (!user) {
-  toast("Sign in required", {
-    description: "Please sign in to add products to your cart.",
-  });
+    if (!user) {
+      toast("Sign in required", {
+        description: "Please sign in to add products to your cart.",
+      });
 
-  setTimeout(() => {
-    router.push("/");
-  }, 1500);
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
 
-  return;
-}
+      return;
+    }
 
-  const { data: existingItem } = await supabase
-    .from("cart_items")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("product_slug", product.slug)
-    .eq("size", selectedSize)
-    .maybeSingle();
+    try {
+      const client = await getClient();
+      const { data: existingItem, error: fetchError } = await client
+        .from("cart_items")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("product_slug", product.slug)
+        .eq("size", selectedSize)
+        .maybeSingle();
 
-  if (existingItem) {
-    await supabase
-      .from("cart_items")
-      .update({
-        quantity: existingItem.quantity + quantity,
-      })
-      .eq("id", existingItem.id);
-  } else {
-    await supabase
-  .from("cart_items")
-  .insert({
-    user_id: user.id,
-    product_slug: product.slug,
-    product_name: product.name,
-    size: selectedSize,
-    quantity,
-    price_value: product.priceValue,
-  });
-  }
+      if (fetchError) throw fetchError;
 
-  router.push("/cart");
-};
+      if (existingItem) {
+        const { error: updateError } = await client
+          .from("cart_items")
+          .update({
+            quantity: existingItem.quantity + quantity,
+          })
+          .eq("id", existingItem.id);
+
+        if (updateError) throw updateError;
+      } else {
+        const { error: insertError } = await client
+          .from("cart_items")
+          .insert({
+            user_id: user.id,
+            product_slug: product.slug,
+            product_name: product.name,
+            size: selectedSize,
+            quantity,
+            price_value: product.priceValue,
+          });
+
+        if (insertError) throw insertError;
+      }
+
+      toast.success("Added to cart!");
+      router.push("/cart");
+    } catch (err: any) {
+      console.error("Cart mutation error:", err);
+      toast.error("Cart Update Failed", {
+        description: "Please check your connection or try signing in again.",
+      });
+    }
+  };
 const handleFavorite = async () => {
   if (!user) {
     toast.error("Please sign in to save favorites");
     return;
   }
 
-  const { data: existing } = await supabase
-    .from("favorites")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("product_slug", product.slug)
-    .maybeSingle();
-
-  if (existing) {
-    await supabase
+  try {
+    const client = await getClient();
+    const { data: existing, error: fetchError } = await client
       .from("favorites")
-      .delete()
-      .eq("id", existing.id);
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("product_slug", product.slug)
+      .maybeSingle();
 
-    setIsFavorite(false);
-    toast.success("Removed from favorites");
-  } else {
-    await supabase
-      .from("favorites")
-      .insert({
-        user_id: user.id,
-        product_slug: product.slug,
-      });
+    if (fetchError) throw fetchError;
 
-    setIsFavorite(true);
-    toast.success("Added to favorites");
+    if (existing) {
+      const { error: deleteError } = await client
+        .from("favorites")
+        .delete()
+        .eq("id", existing.id);
+
+      if (deleteError) throw deleteError;
+
+      setIsFavorite(false);
+      toast.success("Removed from favorites");
+    } else {
+      const { error: insertError } = await client
+        .from("favorites")
+        .insert({
+          user_id: user.id,
+          product_slug: product.slug,
+        });
+
+      if (insertError) throw insertError;
+
+      setIsFavorite(true);
+      toast.success("Added to favorites");
+    }
+  } catch (err: any) {
+    console.error("Favorites update error:", err);
+    toast.error("Favorites Update Failed", {
+      description: "Please check your connection or try signing in again.",
+    });
   }
 };
 
@@ -141,7 +171,7 @@ const handleFavorite = async () => {
                     alt={product.detailAlt}
                     fill
                     priority
-                    className="object-cover"
+                    className="object-contain p-2"
                     sizes="459px"
                   />
                 </div>
@@ -324,7 +354,7 @@ const handleFavorite = async () => {
               alt={product.detailAlt}
               fill
               priority
-              className="object-cover"
+              className="object-contain p-2"
               sizes="(min-width: 640px) 340px, 100vw"
             />
           </div>

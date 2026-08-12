@@ -7,6 +7,7 @@ type PromoChipProps = {
   y: number;
   imagePosition?: "left" | "right";
   href?: string;
+  className?: string;
 };
 
 /** Group 8/9/10 product chip — 179×87px per Figma */
@@ -15,6 +16,7 @@ export function PromoChip({
   y,
   imagePosition = "right",
   href = "/product/multigrain-health-mix",
+  className = "",
 }: PromoChipProps) {
   const imageBox =
     imagePosition === "right"
@@ -32,7 +34,7 @@ export function PromoChip({
       : { left: 142, top: 36, size: 12 };
 
   return (
-    <FigmaLayer x={x} y={y} width={179} height={87} zIndex={24}>
+    <FigmaLayer x={x} y={y} width={179} height={87} zIndex={24} className={className}>
       <Link
         href={href}
         aria-label="View Multigrain Health Mix"

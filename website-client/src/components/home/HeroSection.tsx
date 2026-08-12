@@ -96,7 +96,7 @@ export function HeroSection() {
       />
 
       {/* Group 9 promo chip — kept above the hero product and linked to health mix */}
-      <PromoChip x={415} y={565} imagePosition="right" href="/product/multigrain-health-mix" />
+      <PromoChip x={415} y={565} imagePosition="right" href="/product/multigrain-health-mix" className="hidden xl:block" />
     </>
   );
 }

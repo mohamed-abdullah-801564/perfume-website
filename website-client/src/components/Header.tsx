@@ -153,13 +153,14 @@ export function Header() {
 
         <Link
           href="/"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 xl:hidden flex items-center justify-center"
+          className="absolute left-1/2 top-[2px] -translate-x-1/2 xl:hidden flex items-center justify-center"
         >
-          <div className="relative h-14 w-14 sm:h-16 sm:w-16">
+          <div className="relative h-[110px] w-[110px]">
             <Image
               src="/client-logo.jpeg"
               alt="Anna Valam Logo"
               fill
+              sizes="(max-width: 768px) 110px, 120px"
               className="object-contain rounded-full"
               priority
             />

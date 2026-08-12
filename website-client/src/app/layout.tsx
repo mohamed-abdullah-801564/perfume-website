@@ -12,6 +12,7 @@ import { Header } from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import UserSync from "@/components/UserSync";
 import { Toaster } from "sonner";
+import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 
 const abhaya = Abhaya_Libre({
   subsets: ["latin"],
@@ -61,17 +62,18 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <UserSync />
-    <html
-      lang="en"
-      className={`${abhaya.variable} ${italianno.variable} ${inter.variable} ${rem.variable} ${playfair.variable}`}
-    >
-      <body>
-        <Header />
-        {children}
-        <Toaster richColors />
-      </body>
-    </html>
+      <html
+        lang="en"
+        className={`${abhaya.variable} ${italianno.variable} ${inter.variable} ${rem.variable} ${playfair.variable}`}
+      >
+        <body>
+          <UserSync />
+          <Header />
+          {children}
+          <WhatsAppWidget />
+          <Toaster richColors />
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

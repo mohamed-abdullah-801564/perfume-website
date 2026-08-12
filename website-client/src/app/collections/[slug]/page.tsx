@@ -105,8 +105,8 @@ export default async function CollectionCategoryPage({
               </section>
             </section>
 
+            <FooterSection style={{ top: footerTop }} />
           </main>
-          <FooterSection style={{ top: footerTop }} />
         </FigmaScaler>
       </div>
 

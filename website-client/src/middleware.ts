@@ -1,5 +1,9 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 
+// By default, clerkMiddleware() leaves all routes public, meaning that pages like
+// /product/(.*) and /collections/(.*) are fully accessible without triggering
+// session token checks on unauthenticated page views. Access checks are handled at
+// the component level (e.g. cart/checkout redirections).
 export default clerkMiddleware();
 
 export const config = {
