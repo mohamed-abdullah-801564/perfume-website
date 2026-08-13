@@ -20,6 +20,8 @@ export default function FavoritesPage() {
   const customHeight = footerTop + 477; // footerTop + 477 (footer height)
 
   useEffect(() => {
+    if (!isLoaded) return;
+
     const fetchFavorites = async () => {
       if (!user) {
         try {
@@ -91,7 +93,7 @@ export default function FavoritesPage() {
     };
 
     fetchFavorites();
-  }, [user]);
+  }, [user, isLoaded]);
 
   if (!isLoaded) return null;
 

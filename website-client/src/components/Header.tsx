@@ -66,6 +66,14 @@ export function Header() {
     // Poll every 3 seconds to keep cart in sync
     const interval = setInterval(fetchCartCount, 3000);
 
+    // Custom event listener for instant updates
+    const handleCartUpdate = () => {
+      if (isMounted) {
+        fetchCartCount();
+      }
+    };
+    window.addEventListener("cart-updated", handleCartUpdate);
+
     // Subscribe to changes on cart_items table
     const setupSubscription = async () => {
       try {
@@ -105,6 +113,7 @@ export function Header() {
     return () => {
       isMounted = false;
       clearInterval(interval);
+      window.removeEventListener("cart-updated", handleCartUpdate);
       if (activeChannel && activeClient) {
         activeClient.removeChannel(activeChannel);
       }
@@ -237,7 +246,7 @@ export function Header() {
         >
           <div className="relative h-[110px] w-[110px] bg-transparent">
             <Image
-              src="/client-logo.jpeg"
+              src="/client-logo.png"
               alt="Anna Valam Logo"
               fill
               sizes="(max-width: 768px) 110px, 120px"

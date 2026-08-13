@@ -37,21 +37,20 @@ export function ProductDetail({ product }: { product: Product }) {
   };
 
   useEffect(() => {
+    let isMounted = true;
     const initFavorite = async () => {
-      // Check local storage first
-      try {
-        const stored = localStorage.getItem("anna_favorites");
-        if (stored) {
-          const favoritesList = JSON.parse(stored);
-          if (favoritesList.includes(product.slug)) {
-            setIsFavorite(true);
-            return;
+      let favorite = false;
+      if (!user) {
+        try {
+          const stored = localStorage.getItem("anna_favorites");
+          if (stored) {
+            const list = JSON.parse(stored);
+            if (Array.isArray(list) && list.includes(product.slug)) {
+              favorite = true;
+            }
           }
-        }
-      } catch (_) {}
-
-      // If logged in, check database
-      if (user) {
+        } catch (_) {}
+      } else {
         try {
           const client = await getClient();
           const { data, error } = await client
@@ -62,13 +61,20 @@ export function ProductDetail({ product }: { product: Product }) {
             .maybeSingle();
 
           if (!error && data) {
-            setIsFavorite(true);
+            favorite = true;
           }
         } catch (_) {}
+      }
+
+      if (isMounted) {
+        setIsFavorite(favorite);
       }
     };
 
     initFavorite();
+    return () => {
+      isMounted = false;
+    };
   }, [user, product.slug, getClient]);
 
   const handleAddToCart = async () => {
@@ -121,7 +127,7 @@ export function ProductDetail({ product }: { product: Product }) {
       }
 
       toast.success("Added to cart!");
-      router.push("/cart");
+      window.dispatchEvent(new Event("cart-updated"));
     } catch (err: any) {
       console.error("Cart mutation error:", err);
       toast.error("Cart Update Failed", {
