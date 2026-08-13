@@ -164,32 +164,11 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     key={product.slug}
                     href={`/product/${product.slug}`}
                     onClick={onClose}
-                    className="flex gap-4 items-center rounded-lg border border-anna-brand/10 bg-white/50 p-2.5 hover:bg-white hover:border-anna-copper transition-all shadow-sm group"
+                    className="flex items-center justify-between p-3 rounded-lg border border-anna-brand/10 bg-white hover:border-anna-copper hover:bg-anna-cream/20 transition-all font-display text-base font-bold text-anna-brand group"
                   >
-                    {/* Product Thumbnail */}
-                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded bg-anna-cream/30 border border-anna-brand/5 p-1">
-                      <Image
-                        src={product.thumbnailSrc}
-                        alt={product.name}
-                        fill
-                        className="object-contain"
-                        sizes="48px"
-                      />
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="flex-grow min-w-0">
-                      <h4 className="font-serif text-base font-bold text-black/90 group-hover:text-anna-copper transition-colors truncate">
-                        {product.name}
-                      </h4>
-                      <p className="font-sans text-xs text-anna-brand/80 mt-0.5 font-medium">
-                        {product.category}
-                      </p>
-                    </div>
-
-                    {/* Price */}
-                    <span className="font-sans text-sm font-bold text-right shrink-0 text-anna-copper">
-                      {product.price}
+                    <span>{product.name}</span>
+                    <span className="text-anna-brand/60 group-hover:text-anna-copper transition-colors">
+                      →
                     </span>
                   </Link>
                 ))

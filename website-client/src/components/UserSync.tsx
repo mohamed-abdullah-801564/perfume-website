@@ -37,46 +37,34 @@ export default function UserSync() {
           });
         }
 
-        // Sync local favorites to Supabase
         try {
           const stored = localStorage.getItem("anna_favorites");
           if (stored) {
             const localSlugs = JSON.parse(stored);
             if (Array.isArray(localSlugs) && localSlugs.length > 0) {
-              const { data: dbFavorites, error: favError } = await client
-                .from("favorites")
-                .select("product_slug")
-                .eq("user_id", user.id);
-
-              if (!favError) {
-                const dbSlugs = new Set((dbFavorites || []).map((f: any) => f.product_slug));
-                const toInsert = localSlugs.filter((slug) => typeof slug === "string" && !dbSlugs.has(slug));
-
-                if (toInsert.length > 0) {
-                  const insertData = toInsert.map((slug) => ({
-                    user_id: user.id,
-                    product_slug: slug,
-                  }));
-
-                  const { error: insertError } = await client
+              for (const slug of localSlugs) {
+                if (typeof slug !== "string") continue;
+                try {
+                  await client
                     .from("favorites")
-                    .insert(insertData);
-
-                  if (!insertError) {
-                    localStorage.removeItem("anna_favorites");
-                  } else {
-                    console.error("Failed to merge local favorites to Supabase:", insertError);
-                  }
-                } else {
-                  localStorage.removeItem("anna_favorites");
+                    .upsert(
+                      {
+                        user_id: user.id,
+                        product_slug: slug,
+                      },
+                      {
+                        onConflict: "user_id,product_slug",
+                      }
+                    );
+                } catch (_) {
+                  // ignore individual errors, continue processing
                 }
               }
-            } else {
-              localStorage.removeItem("anna_favorites");
             }
+            localStorage.removeItem("anna_favorites");
           }
         } catch (favSyncError) {
-          console.error("Error syncing favorites from localStorage:", favSyncError);
+          // ignore outer errors silently
         }
       } catch (err: any) {
         console.warn("Gracefully handled user upsert runtime exception:", err.message || err);

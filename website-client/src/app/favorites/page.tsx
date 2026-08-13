@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
-import { supabase } from "@/lib/supabase";
+import { useSupabase } from "@/lib/supabase";
 import { products } from "@/lib/products";
 // import { SiteFooter } from "@/components/SiteFooter";
 import { FooterSection } from "@/components/home/FooterSection";
@@ -14,8 +14,11 @@ import { MobileFooter } from "@/components/MobileFooter";
 
 export default function FavoritesPage() {
   const { user, isLoaded } = useUser();
+  const { getClient } = useSupabase();
 
   const [favoriteProducts, setFavoriteProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const footerTop = favoriteProducts.length > 0 ? 1200 : 900;
   const customHeight = footerTop + 477; // footerTop + 477 (footer height)
 
@@ -23,8 +26,10 @@ export default function FavoritesPage() {
     if (!isLoaded) return;
 
     const fetchFavorites = async () => {
-      if (!user) {
-        try {
+      setLoading(true);
+      try {
+        if (!user) {
+          // Guest User: Read directly from localStorage
           const stored = localStorage.getItem("anna_favorites");
           if (stored) {
             const slugs = JSON.parse(stored);
@@ -35,21 +40,19 @@ export default function FavoritesPage() {
           } else {
             setFavoriteProducts([]);
           }
-        } catch (err) {
-          console.error("Failed to load local favorites:", err);
-          setFavoriteProducts([]);
+          return;
         }
-        return;
-      }
 
-      try {
-        // Sync any local favorites first
+        // Logged-in User: use authenticated Supabase client
+        const client = await getClient();
+
+        // 1. Sync/Merge local storage favorites if any exist
         const stored = localStorage.getItem("anna_favorites");
         if (stored) {
           try {
             const localSlugs = JSON.parse(stored);
             if (Array.isArray(localSlugs) && localSlugs.length > 0) {
-              const { data: dbFavorites, error: favError } = await supabase
+              const { data: dbFavorites, error: favError } = await client
                 .from("favorites")
                 .select("product_slug")
                 .eq("user_id", user.id);
@@ -63,7 +66,7 @@ export default function FavoritesPage() {
                     user_id: user.id,
                     product_slug: slug,
                   }));
-                  await supabase.from("favorites").insert(insertData);
+                  await client.from("favorites").insert(insertData);
                 }
               }
             }
@@ -74,7 +77,8 @@ export default function FavoritesPage() {
           }
         }
 
-        const { data, error } = await supabase
+        // 2. Fetch all favorites from Supabase
+        const { data, error } = await client
           .from("favorites")
           .select("product_slug")
           .eq("user_id", user.id);
@@ -87,15 +91,41 @@ export default function FavoritesPage() {
         );
         setFavoriteProducts(matchedProducts);
       } catch (err) {
-        console.error("Failed to fetch database favorites:", err);
-        setFavoriteProducts([]);
+        console.error("Failed to fetch database favorites, falling back to localStorage:", err);
+        // Fallback to localStorage gracefully
+        try {
+          const stored = localStorage.getItem("anna_favorites");
+          if (stored) {
+            const slugs = JSON.parse(stored);
+            const matchedProducts = products.filter((product) =>
+              slugs.includes(product.slug)
+            );
+            setFavoriteProducts(matchedProducts);
+          } else {
+            setFavoriteProducts([]);
+          }
+        } catch (localErr) {
+          console.error("Failed to load local favorites fallback:", localErr);
+          setFavoriteProducts([]);
+        }
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchFavorites();
-  }, [user, isLoaded]);
+  }, [user, isLoaded, getClient]);
 
-  if (!isLoaded) return null;
+  if (!isLoaded || loading) {
+    return (
+      <div className="relative bg-anna-background min-h-screen flex flex-col justify-center items-center text-anna-brand">
+        <div className="flex flex-col items-center">
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-anna-brand border-t-transparent mb-4"></div>
+          <p className="font-display text-lg tracking-wide animate-pulse">Loading your collection...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative bg-anna-background">
@@ -129,12 +159,12 @@ export default function FavoritesPage() {
                       className="group"
                     >
                       <div className="overflow-hidden rounded-lg bg-white">
-                        <div className="relative aspect-[3/4]">
+                        <div className="relative aspect-[3/4] bg-anna-cream">
                           <Image
                             src={product.detailSrc}
                             alt={product.name}
                             fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                           />
                         </div>
 
@@ -181,12 +211,12 @@ export default function FavoritesPage() {
                   href={`/product/${product.slug}`}
                   className="group block overflow-hidden rounded-lg bg-white border border-black/5"
                 >
-                  <div className="relative aspect-[3/4] w-full">
+                  <div className="relative aspect-[3/4] w-full bg-anna-cream">
                     <Image
                       src={product.detailSrc}
                       alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                       sizes="(min-width: 400px) 50vw, 100vw"
                     />
                   </div>
