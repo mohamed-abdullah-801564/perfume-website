@@ -34,7 +34,7 @@ export function MobileHome() {
   const featuredProduct = getFirstProductByCategory(activeCategory) ?? products[0];
 
   return (
-    <main className="mobile-home bg-anna-background pt-16 xl:hidden">
+    <main className="mobile-home bg-anna-background pt-24 xl:hidden">
       <section className="relative min-h-[520px] overflow-hidden px-5 pb-8 pt-7">
         <Image
           src="/images/image 19.png"
@@ -195,7 +195,7 @@ export function MobileHome() {
         <p className="absolute bottom-16 right-5 z-10 w-44 text-right font-script text-[38px] leading-[1.05]">
           Your Daily Siddha Ritual.
         </p>
-        <div className="absolute bottom-0 left-1/2 h-[430px] w-[260px] -translate-x-1/2">
+        <div className="absolute bottom-0 left-[38%] h-[430px] w-[260px] -translate-x-1/2">
           <Image
             src="/images/hero-botanical-608f3c.png"
             alt="Rosemary oil with botanicals"
@@ -222,9 +222,7 @@ export function MobileHome() {
                 {item.label}
               </Link>
             ))}
-            <a href="mailto:support@annavalam.com" className="mt-3 break-all font-display text-sm underline">
-              support@annavalam.com
-            </a>
+
             <a
               href="https://wa.me/919385303504"
               target="_blank"

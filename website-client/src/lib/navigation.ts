@@ -17,6 +17,5 @@ export const footerNavPrimary = [
 ];
 
 export const footerNavSecondary = [
-  { label: "Contact us", href: "/brand" },
   { label: "Values", href: "/values" }
 ];

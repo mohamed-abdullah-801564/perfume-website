@@ -9,12 +9,12 @@ export function ProductCard({ product }: { product: Product }) {
         href={`/product/${product.slug}`}
         className="group block overflow-hidden rounded-[10px] bg-anna-cream"
       >
-        <div className="relative aspect-[3/4] w-full">
+        <div className="relative aspect-[4/5] w-full p-2">
           <Image
             src={product.detailSrc}
             alt={product.detailAlt}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            className="object-contain transition-transform duration-300 group-hover:scale-[1.03] p-2"
             sizes="260px"
           />
         </div>

@@ -19,7 +19,7 @@ export default function ValuesPage() {
   return (
     <>
       {/* Mobile view */}
-      <div className="xl:hidden bg-anna-background text-anna-foreground pt-20">
+      <div className="xl:hidden bg-anna-background text-anna-foreground pt-[140px]">
         <main className="flex flex-col w-full">
           {/* Hero Image — full width */}
           <div className="relative h-[280px] w-full overflow-hidden">

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Product } from "@/lib/products";
 import { KeyIngredientsSection } from "@/components/product/KeyIngredientsSection";
 import { OtherProductsSection } from "@/components/product/OtherProductsSection";
@@ -27,7 +27,50 @@ export function ProductDetail({ product }: { product: Product }) {
   const customHeight = footerTop + 477; // 3977
   const router = useRouter();
   const { user } = useUser();
-const { openSignIn } = useClerk();
+  const { openSignIn } = useClerk();
+
+  const getPriceForSize = (size: string) => {
+    if (product.sizePrices && product.sizePrices[size]) {
+      return product.sizePrices[size];
+    }
+    return product.priceValue;
+  };
+
+  useEffect(() => {
+    const initFavorite = async () => {
+      // Check local storage first
+      try {
+        const stored = localStorage.getItem("anna_favorites");
+        if (stored) {
+          const favoritesList = JSON.parse(stored);
+          if (favoritesList.includes(product.slug)) {
+            setIsFavorite(true);
+            return;
+          }
+        }
+      } catch (_) {}
+
+      // If logged in, check database
+      if (user) {
+        try {
+          const client = await getClient();
+          const { data, error } = await client
+            .from("favorites")
+            .select("*")
+            .eq("user_id", user.id)
+            .eq("product_slug", product.slug)
+            .maybeSingle();
+
+          if (!error && data) {
+            setIsFavorite(true);
+          }
+        } catch (_) {}
+      }
+    };
+
+    initFavorite();
+  }, [user, product.slug, getClient]);
+
   const handleAddToCart = async () => {
     if (!user) {
       toast("Sign in required", {
@@ -71,7 +114,7 @@ const { openSignIn } = useClerk();
             product_name: product.name,
             size: selectedSize,
             quantity,
-            price_value: product.priceValue,
+            price_value: getPriceForSize(selectedSize),
           });
 
         if (insertError) throw insertError;
@@ -86,53 +129,86 @@ const { openSignIn } = useClerk();
       });
     }
   };
-const handleFavorite = async () => {
-  if (!user) {
-    toast.error("Please sign in to save favorites");
-    return;
-  }
 
-  try {
-    const client = await getClient();
-    const { data: existing, error: fetchError } = await client
-      .from("favorites")
-      .select("*")
-      .eq("user_id", user.id)
-      .eq("product_slug", product.slug)
-      .maybeSingle();
-
-    if (fetchError) throw fetchError;
-
-    if (existing) {
-      const { error: deleteError } = await client
-        .from("favorites")
-        .delete()
-        .eq("id", existing.id);
-
-      if (deleteError) throw deleteError;
-
-      setIsFavorite(false);
-      toast.success("Removed from favorites");
-    } else {
-      const { error: insertError } = await client
-        .from("favorites")
-        .insert({
-          user_id: user.id,
-          product_slug: product.slug,
-        });
-
-      if (insertError) throw insertError;
-
-      setIsFavorite(true);
-      toast.success("Added to favorites");
+  const handleFavorite = async () => {
+    // If user is guest/offline, use local storage fallback
+    if (!user) {
+      try {
+        const stored = localStorage.getItem("anna_favorites");
+        let favoritesList: string[] = stored ? JSON.parse(stored) : [];
+        
+        if (favoritesList.includes(product.slug)) {
+          favoritesList = favoritesList.filter((slug) => slug !== product.slug);
+          setIsFavorite(false);
+          toast.success("Removed from favorites");
+        } else {
+          favoritesList.push(product.slug);
+          setIsFavorite(true);
+          toast.success("Added to favorites");
+        }
+        localStorage.setItem("anna_favorites", JSON.stringify(favoritesList));
+      } catch (localErr) {
+        // Local fallback failed, toggle state anyway
+        setIsFavorite((prev) => !prev);
+        toast.success(isFavorite ? "Removed from favorites" : "Added to favorites");
+      }
+      return;
     }
-  } catch (err: any) {
-    console.error("Favorites update error:", err);
-    toast.error("Favorites Update Failed", {
-      description: "Please check your connection or try signing in again.",
-    });
-  }
-};
+
+    try {
+      const client = await getClient();
+      const { data: existing, error: fetchError } = await client
+        .from("favorites")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("product_slug", product.slug)
+        .maybeSingle();
+
+      if (fetchError) throw fetchError;
+
+      if (existing) {
+        const { error: deleteError } = await client
+          .from("favorites")
+          .delete()
+          .eq("id", existing.id);
+
+        if (deleteError) throw deleteError;
+
+        setIsFavorite(false);
+        toast.success("Removed from favorites");
+      } else {
+        const { error: insertError } = await client
+          .from("favorites")
+          .insert({
+            user_id: user.id,
+            product_slug: product.slug,
+          });
+
+        if (insertError) throw insertError;
+
+        setIsFavorite(true);
+        toast.success("Added to favorites");
+      }
+    } catch (err: any) {
+      console.warn("Favorites update database error, using local fallback:", err);
+      try {
+        const stored = localStorage.getItem("anna_favorites");
+        let favoritesList: string[] = stored ? JSON.parse(stored) : [];
+        if (favoritesList.includes(product.slug)) {
+          favoritesList = favoritesList.filter((slug) => slug !== product.slug);
+          setIsFavorite(false);
+        } else {
+          favoritesList.push(product.slug);
+          setIsFavorite(true);
+        }
+        localStorage.setItem("anna_favorites", JSON.stringify(favoritesList));
+        toast.success("Toggled favorite (local)");
+      } catch (_) {
+        setIsFavorite((prev) => !prev);
+        toast.success("Toggled favorite");
+      }
+    }
+  };
 
   return (
     <div className="relative bg-anna-background">
@@ -205,6 +281,10 @@ const handleFavorite = async () => {
 
                   <div className="mt-[20px] h-px w-[518px] bg-black/15" />
 
+                  <div className="mt-[16px] font-display text-[28px] font-bold text-anna-copper">
+                    ₹ {getPriceForSize(selectedSize)}
+                  </div>
+
                   <p className="mt-[24px] w-[509px] font-sans text-[18px] font-normal leading-[1.18] text-anna-foreground">
                     {product.description}
                   </p>
@@ -216,7 +296,7 @@ const handleFavorite = async () => {
                   <div className="mt-[16px] flex items-center gap-[20px]">
                     {product.sizes.map((size) => {
                       const isSelected = size === selectedSize;
-                      const isDisabled = size === "1kg";
+                      const isDisabled = false;
 
                       let btnStyles = "";
                       if (isDisabled) {
@@ -294,26 +374,6 @@ const handleFavorite = async () => {
                 </div>
               </section>
 
-              <section className="px-[50px] pb-[104px] pt-[118px]">
-                <h2 className="font-script text-[48px] font-normal leading-none text-anna-foreground">
-                  FAQ
-                </h2>
-
-                <div className="ml-[93px] mt-[58px] w-[912px]">
-                  {product.faqs.map((row) => (
-                    <div
-                      key={row}
-                      className="flex h-[81px] items-center justify-between border-b border-black/45 font-sans text-[20px] font-bold text-anna-foreground"
-                    >
-                      <span>{row}</span>
-                      <span className="pr-[19px] text-[27px] font-normal leading-none">
-                        +
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
               <section className="grid min-h-[700px] grid-cols-[740px_1fr] items-center gap-[96px] px-[20px] pb-[42px]">
                 <div className="relative h-[620px] w-[740px] overflow-hidden rounded-[4px] bg-white">
                   <Image
@@ -337,6 +397,26 @@ const handleFavorite = async () => {
                 </div>
               </section>
 
+              <section className="px-[50px] pb-[104px] pt-[118px]">
+                <h2 className="font-script text-[48px] font-normal leading-none text-anna-foreground">
+                  FAQ
+                </h2>
+
+                <div className="ml-[93px] mt-[58px] w-[912px]">
+                  {product.faqs.map((row) => (
+                    <div
+                      key={row}
+                      className="flex h-[81px] items-center justify-between border-b border-black/45 font-sans text-[20px] font-bold text-anna-foreground"
+                    >
+                      <span>{row}</span>
+                      <span className="pr-[19px] text-[27px] font-normal leading-none">
+                        +
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
               <KeyIngredientsSection />
               <OtherProductsSection />
             </section>
@@ -346,9 +426,9 @@ const handleFavorite = async () => {
       </div>
 
       {/* Mobile view */}
-      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-16">
+      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-[140px]">
         <main className="flex-grow px-4 py-6 sm:px-8">
-          <div className="relative aspect-[3/4] w-full max-w-[340px] mx-auto overflow-hidden rounded-lg bg-anna-cream">
+          <div className="relative aspect-[4/5] w-full max-w-[340px] mx-auto overflow-hidden rounded-lg bg-anna-cream p-2">
             <Image
               src={product.detailSrc}
               alt={product.detailAlt}
@@ -385,7 +465,7 @@ const handleFavorite = async () => {
             </div>
 
             <div className="mt-3 font-display text-[24px] font-bold text-anna-copper">
-              {product.price}
+              ₹ {getPriceForSize(selectedSize)}
             </div>
 
             <div className="mt-4 font-sans text-sm leading-relaxed text-anna-charcoal">
@@ -398,7 +478,7 @@ const handleFavorite = async () => {
               <div className="mt-2 flex gap-2">
                 {product.sizes.map((size) => {
                   const isSelected = size === selectedSize;
-                  const isDisabled = size === "1kg";
+                  const isDisabled = false;
                   return (
                     <button
                       key={size}
@@ -464,6 +544,18 @@ const handleFavorite = async () => {
               ))}
             </div>
 
+            {/* Steps Section */}
+            {product.steps && product.steps.length > 0 && (
+              <div className="mt-8 border-t border-black/15 pt-6">
+                <h3 className="font-script text-3xl text-anna-foreground mb-3">Steps:</h3>
+                <ul className="list-disc pl-5 font-sans text-sm leading-relaxed text-anna-charcoal">
+                  {product.steps.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* FAQs */}
             {product.faqs && product.faqs.length > 0 && (
               <div className="mt-8 border-t border-black/15 pt-6">
@@ -475,18 +567,6 @@ const handleFavorite = async () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
-
-            {/* Steps Section */}
-            {product.steps && product.steps.length > 0 && (
-              <div className="mt-8 border-t border-black/15 pt-6">
-                <h3 className="font-script text-3xl text-anna-foreground mb-3">Steps:</h3>
-                <ul className="list-disc pl-5 font-sans text-sm leading-relaxed text-anna-charcoal">
-                  {product.steps.map((step) => (
-                    <li key={step}>{step}</li>
-                  ))}
-                </ul>
               </div>
             )}
           </div>

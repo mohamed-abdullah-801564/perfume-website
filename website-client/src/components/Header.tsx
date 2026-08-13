@@ -3,12 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { navLinks, accountLinks } from "@/lib/navigation";
-import { collections, products } from "@/lib/products";
+import { collections } from "@/lib/products";
+import { useSupabase } from "@/lib/supabase";
+import { SearchModal } from "@/components/SearchModal";
 import {
   SignInButton,
-  SignUpButton,
   useUser,
   useClerk,
   UserButton
@@ -20,36 +21,9 @@ export function Header() {
   const [isCollectionsOpen, setIsCollectionsOpen] = useState(false);
   const isCollectionsPage = pathname.startsWith("/collections");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsSearchOpen(false);
-      }
-    };
-    if (isSearchOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isSearchOpen]);
-
-  useEffect(() => {
-    if (isSearchOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isSearchOpen]);
-
-  useEffect(() => {
-    if (!isSearchOpen) {
-      setSearchQuery("");
-    }
-  }, [isSearchOpen]);
-  const { signOut } = useClerk();
+  const [cartCount, setCartCount] = useState(0);
   const { user, isSignedIn } = useUser();
+  const { getClient } = useSupabase();
 
   const desktopLinkClass =
     "relative font-display text-[32px] leading-none text-anna-foreground after:absolute after:left-0 after:top-full after:mt-[6px] after:h-[3px] after:w-full after:origin-left after:scale-x-0 after:bg-anna-copper-mid after:transition-transform after:duration-200 hover:after:scale-x-100";
@@ -59,8 +33,85 @@ export function Header() {
     setIsCollectionsOpen(false);
   }, [pathname]);
 
-  return (
+  useEffect(() => {
+    if (!user) {
+      setCartCount(0);
+      return;
+    }
 
+    let isMounted = true;
+    let activeChannel: any = null;
+    let activeClient: any = null;
+
+    const fetchCartCount = async () => {
+      try {
+        const client = await getClient();
+        if (!isMounted) return;
+        const { data, error } = await client
+          .from("cart_items")
+          .select("quantity")
+          .eq("user_id", user.id);
+
+        if (!error && data && isMounted) {
+          const totalQty = data.reduce((sum, item) => sum + (item.quantity || 0), 0);
+          setCartCount(totalQty);
+        }
+      } catch (err) {
+        console.error("Error fetching cart count:", err);
+      }
+    };
+
+    fetchCartCount();
+
+    // Poll every 3 seconds to keep cart in sync
+    const interval = setInterval(fetchCartCount, 3000);
+
+    // Subscribe to changes on cart_items table
+    const setupSubscription = async () => {
+      try {
+        const supabaseClient = await getClient();
+        if (!isMounted) return;
+        
+        const ch = supabaseClient.channel(`schema-db-changes-header-${user.id}`);
+        ch.on(
+          "postgres_changes",
+          {
+            event: "*",
+            schema: "public",
+            table: "cart_items",
+            filter: `user_id=eq.${user.id}`,
+          },
+          () => {
+            if (isMounted) {
+              fetchCartCount();
+            }
+          }
+        );
+        ch.subscribe();
+
+        if (!isMounted) {
+          supabaseClient.removeChannel(ch);
+        } else {
+          activeChannel = ch;
+          activeClient = supabaseClient;
+        }
+      } catch (err) {
+        console.error("Subscription setup failed:", err);
+      }
+    };
+
+    setupSubscription();
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      if (activeChannel && activeClient) {
+        activeClient.removeChannel(activeChannel);
+      }
+    };
+  }, [user, getClient]);
+
+  return (
     <header className="absolute left-0 top-0 z-50 h-16 w-full xl:h-[82px]">
       <div className="relative mx-auto h-full w-full max-w-site px-[18px] sm:px-[51px]">
         <nav
@@ -95,8 +146,8 @@ export function Header() {
 
                   <div
                     className={`absolute left-0 top-full pt-6 transition-all duration-200 ${isCollectionsOpen && !isCollectionsPage
-                        ? "visible translate-y-0 opacity-100"
-                        : "invisible -translate-y-2 opacity-0"
+                      ? "visible translate-y-0 opacity-100"
+                      : "invisible -translate-y-2 opacity-0"
                       }`}
                   >
                     <div className="w-[980px] rounded-[18px] border border-black/10 bg-white/95 p-5 shadow-[0_18px_45px_rgba(0,0,0,0.14)] backdrop-blur-sm">
@@ -182,15 +233,15 @@ export function Header() {
 
         <Link
           href="/"
-          className="absolute left-1/2 top-[2px] -translate-x-1/2 xl:hidden flex items-center justify-center"
+          className="absolute left-1/2 top-[2px] -translate-x-1/2 xl:hidden flex items-center justify-center bg-transparent mb-4 md:mb-6"
         >
-          <div className="relative h-[110px] w-[110px]">
+          <div className="relative h-[110px] w-[110px] bg-transparent">
             <Image
               src="/client-logo.jpeg"
               alt="Anna Valam Logo"
               fill
               sizes="(max-width: 768px) 110px, 120px"
-              className="object-contain rounded-full"
+              className="object-contain rounded-full mix-blend-multiply bg-transparent"
               priority
             />
           </div>
@@ -260,7 +311,7 @@ export function Header() {
           </button>
           <Link
             href="/cart"
-            className="relative h-9 w-9 shrink-0 xl:h-[55px] xl:w-[55px]"
+            className="relative h-9 w-9 shrink-0 xl:h-[55px] xl:w-[55px] flex items-center justify-center"
             aria-label="Shopping bag"
           >
             <Image
@@ -270,6 +321,11 @@ export function Header() {
               height={55}
               className="object-contain brightness-0"
             />
+            {cartCount > 0 && (
+              <span className="bg-anna-copper text-white text-[11px] font-bold rounded-full h-5 min-w-5 px-1 flex items-center justify-center absolute -top-1.5 -right-1.5">
+                {cartCount}
+              </span>
+            )}
           </Link>
         </div>
       </div>
@@ -277,8 +333,8 @@ export function Header() {
       <div
         id="mobile-navigation"
         className={`absolute left-0 top-16 w-full border-y border-anna-brand/20 bg-anna-background/95 px-[18px] py-5 shadow-lg backdrop-blur-sm transition-all duration-200 sm:px-[51px] xl:hidden ${isMenuOpen
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-2 opacity-0"
+          ? "visible translate-y-0 opacity-100"
+          : "invisible -translate-y-2 opacity-0"
           }`}
       >
         <nav className="flex flex-col" aria-label="Mobile primary navigation">
@@ -287,8 +343,8 @@ export function Header() {
               key={link.label}
               href={link.href}
               className={`border-b border-anna-brand/15 py-3 font-display text-2xl leading-none ${pathname === link.href
-                  ? "text-anna-copper underline underline-offset-4"
-                  : "text-anna-foreground"
+                ? "text-anna-copper underline underline-offset-4"
+                : "text-anna-foreground"
                 }`}
             >
               {link.label}
@@ -296,129 +352,45 @@ export function Header() {
           ))}
         </nav>
         <nav className="mt-3 grid grid-cols-2 gap-2" aria-label="Mobile account navigation">
-          {accountLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="rounded-md bg-anna-cream px-3 py-2 text-center font-display text-lg leading-tight"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {accountLinks.map((link) => {
+            if (link.href === "/login") {
+              return isSignedIn ? (
+                <div
+                  key="user-button-mobile"
+                  className="flex items-center justify-center rounded-md bg-anna-cream px-3 py-1.5 min-h-[44px]"
+                >
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "h-8 w-8",
+                      },
+                    }}
+                  />
+                </div>
+              ) : (
+                <SignInButton mode="modal" key={link.label}>
+                  <button className="rounded-md bg-anna-cream px-3 py-2 text-center font-display text-lg leading-tight w-full min-h-[44px] hover:bg-anna-cream/80 transition-colors">
+                    Log In
+                  </button>
+                </SignInButton>
+              );
+            }
+
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="rounded-md bg-anna-cream px-3 py-2 text-center font-display text-lg leading-tight flex items-center justify-center min-h-[44px] hover:bg-anna-cream/80 transition-colors"
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
+
       {/* Search Modal Overlay */}
-      {isSearchOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs px-4"
-          onClick={() => setIsSearchOpen(false)}
-        >
-          <div
-            className="w-full max-w-lg rounded-2xl border-2 border-anna-brand bg-[#FFF7E8] p-6 shadow-2xl text-anna-brand relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header of Modal */}
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-anna-brand/10">
-              <h3 className="font-display text-xl font-bold text-anna-brand">Search Products</h3>
-              <button
-                type="button"
-                onClick={() => setIsSearchOpen(false)}
-                className="text-anna-brand hover:text-anna-copper p-1.5 transition-colors"
-                aria-label="Close search"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Input Field */}
-            <div className="relative mb-5">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-anna-brand/60 pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                </svg>
-              </span>
-              <input
-                ref={inputRef}
-                type="text"
-                placeholder="Type to search e.g. Oils, Rosemary..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-md border border-anna-brand/20 bg-white pl-10 pr-4 py-3 font-sans text-base text-anna-brand focus:border-anna-copper focus:outline-none transition-colors shadow-inner"
-              />
-            </div>
-
-            {/* Results Title */}
-            <p className="font-display text-xs font-bold text-anna-brand/70 uppercase tracking-wider mb-3">
-              {searchQuery.trim() === "" ? "Quick Results / Suggestions" : "Matching Products"}
-            </p>
-
-            {/* Results List */}
-            <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
-              {(searchQuery.trim() === ""
-                ? products.slice(0, 3)
-                : products.filter(
-                    (p) =>
-                      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                      p.shortName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                      p.description.toLowerCase().includes(searchQuery.toLowerCase())
-                  )
-              ).length === 0 ? (
-                <p className="text-center py-6 font-sans text-sm text-anna-brand/60">
-                  No products found matching &quot;{searchQuery}&quot;
-                </p>
-              ) : (
-                (searchQuery.trim() === ""
-                  ? products.slice(0, 3)
-                  : products.filter(
-                      (p) =>
-                        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                        p.shortName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                        p.description.toLowerCase().includes(searchQuery.toLowerCase())
-                    )
-                ).map((product) => (
-                  <Link
-                    key={product.slug}
-                    href={`/product/${product.slug}`}
-                    onClick={() => {
-                      setIsSearchOpen(false);
-                      setSearchQuery("");
-                    }}
-                    className="flex gap-4 items-center rounded-lg border border-anna-brand/10 bg-white/50 p-2.5 hover:bg-white hover:border-anna-copper transition-all shadow-sm group"
-                  >
-                    {/* Product Thumbnail */}
-                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded bg-anna-cream/30 border border-anna-brand/5 p-1">
-                      <Image
-                        src={product.thumbnailSrc}
-                        alt={product.name}
-                        fill
-                        className="object-contain"
-                        sizes="48px"
-                      />
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="flex-grow min-w-0">
-                      <h4 className="font-serif text-base font-bold text-black/90 group-hover:text-anna-copper transition-colors truncate">
-                        {product.name}
-                      </h4>
-                      <p className="font-sans text-xs text-anna-brand/80 mt-0.5 font-medium">
-                        {product.category}
-                      </p>
-                    </div>
-
-                    {/* Price */}
-                    <span className="font-sans text-sm font-bold text-right shrink-0 text-anna-copper">
-                      {product.price}
-                    </span>
-                  </Link>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 }

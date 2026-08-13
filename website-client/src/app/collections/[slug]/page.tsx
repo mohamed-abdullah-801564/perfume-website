@@ -112,7 +112,7 @@ export default async function CollectionCategoryPage({
 
       {/* Mobile view */}
       <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col">
-        <main className="flex-grow px-4 pt-24 pb-8 sm:px-8">
+        <main className="flex-grow px-4 pt-[140px] pb-8 sm:px-8">
           <h1 className="flex items-baseline gap-2 text-anna-foreground">
             <span className="font-display text-[42px] font-normal leading-none">
               {collection.label.replace(" Mix", "")}

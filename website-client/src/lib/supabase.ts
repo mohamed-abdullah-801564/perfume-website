@@ -1,5 +1,6 @@
 import { useAuth } from "@clerk/nextjs";
 import { createClient } from "@supabase/supabase-js";
+import { useCallback } from "react";
 
 export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -9,7 +10,7 @@ export const supabase = createClient(
 export function useSupabase() {
   const { getToken } = useAuth();
 
-  const getClient = async () => {
+  const getClient = useCallback(async () => {
     try {
       let token = null;
       try {
@@ -36,7 +37,7 @@ export function useSupabase() {
       console.warn("Failed to configure Supabase session:", e);
     }
     return supabase;
-  };
+  }, [getToken]);
 
   return { getClient };
 }

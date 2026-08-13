@@ -149,7 +149,7 @@ export default function BrandPage() {
       </div>
 
       {/* Mobile view */}
-      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-16">
+      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-[140px]">
         <main className="flex-grow px-5 py-6">
           <h1 className="font-script text-[48px] font-normal leading-none text-anna-foreground mb-4">
             About us

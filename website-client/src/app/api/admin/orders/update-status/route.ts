@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
+import { authorizeAdminRequest } from "@/lib/adminAuth";
 
 export async function POST(request: Request) {
   try {
-    const cookieStore = await cookies();
-    const sessionToken = cookieStore.get("admin_session")?.value;
-
-    if (sessionToken !== "authorized_admin_session_token") {
+    const isAuthorized = await authorizeAdminRequest();
+    if (!isAuthorized) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
@@ -17,7 +15,10 @@ export async function POST(request: Request) {
     }
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!supabaseKey) {
+      throw new Error("SUPABASE_SERVICE_ROLE_KEY is required and missing");
+    }
 
     const supabaseAdmin = createClient(supabaseUrl, supabaseKey);
 
@@ -34,3 +35,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+

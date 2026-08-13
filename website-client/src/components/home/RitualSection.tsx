@@ -79,9 +79,9 @@ export function RitualSection() {
         100% You
       </p>
 
-      {/* Your Daily Siddha Ritual. — 873,3317 423×240 */}
+      {/* Your Daily Siddha Ritual. — 950,3317 423×240 */}
       <p
-        className="text-script-display absolute left-[873px] top-[3317px] z-10 text-right text-anna-foreground"
+        className="text-script-display absolute left-[950px] top-[3317px] z-10 text-right text-anna-foreground"
         style={{ width: 423, height: 240 }}
       >
         Your Daily Siddha Ritual.
@@ -100,7 +100,7 @@ export function RitualSection() {
 
       {/* image 12 botanical — rosemary oil bottle from supplied asset */}
       <FigmaImage
-        x={635}
+        x={540}
         y={2812}
         width={375}
         height={645}

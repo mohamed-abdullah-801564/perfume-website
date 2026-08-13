@@ -194,7 +194,7 @@ export default async function JournalSinglePage({ params }: Props) {
       </div>
 
       {/* Mobile view */}
-      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-16">
+      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-[140px]">
         <main className="flex-grow px-4 py-6 sm:px-8 max-w-[680px] mx-auto">
           <h1 className="font-display text-[28px] font-normal leading-tight text-anna-foreground mb-4 text-center">
             {post.title}

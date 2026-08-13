@@ -8,7 +8,6 @@ import { useUser, SignInButton } from "@clerk/nextjs";
 import { useSupabase } from "@/lib/supabase";
 import { products } from "@/lib/products";
 import { toast } from "sonner";
-import { MobileFooter } from "@/components/MobileFooter";
 import { FooterSection } from "@/components/home/FooterSection";
 
 type CartItem = {
@@ -164,53 +163,37 @@ export default function CheckoutPage() {
       const emailVal = emailOrPhone.includes("@") ? emailOrPhone.trim() : (user.primaryEmailAddress?.emailAddress || "");
       const phoneVal = !emailOrPhone.includes("@") ? emailOrPhone.trim() : "";
 
-      const itemsData = cartItems.map(item => ({
-        product_slug: item.product_slug,
-        product_name: item.product_name,
-        size: item.size,
-        quantity: item.quantity,
-        price_value: item.price_value
-      }));
-
-      // Direct write to the orders table in Supabase via token client
-      const client = await getClient();
-      const { data: insertedOrder, error: orderError } = await client
-        .from("orders")
-        .insert({
-          user_id: user.id,
+      const response = await fetch("/api/checkout/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           email: emailVal,
           phone: phoneVal,
-          first_name: firstName,
-          last_name: lastName,
-          address: address,
-          apartment: apartment || "",
-          city: city,
-          state: state,
-          pin_code: pinCode,
-          payment_method: paymentMethod,
-          total_amount: total,
-          items: itemsData,
-          status: "Pending"
+          firstName,
+          lastName,
+          address,
+          apartment,
+          city,
+          state,
+          pinCode,
+          paymentMethod,
+          cartItems: cartItems.map(item => ({
+            product_slug: item.product_slug,
+            size: item.size,
+            quantity: item.quantity
+          }))
         })
-        .select();
+      });
 
-      if (orderError) {
-        console.error("Supabase Order insertion failed:", orderError);
-        throw new Error(orderError.message);
+      const resData = await response.json();
+      if (!response.ok || !resData.success) {
+        throw new Error(resData.error || "Failed to place order. Please try again.");
       }
 
-      const generatedOrderId = insertedOrder && insertedOrder[0] ? insertedOrder[0].id : ("AV-" + Math.floor(100000 + Math.random() * 900000));
+      const generatedOrderId = resData.order?.id || ("AV-" + Math.floor(100000 + Math.random() * 900000));
       
-      // Clear cart in database
-      const { error: cartError } = await client
-        .from("cart_items")
-        .delete()
-        .eq("user_id", user.id);
-
-      if (cartError) {
-        console.error("Supabase Cart clearing failed:", cartError);
-      }
-
       setOrderId(generatedOrderId);
       setOrderSuccess(true);
       toast.success(
@@ -402,15 +385,12 @@ export default function CheckoutPage() {
         <div className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
           <FooterSection style={{ position: "relative", top: "auto" }} />
         </div>
-        <div className="xl:hidden w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-          <MobileFooter />
-        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-anna-background text-anna-foreground pt-[100px] flex flex-col justify-between w-full overflow-x-hidden">
+    <div className="min-h-screen bg-anna-background text-anna-foreground pt-[140px] flex flex-col justify-between w-full overflow-x-hidden">
       <div className="mx-auto max-w-7xl px-4 md:px-8 flex-grow pb-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           
@@ -676,9 +656,6 @@ export default function CheckoutPage() {
       {/* Footer block */}
       <div className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
         <FooterSection style={{ position: "relative", top: "auto" }} />
-      </div>
-      <div className="xl:hidden w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-        <MobileFooter />
       </div>
     </div>
   );

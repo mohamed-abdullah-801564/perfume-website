@@ -14,6 +14,7 @@ export type Product = {
   sizes: string[];
   steps: string[];
   faqs: string[];
+  sizePrices?: Record<string, number>;
 };
 
 export type Collection = {
@@ -38,8 +39,8 @@ export const products: Product[] = [
     slug: "rosemary-oil",
     name: "Rosemary Oil",
     shortName: "Rosemary oil",
-    price: "₹ 240",
-    priceValue: 240,
+    price: "₹ 200",
+    priceValue: 200,
     category: "Oils",
     collectionTags: ["New Arrivals"],
     thumbnailSrc: "/images/product-2-68e613.png",
@@ -56,13 +57,18 @@ export const products: Product[] = [
       "Use two to three times a week.",
     ],
     faqs: defaultFaqs,
+    sizePrices: {
+      "100ml": 200,
+      "200ml": 380,
+      "500ml": 900,
+    },
   },
   {
     slug: "multigrain-health-mix",
     name: "Multigrain Health Mix",
     shortName: "Health mix",
-    price: "₹ 180",
-    priceValue: 180,
+    price: "₹ 350",
+    priceValue: 350,
     category: "Health mixes",
     collectionTags: ["New Arrivals"],
     thumbnailSrc: "/images/product-1-2b9d79.png",
@@ -79,13 +85,18 @@ export const products: Product[] = [
       "Serve warm as a breakfast meal.",
     ],
     faqs: defaultFaqs,
+    sizePrices: {
+      "250g": 350,
+      "500g": 650,
+      "1kg": 1350,
+    },
   },
   {
     slug: "glowing-face-pack",
     name: "Herbal Wellness Glowing Face Pack",
     shortName: "Face pack",
-    price: "₹ 190",
-    priceValue: 190,
+    price: "₹ 175",
+    priceValue: 175,
     category: "Face packs",
     collectionTags: ["On Sale"],
     thumbnailSrc: "/images/product-3.png",
@@ -102,13 +113,18 @@ export const products: Product[] = [
       "Rinse gently and pat dry.",
     ],
     faqs: defaultFaqs,
+    sizePrices: {
+      "100g": 175,
+      "250g": 400,
+      "500g": 750,
+    },
   },
   {
     slug: "black-rice-porridge-mix",
     name: "Karuppukavuni Kanji Mix / Black Rice Porridge Mix",
     shortName: "Wellness mix",
-    price: "₹ 260",
-    priceValue: 260,
+    price: "₹ 350",
+    priceValue: 350,
     category: "Health mixes",
     collectionTags: ["On Sale"],
     thumbnailSrc: "/images/product-4-784bf1.png",
@@ -125,6 +141,11 @@ export const products: Product[] = [
       "Consume warm as a breakfast meal.",
     ],
     faqs: defaultFaqs,
+    sizePrices: {
+      "250g": 350,
+      "500g": 650,
+      "1kg": 1350,
+    },
   },
 ];
 

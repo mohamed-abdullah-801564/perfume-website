@@ -1,13 +1,8 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { authorizeAdminRequest } from "@/lib/adminAuth";
 
 export async function GET() {
-  const cookieStore = await cookies();
-  const sessionToken = cookieStore.get("admin_session")?.value;
-
-  if (sessionToken === "authorized_admin_session_token") {
-    return NextResponse.json({ authenticated: true });
-  }
-
-  return NextResponse.json({ authenticated: false });
+  const isAuthenticated = await authorizeAdminRequest();
+  return NextResponse.json({ authenticated: isAuthenticated });
 }
+

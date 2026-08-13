@@ -167,7 +167,7 @@ export default function IngredientsPage() {
   return (
     <>
       {/* Mobile view */}
-      <div className="xl:hidden bg-anna-background text-anna-foreground pt-20">
+      <div className="xl:hidden bg-anna-background text-anna-foreground pt-[140px]">
         <main className="flex flex-col w-full">
           {/* Hero — fluid width */}
           <div className="relative h-[280px] w-full overflow-hidden">

@@ -21,38 +21,79 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     const fetchFavorites = async () => {
-      if (!user) return;
+      if (!user) {
+        try {
+          const stored = localStorage.getItem("anna_favorites");
+          if (stored) {
+            const slugs = JSON.parse(stored);
+            const matchedProducts = products.filter((product) =>
+              slugs.includes(product.slug)
+            );
+            setFavoriteProducts(matchedProducts);
+          } else {
+            setFavoriteProducts([]);
+          }
+        } catch (err) {
+          console.error("Failed to load local favorites:", err);
+          setFavoriteProducts([]);
+        }
+        return;
+      }
 
-      const { data } = await supabase
-        .from("favorites")
-        .select("product_slug")
-        .eq("user_id", user.id);
+      try {
+        // Sync any local favorites first
+        const stored = localStorage.getItem("anna_favorites");
+        if (stored) {
+          try {
+            const localSlugs = JSON.parse(stored);
+            if (Array.isArray(localSlugs) && localSlugs.length > 0) {
+              const { data: dbFavorites, error: favError } = await supabase
+                .from("favorites")
+                .select("product_slug")
+                .eq("user_id", user.id);
 
-      if (!data) return;
+              if (!favError) {
+                const dbSlugs = new Set((dbFavorites || []).map((f) => f.product_slug));
+                const toInsert = localSlugs.filter((slug) => typeof slug === "string" && !dbSlugs.has(slug));
 
-      const slugs = data.map((item) => item.product_slug);
+                if (toInsert.length > 0) {
+                  const insertData = toInsert.map((slug) => ({
+                    user_id: user.id,
+                    product_slug: slug,
+                  }));
+                  await supabase.from("favorites").insert(insertData);
+                }
+              }
+            }
+          } catch (e) {
+            console.error("Failed to sync favorites on favorites page:", e);
+          } finally {
+            localStorage.removeItem("anna_favorites");
+          }
+        }
 
-      const matchedProducts = products.filter((product) =>
-        slugs.includes(product.slug)
-      );
+        const { data, error } = await supabase
+          .from("favorites")
+          .select("product_slug")
+          .eq("user_id", user.id);
 
-      setFavoriteProducts(matchedProducts);
+        if (error) throw error;
+
+        const slugs = data ? data.map((item) => item.product_slug) : [];
+        const matchedProducts = products.filter((product) =>
+          slugs.includes(product.slug)
+        );
+        setFavoriteProducts(matchedProducts);
+      } catch (err) {
+        console.error("Failed to fetch database favorites:", err);
+        setFavoriteProducts([]);
+      }
     };
 
     fetchFavorites();
   }, [user]);
 
   if (!isLoaded) return null;
-
-  if (!user) {
-    return (
-      <main className="min-h-screen flex items-center justify-center bg-anna-background">
-        <h1 className="text-3xl font-display">
-          Please sign in to view favorites
-        </h1>
-      </main>
-    );
-  }
 
   return (
     <div className="relative bg-anna-background">
@@ -117,7 +158,7 @@ export default function FavoritesPage() {
       </div>
 
       {/* Mobile view */}
-      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-16">
+      <div className="xl:hidden bg-anna-background text-anna-foreground min-h-screen flex flex-col pt-[140px]">
         <main className="flex-grow px-4 py-6 sm:px-8">
           <h1 className="font-display text-[32px] font-normal mb-6">
             My Favorites

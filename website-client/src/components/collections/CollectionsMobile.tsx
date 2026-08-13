@@ -7,7 +7,7 @@ import { footerNavPrimary, footerNavSecondary } from "@/lib/navigation";
 
 export function CollectionsMobile() {
   return (
-    <main className="bg-anna-background pt-16 text-anna-foreground xl:hidden">
+    <main className="bg-anna-background pt-[140px] text-anna-foreground xl:hidden">
       <section className="px-4 py-6">
         <h1 className="flex flex-wrap items-baseline gap-2">
           <span className="font-display text-[36px] leading-none">

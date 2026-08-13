@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useUser, SignInButton } from "@clerk/nextjs";
 import { FooterSection } from "@/components/home/FooterSection";
-import { MobileFooter } from "@/components/MobileFooter";
 import { useSupabase } from "@/lib/supabase";
 import { products } from "@/lib/products";
 import { toast } from "sonner";
@@ -95,7 +94,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-anna-background text-anna-foreground pt-[100px] flex flex-col justify-between w-full overflow-x-hidden">
+    <div className="min-h-screen bg-anna-background text-anna-foreground pt-[140px] flex flex-col justify-between w-full overflow-x-hidden">
       <main className="mx-auto w-full max-w-site px-4 sm:px-[54px] flex-grow pb-16">
         <h1 className="font-script text-[64px] font-normal leading-none text-anna-brand">
           Shopping Cart
@@ -205,9 +204,6 @@ export default function CartPage() {
       {/* Render correct footer on mobile and desktop */}
       <div className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
         <FooterSection style={{ position: "relative", top: "auto" }} />
-      </div>
-      <div className="xl:hidden w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-        <MobileFooter />
       </div>
     </div>
   );
